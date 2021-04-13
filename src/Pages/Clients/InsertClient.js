@@ -16,19 +16,17 @@ export default function InsertClient({ data, render, onSave }) {
   const dispatch = useDispatch();
 
   const defaultImg = data && data.img;
+  const defaultField = data && data.field;
   // Existing ID or random ID
   const id = data && data.id;
 
   const [img, setImg] = React.useState(defaultImg);
+  const [field, setField] = React.useState(defaultField);
 
   const handleClickOpen = () => {
     setOpen(true);
     setImg(defaultImg);
-    setClient(
-      client.client_first_name,
-      client.client_second_name,
-      client.client_middle_name
-    );
+    setField(defaultField);
   };
 
   const handleClose = () => {
@@ -93,7 +91,7 @@ export default function InsertClient({ data, render, onSave }) {
                             fullWidth
                             value={client.client_first_name}
                             onChange={(e) => {
-                            setClient(e.target.value);
+                            setField(e.target.value);
                             }}
                         />
                         <TextField
@@ -104,7 +102,7 @@ export default function InsertClient({ data, render, onSave }) {
                             fullWidth
                             value={client.client_second_name}
                             onChange={(e) => {
-                            setClient(e.target.value);
+                            setField(e.target.value);
                             }}
                         />
                         <TextField
@@ -115,7 +113,7 @@ export default function InsertClient({ data, render, onSave }) {
                             fullWidth
                             value={client.client_middle_name}
                             onChange={(e) => {
-                            setClient(e.target.value);
+                            setField(e.target.value);
                             }}
                         />
                         <TextField
@@ -126,7 +124,7 @@ export default function InsertClient({ data, render, onSave }) {
                             fullWidth
                             value={client.client_last_name}
                             onChange={(e) => {
-                            setClient(e.target.value);
+                            setField(e.target.value);
                             }}
                         />
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
