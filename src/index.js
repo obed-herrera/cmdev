@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ScopedCssBaseline>
+      <App />
+    </ScopedCssBaseline>
   </React.StrictMode>,
   document.getElementById('root')
 );
