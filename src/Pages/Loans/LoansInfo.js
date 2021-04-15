@@ -52,19 +52,41 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "avatar",
+    id: "credi_loan_code",
     numeric: false,
     disablePadding: true,
-    label: "",
+    label: "Codigo del Prestamo",
   },
   {
-    id: "name",
+    id: "credi_loan_client",
     numeric: false,
     disablePadding: true,
-    label: "Name",
+    label: "Cliente",
   },
-  { id: "id", numeric: true, disablePadding: false, label: "ID" },
-  { id: "trips", numeric: true, disablePadding: false, label: "Trips" },
+  {
+    id: "credi_loan_mount",
+    numeric: false,
+    disablePadding: true,
+    label: "Monto Prestado",
+  },
+  {
+    id: "credi_loan_money_type",
+    numeric: false,
+    disablePadding: true,
+    label: "Tipo de Moneda",
+  },
+  {
+    id: "credi_loan_interest",
+    numeric: false,
+    disablePadding: true,
+    label: "Interes",
+  },
+  {
+    id: "credi_loan_line",
+    numeric: false,
+    disablePadding: true,
+    label: "Linea del Prestamo",
+  },
 ];
 
 function EnhancedTableHeadLines(props) {
@@ -137,6 +159,7 @@ const useStyles = makeStyles((theme) => ({
   },
   table: {
     minWidth: 750,
+    spacing: 20,
   },
   visuallyHidden: {
     border: 0,
@@ -252,7 +275,7 @@ export default function LoansInfo() {
           <InsertLine
             edge = "end"
             onSave = {()=>{
-              setSnackOpen("Cliente Agregado")
+              setSnackOpen("Prestamo Agregado")
             }}
             render = {(open) => (
               <Button variant = "outlined" color = "primary" edge = "end" onClick = {open}>
@@ -261,7 +284,7 @@ export default function LoansInfo() {
             )}
           /> 
           {selected.length > 0 && (
-            <Tooltip title={"Delete"}>
+            <Tooltip title={"Borrar"}>
               <DeleteLines
                 ids={selected}
                 onSave={() => {
@@ -333,9 +356,9 @@ export default function LoansInfo() {
                               ) {
                                 return;
                               }
-                              history.push(`/people/${row.id}`);
+                              history.push(`/loandetail/${row.id}`);
                             }}
-                            key={`person-${row.id}`}
+                            key={`loans-${row.id}`}
                             selected={isItemSelected}
                             style={{ cursor: "pointer" }}
                           >
@@ -353,8 +376,13 @@ export default function LoansInfo() {
                                 }}
                               />
                             </TableCell>
-                            <TableCell>
-                              <Avatar alt={row.name} src={row.img} />
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.credi_loan_code}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -362,10 +390,40 @@ export default function LoansInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.name}
+                              {row.credi_loan_client}
                             </TableCell>
-                            <TableCell align="right">{row.id}</TableCell>
-                            <TableCell align="right">{row.trips}</TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.credi_loan_mount}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.credi_loan_money_type}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.credi_loan_interest}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.credi_loan_line}
+                            </TableCell>
                           </TableRow>
                         );
                       })}

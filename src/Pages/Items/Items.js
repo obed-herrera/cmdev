@@ -1,3 +1,4 @@
+
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,12 +11,13 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
-import LinesInfo from './LinesInfo';
+import ClientsInfo from './ClientsInfo';
 
 function Copyright() {
     return (
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: 50, // keep right padding when drawer closed
   },
   palette: {
     primary: {
@@ -66,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 24,
   },
   menuButtonHidden: {
     display: 'none',
@@ -101,9 +103,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-    position:'sticky',
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+    position: 'sticky',
   },
   paper: {
     padding: theme.spacing(2),
@@ -112,11 +114,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 20,
   },
 }));
 
-export default function Lines(){
+export default function Clients(){
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -142,7 +144,7 @@ export default function Lines(){
                         <MenuIcon/>
                     </IconButton>
                     <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
-                        Lineas
+                        Clientes
                     </Typography>
                     <IconButton color = "inherit">
                         <PowerSettingsNewIcon/>
@@ -170,8 +172,10 @@ export default function Lines(){
             </Drawer>
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
-                  <LinesInfo />
-                <Box pt = {4}>
+                <Container maxWidth = "xl" className = {classes.container}>               
+                      <ClientsInfo />
+                </Container>
+                  <Box pt = {4}>
                     <Copyright/>
                 </Box>
             </main>

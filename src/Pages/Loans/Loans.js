@@ -17,6 +17,7 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
 import LoansInfo from './LoansInfo';
+import { Container } from '@material-ui/core';
 
 function Copyright() {
     return (
@@ -99,16 +100,16 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     height: '100vh',
-    overflow: '',
-    display: 'block',
+    overflow: 'auto',
   },
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+    position: 'sticky',
   },
   paper: {
     padding: theme.spacing(2),
-    display: 'flex',
+    display: 'contents',
     overflow: 'auto',
     flexDirection: 'column',
   },
@@ -143,7 +144,7 @@ export default function Loans(){
                         <MenuIcon/>
                     </IconButton>
                     <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
-                        Lineas
+                        Prestamos
                     </Typography>
                     <IconButton color = "inherit">
                         <PowerSettingsNewIcon/>
@@ -171,7 +172,9 @@ export default function Loans(){
             </Drawer>
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
+                <Container maxWidth = "xl" className = {classes.container}>
                   <LoansInfo />
+                </Container>
                 <Box pt = {4}>
                     <Copyright/>
                 </Box>

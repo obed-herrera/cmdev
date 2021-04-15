@@ -8,7 +8,7 @@ export function nextID() {
 }
 
 export const ClientSlice = createSlice({
-  name: "people",
+  name: "clients",
   initialState: {
     list: [
       { client_first_name: "Obed",
@@ -109,7 +109,7 @@ export const incrementAsync = (amount) => (dispatch) => {
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
-export const selectClient = (state) => state.people.list;
-export const selectLoading = (state) => state.people.loading;
+export const selectClient = (state) => state.clients.list;
+export const selectLoading = (state) => state.clients.loading;
 
 export default ClientSlice.reducer;

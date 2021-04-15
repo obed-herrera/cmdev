@@ -8,11 +8,17 @@ export function nextID() {
 }
 
 export const LoansSlice = createSlice({
-  name: "people",
+  name: "loan",
   initialState: {
     list: [
-      { name: "Joe", img: "/img/driver.png", id: nextID() },
-      { name: "Mary", img: "/img/driver2.png", id: nextID() },
+      { id: nextID(), credi_loan_code: "2556-256", credi_loan_client: "Obed Herrera", credi_loan_mount: "2500", credi_loan_money_type: "Cordoba", credi_loan_interest: "6%", credi_loan_line: "Montetabor" },
+      { id: nextID(), credi_loan_code: "2556-256", credi_loan_client: "Obed Herrera", credi_loan_mount: "2500", credi_loan_money_type: "Cordoba", credi_loan_interest: "6%", credi_loan_line: "Montetabor" },
+      { id: nextID(), credi_loan_code: "2556-256", credi_loan_client: "Obed Herrera", credi_loan_mount: "2500", credi_loan_money_type: "Cordoba", credi_loan_interest: "6%", credi_loan_line: "Montetabor" },
+      { id: nextID(), credi_loan_code: "2556-256", credi_loan_client: "Obed Herrera", credi_loan_mount: "2500", credi_loan_money_type: "Cordoba", credi_loan_interest: "6%", credi_loan_line: "Montetabor" },
+      { id: nextID(), credi_loan_code: "2556-256", credi_loan_client: "Obed Herrera", credi_loan_mount: "2500", credi_loan_money_type: "Cordoba", credi_loan_interest: "6%", credi_loan_line: "Montetabor" },
+      { id: nextID(), credi_loan_code: "2556-256", credi_loan_client: "Obed Herrera", credi_loan_mount: "2500", credi_loan_money_type: "Cordoba", credi_loan_interest: "6%", credi_loan_line: "Montetabor" },
+      { id: nextID(), credi_loan_code: "2556-256", credi_loan_client: "Obed Herrera", credi_loan_mount: "2500", credi_loan_money_type: "Cordoba", credi_loan_interest: "6%", credi_loan_line: "Montetabor" },
+      { id: nextID(), credi_loan_code: "2556-256", credi_loan_client: "Obed Herrera", credi_loan_mount: "2500", credi_loan_money_type: "Cordoba", credi_loan_interest: "6%", credi_loan_line: "Montetabor" },
     ],
     loading: false,
   },
@@ -26,16 +32,16 @@ export const LoansSlice = createSlice({
     },
     remove: (state, action) => {
       const removedIds = action.payload;
-      state.list = state.list.filter((client) => {
-        return !removedIds.includes(client.id);
+      state.list = state.list.filter((loan) => {
+        return !removedIds.includes(loan.id);
       });
     },
     update: (state, action) => {
-      state.list = state.list.map((client) => {
-        if (client.id === action.payload.id) {
+      state.list = state.list.map((loan) => {
+        if (loan.id === action.payload.id) {
           return action.payload;
         }
-        return client;
+        return loan;
       });
     },
   },
@@ -56,7 +62,7 @@ export const incrementAsync = (amount) => (dispatch) => {
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
-export const selectLoans = (state) => state.people.list;
-export const selectLoading = (state) => state.people.loading;
+export const selectLoans = (state) => state.loan.list;
+export const selectLoading = (state) => state.loan.loading;
 
 export default LoansSlice.reducer;

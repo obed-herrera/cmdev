@@ -10,6 +10,13 @@ import { add, update } from "./LoansSlice";
 import { useDispatch } from "react-redux";
 import { nextID } from "./LoansSlice";
 import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, NativeSelect, Select } from "@material-ui/core";
+import { DatePicker, KeyboardDatePicker } from "@material-ui/pickers";
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+} from '@material-ui/pickers';
+import 'date-fns';
 
 
 const useStyles = makeStyles((theme)=>({
@@ -71,6 +78,8 @@ const handleChangeTerm = (event) => {
     setCredi_Loan_Term(event.target.value);
 };
 
+const [selectedDate, setSelectedDate] = React.useState(new Date());
+
 const classes = useStyles();
 
   const handleChange=e=>{
@@ -86,6 +95,10 @@ const classes = useStyles();
     client_line: '',
   });
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
 
   return (
     <>
@@ -99,7 +112,7 @@ const classes = useStyles();
           {data ? "Editar" : "Agragar"} Prestamo{" "}
         </DialogTitle>
         <DialogContent>
-        <Grid container spacing = {2} style = {{padding:20}}>
+        <Grid container spacing = {3} style = {{padding:10}}>
                 <Grid item xs ={4}>
                     <div className = "form-group">
                         <TextField
@@ -135,6 +148,10 @@ const classes = useStyles();
                             setName(e.target.value);
                             }}
                         />
+                        <Grid container 
+                        spacing = {2}
+                        direction = "row">
+                          <Grid item xs = {3}>
                         <FormControl variant = "outlined" className = {classes.formControl}>
                             <InputLabel id = "credi_loan_term">Plazo</InputLabel>
                             <Select
@@ -158,41 +175,122 @@ const classes = useStyles();
 
                             </Select>
                         </FormControl>
+                        <FormControl variant = "outlined" className = {classes.formControl}>
+                            <InputLabel id = "credi_loan_term">Forma de Pago</InputLabel>
+                            <Select
+                                labelId = "credi_loan_paym_freq"
+                                id = "credi_loan_paym_freq"
+                                value = {credi_loan_term}
+                                onChange = {handleChangeTerm}
+                                label = "Forma de Pago"
+                            >
+                                <MenuItem value = "">
+                                    <em>Ninguno</em>
+                                </MenuItem>
+                                <MenuItem value = {30}>Diario</MenuItem>
+                                <MenuItem value = {60}>Dia de por medio</MenuItem>
+                                <MenuItem value = {90}>Semanal</MenuItem>
+                                <MenuItem value = {120}>Quincenal</MenuItem>
+                                <MenuItem value = {150}>Mensual</MenuItem>
+                            </Select>
+                        </FormControl>
+                        </Grid>
+                        </Grid>
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
                     </div>
                 </Grid>
                 <Grid item xs ={4}> 
                     <div className = "form-group">
-                        <label class = "pure-material-textfield-outlined">
-                            <input placeholder= " " type = "text" className = "form-control" name = "client_national_id" onChange = {handleChange}/>
-                            <span>Cedula del Cliente</span> 
-                        </label>
-                        <br/>
-                        <label class = "pure-material-textfield-outlined">
-                            <input placeholder= " " type = "text" className = "form-control" name = "client_sys_code" onChange = {handleChange}/>
-                            <span>Codigo del Cliente</span> 
-                        </label>
-                        <br/>
-                        <label class = "pure-material-textfield-outlined">
-                            <input placeholder= " " type = "text" className = "form-control" name = "client_home_address" onChange = {handleChange}/>
-                            <span>Direccion de casa</span> 
-                        </label>
-                        <br/>
-                        <label class = "pure-material-textfield-outlined">
-                            <input placeholder= " " type = "text" className = "form-control" name = "client_business_address" onChange = {handleChange}/>
-                            <span>Direccion de negocio</span> 
-                        </label>
-                        <br/>
-                    </div>                                    
-                </Grid>
+                      <MuiPickersUtilsProvider utils = {DateFnsUtils}>
+                        <Grid container justify = "space-around">
+                          <KeyboardDatePicker
+                            margin="normal"
+                            id="date-picker-dialog"
+                            label="Date picker dialog"
+                            format="MM/dd/yyyy"
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            KeyboardButtonProps={{
+                              'aria-label': 'change date',
+                            }}
+                          />
+                        </Grid>
+                        <Grid container justify = "space-around">
+                          <KeyboardDatePicker
+                            margin="normal"
+                            id="date-picker-dialog"
+                            label="Date picker dialog"
+                            format="MM/dd/yyyy"
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            KeyboardButtonProps={{
+                              'aria-label': 'change date',
+                            }}
+                          />
+                        </Grid>
+                        <Grid container justify = "space-around">
+                          <KeyboardDatePicker
+                            margin="normal"
+                            id="date-picker-dialog"
+                            label="Date picker dialog"
+                            format="MM/dd/yyyy"
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            KeyboardButtonProps={{
+                              'aria-label': 'change date',
+                            }}
+                          />
+                        </Grid>
+                        
+                        </MuiPickersUtilsProvider>
+                  </div> 
+            </Grid>
                 <Grid item xs = {4}>
-                  <div className = "form-group">
-                  <label class = "pure-material-textfield-outlined">
-                      <input placeholder= " " type = "text" className = "form-control" name = "client_phone" onChange = {handleChange}/>
-                      <span>Telefono del Cliente</span> 
-                    </label>
-                    <br/>
-                    <FormControl className={classes.formControl}>
+                  <FormControl className={classes.formControl}>
+                      <NativeSelect
+                        className={classes.selectEmpty}
+                        value={state.client_state}
+                        name="client_state"
+                        onChange={handleChange}
+                        inputProps={{ 'aria-label': 'client_state' }}
+                      >
+                        <option value="" disabled>
+                          Tipo de moneda
+                        </option>
+                        <option value={'Activo'}>Cordoba</option>
+                        <option value={'Inactivo'}>Dolar</option>
+                      </NativeSelect>
+                      <FormHelperText>Tipo de Moneda</FormHelperText>
+                    </FormControl>
+                    <FormControl variant = "outlined" className = {classes.formControl}>
+                            <InputLabel id = "credi_loan_term">Linea del Cliente</InputLabel>
+                            <Select
+                                labelId = "credi_loan_paym_freq"
+                                id = "credi_loan_paym_freq"
+                                value = {credi_loan_term}
+                                onChange = {handleChangeTerm}
+                                label = "Linea del Cliente"
+                            >
+                                <MenuItem value = "">
+                                    <em>Ninguno</em>
+                                </MenuItem>
+                                <MenuItem value = {30}>Montetabor</MenuItem>
+                                <MenuItem value = {60}>TICOMO</MenuItem>
+                                <MenuItem value = {60}>San Jose O.</MenuItem>
+                                <MenuItem value = {60}>Cuajachillo</MenuItem>
+                                <MenuItem value = {60}>Ciudad Sandino</MenuItem>
+                                <MenuItem value = {60}>Villa Reconciliacion</MenuItem>
+                                <MenuItem value = {60}>Bello Amanecer 1</MenuItem>
+                                <MenuItem value = {60}>Bello Amanecer 2</MenuItem>
+                                <MenuItem value = {60}>Bello Amanecer 3</MenuItem>
+                                <MenuItem value = {60}>Bello Amanecer 4</MenuItem>
+                                <MenuItem value = {60}>Giorgino Andrae</MenuItem>
+                                <MenuItem value = {60}>Los Brasiles</MenuItem>
+
+                            </Select>
+                        </FormControl>
+                        <div className = "form-group">
+                        <FormControl className={classes.formControl}>
                       <NativeSelect
                         className={classes.selectEmpty}
                         value={state.client_state}
@@ -208,38 +306,19 @@ const classes = useStyles();
                       </NativeSelect>
                       <FormHelperText>Estado del Trabajador</FormHelperText>
                     </FormControl>
-                     {/* <div className = "form-group">
-                        <FormControl className={classes.formControl}>
-                            <NativeSelect
-                              className={classes.selectEmpty}
-                              value={state.client_Line}
-                              name="client_line"
-                              onChange={handleChange}
-                              inputProps={{ 'aria-label': 'client_line' }}
-                            >
-                              <option value="" disabled>
-                                Linea del Cliente
-                              </option>
-                              {lines.map((value)=>(
-                                <option value = {value.client_line} key = {value.id_credi_client_line}>
-                                  {value.client_line}
-                                </option>
-                              ))}
-                              
-                            </NativeSelect>
-                            <FormHelperText>Linea del Cliente</FormHelperText>
-                          </FormControl>
-                              </div>*/}
                   </div>
+                        
+                                         
                 </Grid>
-            </Grid>
+                </Grid>
+                
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Cancel
+            Cancelar
           </Button>
           {<Button onClick={handleSave} color="primary">
-            Save
+            Guardar
         </Button>}
         </DialogActions>
       </Dialog>

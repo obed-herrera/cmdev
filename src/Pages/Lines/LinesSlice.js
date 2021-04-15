@@ -8,11 +8,15 @@ export function nextID() {
 }
 
 export const LinesSlice = createSlice({
-  name: "people",
+  name: "lines",
   initialState: {
     list: [
-      { name: "Joe", img: "/img/driver.png", id: nextID() },
-      { name: "Mary", img: "/img/driver2.png", id: nextID() },
+      {id: nextID(), credi_line_code: "98-89", credi_line_client: "Obed Herrera", credi_line_item: "Shampoo", credi_line_item_price: "2500", credi_line_item_quantity: "5", credi_line_total: "12500"},
+      {id: nextID(), credi_line_code: "98-89", credi_line_client: "Obed Herrera", credi_line_item: "Shampoo", credi_line_item_price: "2500", credi_line_item_quantity: "5", credi_line_total: "12500"},
+      {id: nextID(), credi_line_code: "98-89", credi_line_client: "Obed Herrera", credi_line_item: "Shampoo", credi_line_item_price: "2500", credi_line_item_quantity: "5", credi_line_total: "12500"},
+      {id: nextID(), credi_line_code: "98-89", credi_line_client: "Obed Herrera", credi_line_item: "Shampoo", credi_line_item_price: "2500", credi_line_item_quantity: "5", credi_line_total: "12500"},
+      {id: nextID(), credi_line_code: "98-89", credi_line_client: "Obed Herrera", credi_line_item: "Shampoo", credi_line_item_price: "2500", credi_line_item_quantity: "5", credi_line_total: "12500"},
+      {id: nextID(), credi_line_code: "98-89", credi_line_client: "Obed Herrera", credi_line_item: "Shampoo", credi_line_item_price: "2500", credi_line_item_quantity: "5", credi_line_total: "12500"},
     ],
     loading: false,
   },
@@ -26,16 +30,16 @@ export const LinesSlice = createSlice({
     },
     remove: (state, action) => {
       const removedIds = action.payload;
-      state.list = state.list.filter((client) => {
-        return !removedIds.includes(client.id);
+      state.list = state.list.filter((line) => {
+        return !removedIds.includes(line.id);
       });
     },
     update: (state, action) => {
-      state.list = state.list.map((client) => {
-        if (client.id === action.payload.id) {
+      state.list = state.list.map((line) => {
+        if (line.id === action.payload.id) {
           return action.payload;
         }
-        return client;
+        return line;
       });
     },
   },
@@ -56,7 +60,7 @@ export const incrementAsync = (amount) => (dispatch) => {
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
-export const selectLines = (state) => state.people.list;
-export const selectLoading = (state) => state.people.loading;
+export const selectLines = (state) => state.lines.list;
+export const selectLoading = (state) => state.lines.loading;
 
 export default LinesSlice.reducer;

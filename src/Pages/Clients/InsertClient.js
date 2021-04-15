@@ -134,7 +134,7 @@ export default function InsertClient({ data, render, onSave }) {
                 <TextField
                             autoFocus
                             margin="dense"
-                            id="client_national_id"
+                            id="clieYnt_national_id"
                             label="Cedula del Cliente"
                             fullWidth
                             value={client.client_national_id}

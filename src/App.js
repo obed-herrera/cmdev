@@ -12,16 +12,19 @@ import {useTheme} from './theme';
 import { configureStore } from "@reduxjs/toolkit";
 import Lines from './Pages/Lines/Lines';
 import { Provider } from 'react-redux';
-import peopleReducer from '../src/Pages/Clients/ClientSlice';
+import loanReducer from '../src/Pages/Loans/LoansSlice';
+import clientsReducer from '../src/Pages/Clients/ClientSlice';
 import ClientDetail from './Pages/Clients/ClientDetail';
 import Configuration from './Pages/Configuration/Configuration';
-
+import linesReducer from '../src/Pages/Lines/LinesSlice';
 
 function App() {
 
   const store = configureStore({
     reducer: {
-      people: peopleReducer,
+      clients: clientsReducer,
+      loan: loanReducer,
+      lines: linesReducer,
     },
   });
 

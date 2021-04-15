@@ -58,13 +58,41 @@ const headCells = [
     label: "",
   },
   {
-    id: "credi_loan_code",
+    id: "credi_line_code",
     numeric: false,
     disablePadding: true,
-    label: "Codigo del Prestamo",
+    label: "Codigo de la Linea",
   },
-  { id: "id", numeric: true, disablePadding: false, label: "ID" },
-  { id: "trips", numeric: true, disablePadding: false, label: "Trips" },
+  {
+    id: "credi_line_client",
+    numeric: false,
+    disablePadding: true,
+    label: "Cliente",
+  },
+  {
+    id: "credi_line_item",
+    numeric: false,
+    disablePadding: true,
+    label: "Producto",
+  },
+  {
+    id: "credi_line_item_price",
+    numeric: false,
+    disablePadding: true,
+    label: "Precio del Producto",
+  },
+  {
+    id: "credi_line_item_quantity",
+    numeric: false,
+    disablePadding: true,
+    label: "Cantidad",
+  },
+  {
+    id: "credi_line_item_quantity_total",
+    numeric: false,
+    disablePadding: true,
+    label: "Total",
+  },
 ];
 
 function EnhancedTableHeadLines(props) {
@@ -268,9 +296,9 @@ export default function LinesInfo() {
                   dispatch(remove(selected));
 
                   setSnackOpen(
-                    `${selected.length} Driver${
+                    `${selected.length} Linea${
                       selected.length > 1 ? "s" : ""
-                    } Deleted`
+                    } Borrada`
                   );
                   setSelected([]);
                 }}
@@ -283,7 +311,7 @@ export default function LinesInfo() {
                     onClick={open}
                   >
                     {" "}
-                    Delete {selected.length} selected
+                    Borrar {selected.length} seleccionada
                   </Button>
                 )}
               />
@@ -333,7 +361,7 @@ export default function LinesInfo() {
                               ) {
                                 return;
                               }
-                              history.push(`/people/${row.id}`);
+                              history.push(`/linesdetail/${row.id}`);
                             }}
                             key={`person-${row.id}`}
                             selected={isItemSelected}
@@ -362,10 +390,48 @@ export default function LinesInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.name}
+                              {row.credi_line_code}
                             </TableCell>
-                            <TableCell align="right">{row.id}</TableCell>
-                            <TableCell align="right">{row.trips}</TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.credi_line_client}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.credi_line_item}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.credi_line_item_price}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.credi_line_item_quantity}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.credi_line_total}
+                            </TableCell>
                           </TableRow>
                         );
                       })}
