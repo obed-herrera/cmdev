@@ -144,7 +144,7 @@ export default function Lines(){
                     <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
                         Lineas
                     </Typography>
-                    <IconButton color = "inherit">
+                    <IconButton color = "inherit"  href = "/">
                         <PowerSettingsNewIcon/>
                     </IconButton>
                 </Toolbar>

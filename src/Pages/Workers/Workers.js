@@ -16,8 +16,8 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { headerSecondaryList, mainListItems, secondaryListItems } from './listItems';
-import LoansInfo from '../Pages/Loans/LoansInfo';
+import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
+import WorkersInfo from './WorkersInfo';
 
 function Copyright() {
     return (
@@ -31,7 +31,7 @@ function Copyright() {
       </Typography>
     );
   }
-export const drawerWidth = 240;
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   drawerPaper: {
-    position: 'relative',
+    position: 'sticky',
     whiteSpace: 'nowrap',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
@@ -103,21 +103,22 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+    position: 'sticky',
   },
   paper: {
     padding: theme.spacing(2),
-    display: 'flex',
+    display: 'contents',
     overflow: 'auto',
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 20,
   },
 }));
 
-export default function Dashboard(){
+export default function Workers(){
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -143,10 +144,10 @@ export default function Dashboard(){
                         <MenuIcon/>
                     </IconButton>
                     <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
-                        Dashboard
+                        Trabajadores
                     </Typography>
-                    <IconButton color = "inherit" href = "/">
-                        <PowerSettingsNewIcon />
+                    <IconButton color = "inherit"  href = "/">
+                        <PowerSettingsNewIcon/>
                     </IconButton>
                 </Toolbar>
             </AppBar>
@@ -171,11 +172,10 @@ export default function Dashboard(){
             </Drawer>
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
-                <Container maxWidth="lg" className={classes.container}>
-                        
-                         <LoansInfo />
+                <Container maxWidth = "xl" className = {classes.container}>               
+                      <WorkersInfo />
                 </Container>
-                <Box pt = {4}>
+                  <Box pt = {4}>
                     <Copyright/>
                 </Box>
             </main>

@@ -10,13 +10,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 import { Avatar, Button, Checkbox, TableContainer, TablePagination, TableSortLabel, Toolbar, Tooltip } from '@material-ui/core';
-import InsertItem from './InsertItem';
+import InsertWorker from './InsertWorker';
 import PropTypes from "prop-types";
-import { SummaryCard } from "./ItemDetail";
+import { SummaryCard } from "./WorkersDetail";
 import MuiAlert from "@material-ui/lab/Alert";
-import DeleteItem from './DeleteItem';
+import DeleteWorker from './DeleteWorker';
 import { useDispatch, useSelector } from 'react-redux';
-import {add, remove, selectItem, selectLoading} from './ItemSlice';
+import {add, remove, selectWorker, selectLoading} from './WorkersSlice';
 import { useHistory } from 'react-router';
 
 
@@ -58,28 +58,34 @@ const headCells = [
     label: "",
   },
   {
-    id: "item_code",
+    id: "credi_worker_code",
     numeric: false,
     disablePadding: true,
-    label: "Codigo del Producto",
+    label: "Codigo del Trabajador",
   },
   {
-    id: "item_name",
+    id: "worker_first_name",
     numeric: false,
     disablePadding: true,
-    label: "Nombre de Producto",
+    label: "Primer Nombre",
   },
   {
-    id: "item_description",
+    id: "worker_second_name",
     numeric: false,
     disablePadding: true,
-    label: "Descripcion del Producto",
+    label: "Segundo Nombre",
   },
   {
-    id: "item_quantity",
+    id: "worker_middle_name",
     numeric: false,
     disablePadding: true,
-    label: "Cantidad en inventario",
+    label: "Primer Apellido",
+  },
+  {
+    id: "worker_last_name",
+    numeric: false,
+    disablePadding: true,
+    label: "Segundo Apellido",
   },
 ];
 
@@ -173,14 +179,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ItemsInfo() {
+export default function ClientsInfo() {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
-  const rows = useSelector(selectItem);
+  const rows = useSelector(selectClient);
   const loading = useSelector(selectLoading);
   const [snackOpen, setSnackOpen] = React.useState(false);
   const dispatch = useDispatch();
@@ -261,28 +267,28 @@ export default function ItemsInfo() {
       <div className = {classes.root}>
         <Toolbar>
           <div edge = "start" className = {classes.grow}/>
-          <InsertItem
+          <InsertClient
             edge = "end"
             onSave = {()=>{
-              setSnackOpen("Producto Agregado")
+              setSnackOpen("Cliente Agregado")
             }}
             render = {(open) => (
               <Button variant = "outlined" color = "primary" edge = "end" onClick = {open}>
-                Insertar Nuevo Producto
+                Insertar Nuevo Cliente
               </Button>
             )}
           /> 
           {selected.length > 0 && (
-            <Tooltip title={"Borrar"}>
-              <DeleteItem
+            <Tooltip title={"Delete"}>
+              <DeleteClient
                 ids={selected}
                 onSave={() => {
                   dispatch(remove(selected));
 
                   setSnackOpen(
-                    `${selected.length} Producto${
+                    `${selected.length} Driver${
                       selected.length > 1 ? "s" : ""
-                    } Borrado`
+                    } Deleted`
                   );
                   setSelected([]);
                 }}
@@ -303,7 +309,7 @@ export default function ItemsInfo() {
           )}
         </Toolbar>
         <SummaryCard
-          title={"Productos"}
+          title={"Clientes"}
           value={
             <>
               <TableContainer>
@@ -345,7 +351,7 @@ export default function ItemsInfo() {
                               ) {
                                 return;
                               }
-                              history.push(`/itemdetail/1`);
+                              history.push(`/clientdetail/1`);
                             }}
                             key={`person-${row.id}`}
                             selected={isItemSelected}
@@ -374,7 +380,7 @@ export default function ItemsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.item_code}
+                              {row.client_sys_code}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -382,7 +388,7 @@ export default function ItemsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.item_name}
+                              {row.client_first_name}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -390,7 +396,7 @@ export default function ItemsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.item_description}
+                              {row.client_second_name}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -398,7 +404,15 @@ export default function ItemsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.item_quantity}
+                              {row.client_middle_name}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.client_last_name}
                             </TableCell>
                           </TableRow>
                         );

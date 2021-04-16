@@ -146,7 +146,7 @@ export default function Loans(){
                     <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
                         Prestamos
                     </Typography>
-                    <IconButton color = "inherit">
+                    <IconButton color = "inherit"  href = "/">
                         <PowerSettingsNewIcon/>
                     </IconButton>
                 </Toolbar>
