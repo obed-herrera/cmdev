@@ -66,12 +66,12 @@ export const secondaryListItems = (
             </ListItemIcon>
             <ListItemText primary = "Reportes"/>
         </ListItem>
-        <ListItem>
+        <ListItemLink href = "/items">
             <ListItemIcon>
                 <ShoppingCartIcon/>
             </ListItemIcon>
             <ListItemText primary = "Inventario"/>
-        </ListItem>
+        </ListItemLink>
         <ListItemLink href = "/configuration">
             <ListItemIcon>
                 <ShoppingCartIcon/>

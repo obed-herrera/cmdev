@@ -17,6 +17,8 @@ import clientsReducer from '../src/Pages/Clients/ClientSlice';
 import ClientDetail from './Pages/Clients/ClientDetail';
 import Configuration from './Pages/Configuration/Configuration';
 import linesReducer from '../src/Pages/Lines/LinesSlice';
+import itemsReducer from '../src/Pages/Items/ItemSlice';
+import Items from "./Pages/Items/Items";
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
       clients: clientsReducer,
       loan: loanReducer,
       lines: linesReducer,
+      items: itemsReducer,
     },
   });
 
@@ -58,6 +61,9 @@ function App() {
                     </Route>
                     <Route exact path = "/configuration">
                       <Configuration/>
+                    </Route>
+                    <Route exact path = "/items">
+                      <Items/>
                     </Route>
                   </Switch>
                   

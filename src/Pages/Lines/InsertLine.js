@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { nextID } from "./LinesSlice";
 import { FormControl, FormHelperText, Grid, NativeSelect } from "@material-ui/core";
 import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
+import './InsertLine.css';
 
 export default function InsertLine({ data, render, onSave }) {
   const [open, setOpen] = React.useState(false);
@@ -42,10 +43,12 @@ export default function InsertLine({ data, render, onSave }) {
 
   const [line, setLine]=useState({
     id_credi_line: '',
-    line_client: '',
-    line_item: '',
-    line_payment: '',
-    line_date: ''
+    credi_line_code: '',
+    credi_line_client: '',
+    credi_line_item: '',
+    credi_line_item_price: '',
+    credi_line_item_quantity:'',
+    credi_line_total:'',
   });
 
   const handleChange=e=>{
@@ -66,25 +69,37 @@ export default function InsertLine({ data, render, onSave }) {
   return (
     <>
       {render(handleClickOpen)}
-      <Dialog
+      <Dialog contentClassName = "custom-modal-style-line"
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        maxWidth = "xs"
       >
         <DialogTitle id="form-dialog-title">
           {data ? "Editar" : "Agregar"} Linea{" "}
         </DialogTitle>
         <DialogContent>
-        <Grid container spacing = {2} style = {{padding:20}}>
-                <Grid item xs ={4}>
+        <Grid style = {{padding:20}}>
+                <Grid item xs ={9}>
                     <div className = "form-group">
+                    <TextField
+                            autoFocus
+                            margin="dense"
+                            id="credi_line_code"
+                            label="Codigo de la Linea"
+                            fullWidth
+                            value={line.credi_line_code}
+                            onChange={(e) => {
+                            setName(e.target.value);
+                            }}
+                        />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="line_client"
+                            id="credi_line_client"
                             label="Cliente"
                             fullWidth
-                            value={line.line_client}
+                            value={line.credi_line_client}
                             onChange={(e) => {
                             setName(e.target.value);
                             }}
@@ -92,10 +107,10 @@ export default function InsertLine({ data, render, onSave }) {
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="line_item"
+                            id="credi_line_item"
                             label="Item"
                             fullWidth
-                            value={line.line_item}
+                            value={line.credi_line_item}
                             onChange={(e) => {
                             setName(e.target.value);
                             }}
@@ -103,10 +118,21 @@ export default function InsertLine({ data, render, onSave }) {
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="line_payment"
-                            label="Pago del Item"
+                            id="credi_line_item_price"
+                            label="Producto"
                             fullWidth
-                            value={line.line_payment}
+                            value={line.credi_line_item_price}
+                            onChange={(e) => {
+                            setName(e.target.value);
+                            }}
+                        />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="credi_line_quantity"
+                            label="Cantidad"
+                            fullWidth
+                            value={line.credi_line_quantity}
                             onChange={(e) => {
                             setName(e.target.value);
                             }}

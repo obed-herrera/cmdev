@@ -17,7 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
-import ClientsInfo from './ClientsInfo';
+import ItemsInfo from './ItemsInfo';
 
 function Copyright() {
     return (
@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Clients(){
+export default function Items(){
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -144,7 +144,7 @@ export default function Clients(){
                         <MenuIcon/>
                     </IconButton>
                     <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
-                        Clientes
+                        Inventario
                     </Typography>
                     <IconButton color = "inherit">
                         <PowerSettingsNewIcon/>
@@ -173,7 +173,7 @@ export default function Clients(){
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
                 <Container maxWidth = "xl" className = {classes.container}>               
-                      <ClientsInfo />
+                      <ItemsInfo />
                 </Container>
                   <Box pt = {4}>
                     <Copyright/>
