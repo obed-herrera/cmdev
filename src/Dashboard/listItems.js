@@ -3,7 +3,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ContactsIcon from '@material-ui/icons/Contacts';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import AssignmentIcon from '@material-ui/icons/Assignment';

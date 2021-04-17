@@ -1,17 +1,12 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import Content from "../../Dashboard/Content";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Chip from "@material-ui/core/Chip";
-import DriveIcon from "@material-ui/icons/DriveEta";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import { useSelector } from "react-redux";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 
@@ -174,10 +169,6 @@ export default function ItemDetail({ id }) {
       </Content>
     );
   }
-
-  const trips = 4;
-  const distance = 0;
-  const fare = 0;
   return (
     <div className = {classes.root}>
     <CssBaseline/>

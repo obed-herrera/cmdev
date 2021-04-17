@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,7 +9,7 @@ import Content from "../../Dashboard/Content";
 import DeleteIcon from '@material-ui/icons/Delete';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Snackbar from "@material-ui/core/Snackbar";
-import { Avatar, Button, Checkbox, TableContainer, TablePagination, TableSortLabel, Toolbar, Tooltip } from '@material-ui/core';
+import {Button, Checkbox, TableContainer, TablePagination, TableSortLabel, Toolbar, Tooltip } from '@material-ui/core';
 import InsertLine from './InsertLoans';
 import PropTypes from "prop-types";
 import { SummaryCard } from "./LoansDetail";

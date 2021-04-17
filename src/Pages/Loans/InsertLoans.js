@@ -10,11 +10,10 @@ import { add, update } from "./LoansSlice";
 import { useDispatch } from "react-redux";
 import { nextID } from "./LoansSlice";
 import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, NativeSelect, Select } from "@material-ui/core";
-import { DatePicker, KeyboardDatePicker } from "@material-ui/pickers";
+import { KeyboardDatePicker } from "@material-ui/pickers";
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
 } from '@material-ui/pickers';
 import 'date-fns';
 
@@ -91,7 +90,7 @@ const classes = useStyles();
     console.log(loan);
   }
 
-  const [state, setState] = React.useState({
+  const [state,] = React.useState({
     client_line: '',
   });
 
