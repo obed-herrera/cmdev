@@ -5,6 +5,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ContactsIcon from '@material-ui/icons/Contacts';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import StorageIcon from '@material-ui/icons/Storage';
+import BuildIcon from '@material-ui/icons/Build';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 import { AttachMoney, Description } from '@material-ui/icons';
 
 function ListItemLink(props){
@@ -45,7 +50,7 @@ export const headerSecondaryList = (
     <div>
         <ListItem>
             <ListItemIcon>
-                    <ShoppingCartIcon/>
+                    <DoneAllIcon/>
             </ListItemIcon>
             <ListItemText align = "center" primary = "Administracion"/>
         </ListItem>
@@ -56,25 +61,25 @@ export const secondaryListItems = (
     <div>
         <ListItemLink href = "/workers">
             <ListItemIcon>
-                <ShoppingCartIcon/>
+                <EmojiPeopleIcon/>
             </ListItemIcon>
             <ListItemText primary = "Trabajadores"/>
         </ListItemLink>
         <ListItemLink href = "/reports">
             <ListItemIcon>
-                <ShoppingCartIcon/>
+                <AssignmentIcon/>
             </ListItemIcon>
             <ListItemText primary = "Reportes"/>
         </ListItemLink>
         <ListItemLink href = "/items">
             <ListItemIcon>
-                <ShoppingCartIcon/>
+                <StorageIcon/>
             </ListItemIcon>
             <ListItemText primary = "Inventario"/>
         </ListItemLink>
         <ListItemLink href = "/configuration">
             <ListItemIcon>
-                <ShoppingCartIcon/>
+                <BuildIcon/>
             </ListItemIcon>
             <ListItemText primary = "Configuración"/>
         </ListItemLink>

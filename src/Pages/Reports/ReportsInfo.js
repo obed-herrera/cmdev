@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
 import CssBaseline from '@material-ui/core/CssBaseline';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 const drawerWidth = 240;
 
@@ -155,6 +156,9 @@ export function SummaryCard({ title, value, component }) {
           {value}
         </Typography>
       )}
+            <Button variant = "outlined" color = "primary" edge="end">
+                Generar
+            </Button>
     </Paper>
   );
 }
@@ -185,16 +189,19 @@ export default function ItemDetail({ id }) {
           <Avatar
             classes={{ root: classes.avatar, circle: classes.circle }}
           />
-          <Typography variant={"h5"}>Reportes</Typography>
-          <Chip variant={"outlined"} icon={<DriveIcon />} label="Driver" />
+          <Typography variant={"h5"}></Typography>
+          <Chip variant={"outlined"} icon={<AssessmentIcon />} label="Seleccione su reporte" />
           {/*<Rating name="read-only" value={4.3} readOnly />*/}
         </div>
       </div>
       <div className={classes.summaryCards}>
-        <SummaryCard title={"Revenue"} value={"$" + fare} />
-        <SummaryCard title={"Trips"} value={trips} />
-        <SummaryCard title={"Miles"} value={distance} />
-        <SummaryCard title={"Rating"} value={4.32} />
+        <SummaryCard title={"Reporte al dia de hoy"}>
+        </SummaryCard>
+        <SummaryCard title={"Reporte de la semana"} />
+        <SummaryCard title={"Reporte del mes"}  />
+        <SummaryCard title={"Reporte por prestamos"}  />
+        <SummaryCard title={"Reporte por lineas"}  />
+        <SummaryCard title={"Reporte por clientes"}  />
       </div>
       {/*<div className={classes.summaryCards}>
         <SummaryCard title="Last 30 Days" component={<RevenueLine />} />
