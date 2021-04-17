@@ -19,6 +19,9 @@ import Configuration from './Pages/Configuration/Configuration';
 import linesReducer from '../src/Pages/Lines/LinesSlice';
 import itemsReducer from '../src/Pages/Items/ItemSlice';
 import Items from "./Pages/Items/Items";
+import Workers from "./Pages/Workers/Workers";
+import workersReducer from '../src/Pages/Workers/WorkersSlice';
+import Reports from "./Pages/Reports/Reports";
 
 function App() {
 
@@ -28,6 +31,7 @@ function App() {
       loan: loanReducer,
       lines: linesReducer,
       items: itemsReducer,
+      workers: workersReducer,
     },
   });
 
@@ -61,6 +65,12 @@ function App() {
                     </Route>
                     <Route exact path = "/configuration">
                       <Configuration/>
+                    </Route>
+                    <Route exact path = "/reports">
+                      <Reports/>
+                    </Route>
+                    <Route exact path = "/workers">
+                      <Workers/>
                     </Route>
                     <Route exact path = "/items">
                       <Items/>

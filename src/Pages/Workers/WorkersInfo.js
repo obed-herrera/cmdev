@@ -12,7 +12,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import { Avatar, Button, Checkbox, TableContainer, TablePagination, TableSortLabel, Toolbar, Tooltip } from '@material-ui/core';
 import InsertWorker from './InsertWorker';
 import PropTypes from "prop-types";
-import { SummaryCard } from "./WorkersDetail";
+import { SummaryCard } from "./WorkerDetail";
 import MuiAlert from "@material-ui/lab/Alert";
 import DeleteWorker from './DeleteWorker';
 import { useDispatch, useSelector } from 'react-redux';
@@ -179,14 +179,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ClientsInfo() {
+export default function WorkersInfo() {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
-  const rows = useSelector(selectClient);
+  const rows = useSelector(selectWorker);
   const loading = useSelector(selectLoading);
   const [snackOpen, setSnackOpen] = React.useState(false);
   const dispatch = useDispatch();
@@ -267,28 +267,28 @@ export default function ClientsInfo() {
       <div className = {classes.root}>
         <Toolbar>
           <div edge = "start" className = {classes.grow}/>
-          <InsertClient
+          <InsertWorker
             edge = "end"
             onSave = {()=>{
-              setSnackOpen("Cliente Agregado")
+              setSnackOpen("Trabajador Agregado")
             }}
             render = {(open) => (
               <Button variant = "outlined" color = "primary" edge = "end" onClick = {open}>
-                Insertar Nuevo Cliente
+                Insertar Nuevo Trabajador
               </Button>
             )}
           /> 
           {selected.length > 0 && (
-            <Tooltip title={"Delete"}>
-              <DeleteClient
+            <Tooltip title={"Borrar"}>
+              <DeleteWorker
                 ids={selected}
                 onSave={() => {
                   dispatch(remove(selected));
 
                   setSnackOpen(
-                    `${selected.length} Driver${
+                    `${selected.length} Trabajador${
                       selected.length > 1 ? "s" : ""
-                    } Deleted`
+                    } Borrado`
                   );
                   setSelected([]);
                 }}
@@ -309,7 +309,7 @@ export default function ClientsInfo() {
           )}
         </Toolbar>
         <SummaryCard
-          title={"Clientes"}
+          title={"Trabajadores"}
           value={
             <>
               <TableContainer>
@@ -351,9 +351,9 @@ export default function ClientsInfo() {
                               ) {
                                 return;
                               }
-                              history.push(`/clientdetail/1`);
+                              history.push(`/workersdetail/1`);
                             }}
-                            key={`person-${row.id}`}
+                            key={`worker-${row.id}`}
                             selected={isItemSelected}
                             style={{ cursor: "pointer" }}
                           >
@@ -380,7 +380,7 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_sys_code}
+                              {row.credi_worker_code}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -388,7 +388,7 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_first_name}
+                              {row.worker_first_name}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -396,7 +396,7 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_second_name}
+                              {row.worker_second_name}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -404,7 +404,7 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_middle_name}
+                              {row.worker_middle_name}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -412,7 +412,7 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_last_name}
+                              {row.worker_last_name}
                             </TableCell>
                           </TableRow>
                         );

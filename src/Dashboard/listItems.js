@@ -54,18 +54,18 @@ export const headerSecondaryList = (
 
 export const secondaryListItems = (
     <div>
-        <ListItem button>
+        <ListItemLink href = "/workers">
             <ListItemIcon>
                 <ShoppingCartIcon/>
             </ListItemIcon>
             <ListItemText primary = "Trabajadores"/>
-        </ListItem>
-        <ListItem button>
+        </ListItemLink>
+        <ListItemLink href = "/reports">
             <ListItemIcon>
                 <ShoppingCartIcon/>
             </ListItemIcon>
             <ListItemText primary = "Reportes"/>
-        </ListItem>
+        </ListItemLink>
         <ListItemLink href = "/items">
             <ListItemIcon>
                 <ShoppingCartIcon/>
