@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -27,8 +28,11 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    height: "100vh",
+  },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(8, 8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -38,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    width: '70%', // Fix IE 11 issue.
+    marginTop: theme.spacing(2),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -54,7 +58,7 @@ export default function SignIn() {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+
         </Avatar>
         <Typography component="h1" variant="h5">
           Inicio de Sesión
@@ -70,6 +74,7 @@ export default function SignIn() {
             name="username"
             autoComplete="username"
             autoFocus
+
           />
           <TextField
             variant="outlined"
@@ -83,7 +88,7 @@ export default function SignIn() {
             autoComplete="current-password"
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox value="remember" color="secondary" />}
             label="Recuérdame"
           />
           <Button
@@ -98,7 +103,7 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="#" variant="body2" color = "secondary">
                 ¿Olvidó su contraseña?
               </Link>
             </Grid>

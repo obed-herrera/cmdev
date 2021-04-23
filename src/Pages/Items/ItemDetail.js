@@ -26,6 +26,7 @@ import IconButton from '@material-ui/core/IconButton';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
+import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 
 const drawerWidth = 240;
 
@@ -267,6 +268,14 @@ export default function ItemDetail({ id }) {
           {/*<Rating name="read-only" value={4.3} readOnly />*/}
           <div className={classes.spacer} />
           <div className={classes.actionGroup}>
+          <Button
+          color = "secondary"
+          variant = "contained"
+          href = "/items"
+          startIcon = {<KeyboardReturnIcon/>}
+          >
+            Regresar
+          </Button>
             <InsertItem
               data={item}
               render={(open) => (

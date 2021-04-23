@@ -68,7 +68,8 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 24,
+    marginRight: 22,
+    marginLeft: -20,
   },
   menuButtonHidden: {
     display: 'none',
@@ -126,7 +127,7 @@ export default function Dashboard(){
     const handleDrawerClose = () => {
         setOpen(false);
     }
-    //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     return(
         <div className = {classes.root}>
@@ -143,7 +144,7 @@ export default function Dashboard(){
                         <MenuIcon/>
                     </IconButton>
                     <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
-                        Dashboard
+                        Inicio
                     </Typography>
                     <IconButton color = "inherit" href = "/">
                         <PowerSettingsNewIcon />
@@ -168,17 +169,17 @@ export default function Dashboard(){
                 <List>{headerSecondaryList}</List>
                 <Divider/>
                 <List>{secondaryListItems}</List>
-            </Drawer>
+              </Drawer>
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
                 <Container maxWidth="lg" className={classes.container}>
                         
-                         <LoansInfo />
+                        
                 </Container>
                 <Box pt = {4}>
                     <Copyright/>
                 </Box>
             </main>
         </div>
-    )
+    );
 }

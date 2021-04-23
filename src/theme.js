@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { blue, blueGrey } from "@material-ui/core/colors";
+import { blue, blueGrey, green } from "@material-ui/core/colors";
 
 const defaultTheme = {
   palette: {
-    primary: blue,
+    primary: green,
     secondary: blueGrey, //ss,
     //type: "dark",
   },
@@ -19,7 +19,7 @@ const defaultTheme = {
 export function useTheme() {
   const [currentTheme, setCurrentTheme] = useState({
     palette: {
-      primary: blue,
+      primary: green,
       secondary: blueGrey,
     },
   });

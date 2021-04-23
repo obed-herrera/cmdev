@@ -17,6 +17,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
+import ConfigurationInfo from './ConfigurationInfo';
+
 
 
 function Copyright() {
@@ -68,7 +70,8 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 24,
+    marginRight: 22,
+    marginLeft: -20,
   },
   menuButtonHidden: {
     display: 'none',
@@ -118,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Configuration(){
+export default function Configuration({currentTheme, setCurrentTheme}){
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -173,7 +176,7 @@ export default function Configuration(){
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
                 <Container maxWidth = "xl" className = {classes.container}>               
-                    
+                  <ConfigurationInfo/>
                 </Container>
                   <Box pt = {4}>
                     <Copyright/>

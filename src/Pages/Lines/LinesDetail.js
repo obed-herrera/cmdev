@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import InsertLine from "./InsertLine";
 import { useSelector } from "react-redux";
 import { selectLines } from "./LinesSlice";
+import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -122,6 +123,14 @@ export default function LinesDetail({ id }) {
           {/*<Rating name="read-only" value={4.3} readOnly />*/}
           <div className={classes.spacer} />
           <div className={classes.actionGroup}>
+          <Button
+          color = "secondary"
+          variant = "contained"
+          href = "/lines"
+          startIcon = {<KeyboardReturnIcon/>}
+          >
+            Regresar
+          </Button>
             <InsertLine
               data={line}
               render={(open) => (

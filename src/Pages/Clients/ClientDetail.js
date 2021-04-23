@@ -26,6 +26,7 @@ import IconButton from '@material-ui/core/IconButton';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
+import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 
 const drawerWidth = 240;
 
@@ -219,6 +220,7 @@ export default function ClientDetail({ id }) {
                     <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
                         Clientes
                     </Typography>
+                    
                     <IconButton color = "inherit">
                         <PowerSettingsNewIcon/>
                     </IconButton>
@@ -243,7 +245,7 @@ export default function ClientDetail({ id }) {
                 <Divider/>
                 <List>{secondaryListItems}</List>
             </Drawer>
-    {<main className = {classes.content}> 
+    <main className = {classes.content}> 
     <div className = {classes.appBarSpacer}/>     
     <Content maxWidth = "lg" className = {classes.container}>
       <div
@@ -252,10 +254,10 @@ export default function ClientDetail({ id }) {
           backgroundPosition: "center",
           backgroundSize: "cover",
           filter: "contrast(75%)",
-          backgroundImage: "url(/img/wallpaper.jpeg)",
         }}
       />
       <div className={classes.headerContainer}>
+      
         <div className={classes.header}>
           <Avatar
             alt={client.name}
@@ -267,6 +269,16 @@ export default function ClientDetail({ id }) {
           {/*<Rating name="read-only" value={4.3} readOnly />*/}
           <div className={classes.spacer} />
           <div className={classes.actionGroup}>
+          <div>
+          <Button
+          color = "secondary"
+          variant = "contained"
+          href = "/clients"
+          startIcon = {<KeyboardReturnIcon/>}
+          >
+            Regresar
+          </Button>
+          </div>
             <InsertClient
               data={client}
               render={(open) => (
@@ -298,7 +310,7 @@ export default function ClientDetail({ id }) {
               </div>*/}
       {/*<SummaryCard title={"Recent expenses"} component={<ExpensesTable />} />*/}
     </Content>
-    </main>}
+    </main>
 </div>
   )
           }
