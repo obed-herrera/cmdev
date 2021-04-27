@@ -16,17 +16,14 @@ export default function InsertWorker({ data, render, onSave }) {
   const dispatch = useDispatch();
 
   const defaultImg = data && data.img;
-  const defaultField = data && data.field;
   // Existing ID or random ID
   const id = data && data.id;
 
   const [img, setImg] = React.useState(defaultImg);
-  const [field, setField] = React.useState(defaultField);
 
   const handleClickOpen = () => {
     setOpen(true);
     setImg(defaultImg);
-    setField(defaultField);
   };
 
   const handleClose = () => {
@@ -83,7 +80,7 @@ export default function InsertWorker({ data, render, onSave }) {
                             fullWidth
                             value={worker.worker_first_name}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setWorker(e.target.value);
                             }}
                         />
                         <TextField
@@ -94,7 +91,7 @@ export default function InsertWorker({ data, render, onSave }) {
                             fullWidth
                             value={worker.worker_second_name}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setWorker(e.target.value);
                             }}
                         />
                         <TextField
@@ -105,7 +102,7 @@ export default function InsertWorker({ data, render, onSave }) {
                             fullWidth
                             value={worker.worker_middle_name}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setWorker(e.target.value);
                             }}
                         />
                         <TextField
@@ -116,7 +113,7 @@ export default function InsertWorker({ data, render, onSave }) {
                             fullWidth
                             value={worker.worker_last_name}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setWorker(e.target.value);
                             }}
                         />
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "worker_first_name" onChange = {handleChange}/>*/}

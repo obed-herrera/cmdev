@@ -16,7 +16,7 @@ import { SummaryCard } from "./LoansDetail";
 import MuiAlert from "@material-ui/lab/Alert";
 import DeleteLines from './DeleteLoans';
 import { useDispatch, useSelector } from 'react-redux';
-import {add, remove, selectLoans, selectLoading} from './LoansSlice';
+import { remove, selectLoans, selectLoading} from './LoansSlice';
 import { useHistory } from 'react-router';
 
 

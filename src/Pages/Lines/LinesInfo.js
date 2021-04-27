@@ -16,7 +16,7 @@ import { SummaryCard } from "./LinesDetail";
 import MuiAlert from "@material-ui/lab/Alert";
 import DeleteLines from './DeleteLines';
 import { useDispatch, useSelector } from 'react-redux';
-import {add, remove, selectLines, selectLoading} from './LinesSlice';
+import { remove, selectLines, selectLoading} from './LinesSlice';
 import { useHistory } from 'react-router';
 
 

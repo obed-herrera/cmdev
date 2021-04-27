@@ -35,7 +35,7 @@ function App() {
     },
   });
 
-  const [currentTheme, setCurrentTheme] = useTheme();
+  const [currentTheme] = useTheme();
 
   return (
     <>

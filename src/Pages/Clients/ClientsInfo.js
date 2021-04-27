@@ -70,22 +70,22 @@ const headCells = [
     label: "Primer Nombre",
   },
   {
-    id: "client_second_name",
-    numeric: false,
-    disablePadding: true,
-    label: "Segundo Nombre",
-  },
-  {
     id: "client_middle_name",
     numeric: false,
     disablePadding: true,
     label: "Primer Apellido",
   },
   {
-    id: "client_last_name",
+    id: "client_national_id",
     numeric: false,
     disablePadding: true,
-    label: "Segundo Apellido",
+    label: "Cedula",
+  },
+  {
+    id: "client_phone",
+    numeric: false,
+    disablePadding: true,
+    label: "Telefono del Cliente",
   },
 ];
 
@@ -396,14 +396,6 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_second_name}
-                            </TableCell>
-                            <TableCell
-                              component="th"
-                              id={labelId}
-                              scope="row"
-                              padding="none"
-                            >
                               {row.client_middle_name}
                             </TableCell>
                             <TableCell
@@ -412,7 +404,15 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_last_name}
+                              {row.client_national_id}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.client_phone}
                             </TableCell>
                           </TableRow>
                         );

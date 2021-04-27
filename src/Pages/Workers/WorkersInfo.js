@@ -16,7 +16,7 @@ import { SummaryCard } from "./WorkerDetail";
 import MuiAlert from "@material-ui/lab/Alert";
 import DeleteWorker from './DeleteWorker';
 import { useDispatch, useSelector } from 'react-redux';
-import {add, remove, selectWorker, selectLoading} from './WorkersSlice';
+import {remove, selectWorker, selectLoading} from './WorkersSlice';
 import { useHistory } from 'react-router';
 
 
