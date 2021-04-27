@@ -8,8 +8,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { add, update } from "./LinesSlice";
 import { useDispatch } from "react-redux";
 import { nextID } from "./LinesSlice";
-import { FormControl, FormHelperText, Grid, NativeSelect } from "@material-ui/core";
-import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
+import { Grid } from "@material-ui/core";
 import './InsertLine.css';
 
 export default function InsertLine({ data, render, onSave }) {
@@ -51,20 +50,15 @@ export default function InsertLine({ data, render, onSave }) {
     credi_line_total:'',
   });
 
-  const handleChange=e=>{
+  /*const handleChange=e=>{
     const {name, value}=e.target;
     setLine((prevState)=>({
       ...prevState,
       [name]: value
     }))
     console.log(line);
-  }
+  }*/
 
-  const [state, setState] = React.useState({
-    client_line: '',
-  });
-
-  const classes = useStyles();
 
   return (
     <>
@@ -90,7 +84,7 @@ export default function InsertLine({ data, render, onSave }) {
                             fullWidth
                             value={line.credi_line_code}
                             onChange={(e) => {
-                            setName(e.target.value);
+                            setLine(e.target.value);
                             }}
                         />
                         <TextField
@@ -101,7 +95,7 @@ export default function InsertLine({ data, render, onSave }) {
                             fullWidth
                             value={line.credi_line_client}
                             onChange={(e) => {
-                            setName(e.target.value);
+                            setLine(e.target.value);
                             }}
                         />
                         <TextField
@@ -112,7 +106,7 @@ export default function InsertLine({ data, render, onSave }) {
                             fullWidth
                             value={line.credi_line_item}
                             onChange={(e) => {
-                            setName(e.target.value);
+                            setLine(e.target.value);
                             }}
                         />
                         <TextField
@@ -123,7 +117,7 @@ export default function InsertLine({ data, render, onSave }) {
                             fullWidth
                             value={line.credi_line_item_price}
                             onChange={(e) => {
-                            setName(e.target.value);
+                            setLine(e.target.value);
                             }}
                         />
                         <TextField
@@ -134,7 +128,7 @@ export default function InsertLine({ data, render, onSave }) {
                             fullWidth
                             value={line.credi_line_quantity}
                             onChange={(e) => {
-                            setName(e.target.value);
+                            setLine(e.target.value);
                             }}
                         />
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}

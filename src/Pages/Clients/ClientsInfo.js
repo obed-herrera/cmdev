@@ -16,7 +16,7 @@ import { SummaryCard } from "./ClientDetail";
 import MuiAlert from "@material-ui/lab/Alert";
 import DeleteClient from './DeleteClient';
 import { useDispatch, useSelector } from 'react-redux';
-import {add, remove, selectClient, selectLoading} from './ClientSlice';
+import { remove, selectClient, selectLoading} from './ClientSlice';
 import { useHistory } from 'react-router';
 
 

@@ -8,8 +8,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { add, update } from "./ItemSlice";
 import { useDispatch } from "react-redux";
 import { nextID } from "./ItemSlice";
-import { Divider, FormControl, FormHelperText, Grid, NativeSelect } from "@material-ui/core";
-import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
+import { Divider, Grid } from "@material-ui/core";
+//import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
 
 export default function InsertItem({ data, render, onSave }) {
   const [open, setOpen] = React.useState(false);
@@ -21,7 +21,7 @@ export default function InsertItem({ data, render, onSave }) {
   const id = data && data.id;
 
   const [img, setImg] = React.useState(defaultImg);
-  const [field, setField] = React.useState(defaultField);
+  const [ setField] = React.useState(defaultField);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,16 +48,16 @@ export default function InsertItem({ data, render, onSave }) {
     item_quantity:'',
   });
 
-  const handleChange=e=>{
+ /* const handleChange=e=>{
     const {name, value}=e.target;
     setItem((prevState)=>({
       ...prevState,
       [name]: value
     }))
     console.log(item);
-  }
+  }*/
 
-  const classes = useStyles();
+  //const classes = useStyles();
 
   return (
     <>
@@ -84,7 +84,7 @@ export default function InsertItem({ data, render, onSave }) {
                             fullWidth
                             value={item.item_code}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setItem(e.target.value);
                             }}
                         />
                         <TextField
@@ -95,7 +95,7 @@ export default function InsertItem({ data, render, onSave }) {
                             fullWidth
                             value={item.item_name}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setItem(e.target.value);
                             }}
                         />
                         <TextField
@@ -106,7 +106,7 @@ export default function InsertItem({ data, render, onSave }) {
                             fullWidth
                             value={item.item_description}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setItem(e.target.value);
                             }}
                         />
                         <TextField
@@ -117,7 +117,7 @@ export default function InsertItem({ data, render, onSave }) {
                             fullWidth
                             value={item.item_quantity}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setItem(e.target.value);
                             }}
                         />
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}

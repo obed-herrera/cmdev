@@ -17,13 +17,11 @@ export default function InsertClient({ data, render, onSave }) {
 
   const defaultImg = data && data.img;
   const defaultField = data && data.field;
-  const defaultCFN = data && data.CFN;
   // Existing ID or random ID
   const id = data && data.id;
 
   const [img, setImg] = React.useState(defaultImg);
-  const [field, setField] = React.useState(defaultField);
-  const [CFN, setCFN] = React.useState(defaultCFN);
+  const [setField] = React.useState(defaultField);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -59,7 +57,7 @@ export default function InsertClient({ data, render, onSave }) {
   });
 
   const handleChange=e=>{
-    const {name, CFN, value}=e.target;
+    const {name, value}=e.target;
     setClient((prevState)=>({
       ...prevState,
       [name]: value
@@ -91,7 +89,7 @@ export default function InsertClient({ data, render, onSave }) {
                             id="client_first_name"
                             label="Primer Nombre"
                             fullWidth
-                            value={CFN}
+                            value={client.client_first_name}
                             onChange={(e) => {
                             setField(e.target.value);
                             }}

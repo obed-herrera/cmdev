@@ -16,7 +16,7 @@ import { SummaryCard } from "./ItemDetail";
 import MuiAlert from "@material-ui/lab/Alert";
 import DeleteItem from './DeleteItem';
 import { useDispatch, useSelector } from 'react-redux';
-import {add, remove, selectItem, selectLoading} from './ItemSlice';
+import { remove, selectItem, selectLoading} from './ItemSlice';
 import { useHistory } from 'react-router';
 
 

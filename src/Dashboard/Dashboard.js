@@ -17,7 +17,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from './listItems';
-import LoansInfo from '../Pages/Loans/LoansInfo';
 
 function Copyright() {
     return (
@@ -127,7 +126,6 @@ export default function Dashboard(){
     const handleDrawerClose = () => {
         setOpen(false);
     }
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     return(
         <div className = {classes.root}>
