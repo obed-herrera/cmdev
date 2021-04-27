@@ -26,7 +26,7 @@ export default function InsertClient({ data, render, onSave }) {
   const handleClickOpen = () => {
     setOpen(true);
     setImg(defaultImg);
-    setField(defaultField);
+    setClient(client);
   };
 
   const handleClose = () => {
@@ -91,7 +91,7 @@ export default function InsertClient({ data, render, onSave }) {
                             fullWidth
                             value={client.client_first_name}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setClient(e.target.value);
                             }}
                         />
                         <TextField
@@ -102,7 +102,7 @@ export default function InsertClient({ data, render, onSave }) {
                             fullWidth
                             value={client.client_second_name}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setClient(e.target.value);
                             }}
                         />
                         <TextField
@@ -113,7 +113,7 @@ export default function InsertClient({ data, render, onSave }) {
                             fullWidth
                             value={client.client_middle_name}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setClient(e.target.value);
                             }}
                         />
                         <TextField
@@ -124,7 +124,7 @@ export default function InsertClient({ data, render, onSave }) {
                             fullWidth
                             value={client.client_last_name}
                             onChange={(e) => {
-                            setField(e.target.value);
+                            setClient(e.target.value);
                             }}
                         />
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
