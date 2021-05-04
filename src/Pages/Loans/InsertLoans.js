@@ -111,8 +111,8 @@ const classes = useStyles();
           {data ? "Editar" : "Agragar"} Prestamo{" "}
         </DialogTitle>
         <DialogContent>
-        <Grid container spacing = {3} style = {{padding:10}}>
-                <Grid item xs ={4}>
+        <Grid container lg = 'auto' spacing = {3} style = {{padding:10}}>
+                <Grid item lg ={4}>
                     <div className = "form-group">
                         <TextField
                             autoFocus
@@ -150,7 +150,7 @@ const classes = useStyles();
                         <Grid container 
                         spacing = {2}
                         direction = "row">
-                          <Grid item xs = {3}>
+                          <Grid item lg = {3}>
                         <FormControl variant = "outlined" className = {classes.formControl}>
                             <InputLabel id = "credi_loan_term">Plazo</InputLabel>
                             <Select
@@ -198,7 +198,7 @@ const classes = useStyles();
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
                     </div>
                 </Grid>
-                <Grid item xs ={4}> 
+                <Grid item lg ={4}> 
                     <div className = "form-group">
                       <MuiPickersUtilsProvider utils = {DateFnsUtils}>
                         <Grid container justify = "space-around">
@@ -244,7 +244,7 @@ const classes = useStyles();
                         </MuiPickersUtilsProvider>
                   </div> 
             </Grid>
-                <Grid item xs = {4}>
+                <Grid item lg = {4}>
                   <FormControl className={classes.formControl}>
                       <NativeSelect
                         className={classes.selectEmpty}

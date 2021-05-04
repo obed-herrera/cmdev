@@ -75,8 +75,8 @@ export default function InsertClient({ data, render, onSave }) {
         </DialogTitle>
         <Divider/>
         <DialogContent>
-        <Grid container spacing = {2} style = {{padding:20}}>
-                <Grid item xs ={4}>
+        <Grid container lg = 'auto' spacing = {2} style = {{padding:20}}>
+                <Grid item lg ={4}>
                     <div className = "form-group">
                         <TextField
                             autoFocus
@@ -125,7 +125,7 @@ export default function InsertClient({ data, render, onSave }) {
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
                     </div>
                 </Grid>
-                <Grid item xs ={4}> 
+                <Grid item lg ={4}> 
                 <TextField
                             autoFocus
                             margin="dense"
@@ -171,7 +171,7 @@ export default function InsertClient({ data, render, onSave }) {
                             }}
                         />                                  
                 </Grid>
-                <Grid item xs = {4}>
+                <Grid item lg = {4}>
                   <div className = "form-group">
                   <TextField
                             autoFocus

@@ -26,7 +26,6 @@ export default function InsertItem({ data, render, onSave }) {
   const handleClickOpen = () => {
     setOpen(true);
     setImg(defaultImg);
-    setField(defaultField);
   };
 
   const handleClose = () => {
@@ -116,6 +115,17 @@ export default function InsertItem({ data, render, onSave }) {
                             label="Cantidad"
                             fullWidth
                             value={item.item_quantity}
+                            onChange={(e) => {
+                            setItem(e.target.value);
+                            }}
+                        />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="item_price"
+                            label="Precio"
+                            fullWidth
+                            value={item.item_price}
                             onChange={(e) => {
                             setItem(e.target.value);
                             }}
