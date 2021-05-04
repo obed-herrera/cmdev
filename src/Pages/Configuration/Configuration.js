@@ -18,6 +18,7 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
 import ConfigurationInfo from './ConfigurationInfo';
+import Registration from './Registration';
 
 
 
@@ -177,6 +178,7 @@ export default function Configuration({currentTheme, setCurrentTheme}){
                 <div className = {classes.appBarSpacer}/>
                 <Container maxWidth = "xl" className = {classes.container}>               
                   <ConfigurationInfo/>
+                  <Registration/>
                 </Container>
                   <Box pt = {4}>
                     <Copyright/>

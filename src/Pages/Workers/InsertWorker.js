@@ -39,6 +39,8 @@ export default function InsertWorker({ data, render, onSave }) {
 
   const [worker, setWorker]=useState({
     credi_worker_code: '',
+    worker_username:'',
+    worker_password:'',
     worker_first_name:'',
     worker_second_name:'',
     worker_middle_name:'',
@@ -63,14 +65,44 @@ export default function InsertWorker({ data, render, onSave }) {
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        fullWidth
+        maxWidth = "md"
       >
         <DialogTitle id="form-dialog-title">
           {data ? "Editar" : "Agregar"} Trabajador{" "}
         </DialogTitle>
         <Divider/>
         <DialogContent>
-        <Grid container spacing = {2} style = {{padding:20}}>
-                <Grid item xs ={4}>
+          <Grid container width = '100%' spacing = {4} zeroMinWidth>
+                  <Grid item lg ={3} spacing = {2}>
+                    <div className = "form-group">
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="worker_username"
+                            label="Usuario"
+                            fullWidth
+                            value={worker.worker_username}
+                            onChange={(e) => {
+                            setWorker(e.target.value);
+                            }}
+                        />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="worker_password"
+                            label="Contraseña"
+                            fullWidth
+                            value={worker.password}
+                            onChange={(e) => {
+                            setWorker(e.target.value);
+                            }}
+                        />
+                        {/*<input placeholder= " " type = "text" className = "form-control" name = "worker_first_name" onChange = {handleChange}/>*/}
+                    </div>
+                  
+                  </Grid>
+                  <Grid item lg ={3}>
                     <div className = "form-group">
                         <TextField
                             autoFocus
@@ -119,12 +151,13 @@ export default function InsertWorker({ data, render, onSave }) {
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "worker_first_name" onChange = {handleChange}/>*/}
                     </div>
                 </Grid>
-                <Grid item xs ={4}> 
+                
+                <Grid item lg ={3}> 
                 <TextField
                             autoFocus
                             margin="dense"
                             id="client_national_id"
-                            label="Cedula del workere"
+                            label="Cedula del trabajador"
                             fullWidth
                             value={worker.worker_national_id}
                             onChange={(e) => {
@@ -135,7 +168,7 @@ export default function InsertWorker({ data, render, onSave }) {
                             autoFocus
                             margin="dense"
                             id="worker_sys_code"
-                            label="Codigo del workere"
+                            label="Codigo del trabajdor"
                             fullWidth
                             value={worker.worker_sys_code}
                             onChange={(e) => {
@@ -163,9 +196,10 @@ export default function InsertWorker({ data, render, onSave }) {
                             onChange={(e) => {
                             setWorker(e.target.value);
                             }}
-                        />                                  
+                        /> 
+                                                      
                 </Grid>
-                <Grid item xs = {4}>
+                <Grid item lg = {3}>
                   <div className = "form-group">
                   <TextField
                             autoFocus
@@ -187,12 +221,29 @@ export default function InsertWorker({ data, render, onSave }) {
                         inputProps={{ 'aria-label': 'worker_state' }}
                       >
                         <option value="" disabled>
-                          Estado del workere
+                          Estado del trabajador
                         </option>
                         <option value={'Activo'}>Activo</option>
                         <option value={'Inactivo'}>Inactivo</option>
                       </NativeSelect>
                       <FormHelperText>Estado del Trabajador</FormHelperText>
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                      <NativeSelect
+                        className={classes.selectEmpty}
+                        value={worker.worker_role}
+                        name="worker_role"
+                        onChange={handleChange}
+                        inputProps={{ 'aria-label': 'worker_role' }}
+                      >
+                        <option value="" disabled>
+                          Rol del trabajador
+                        </option>
+                        <option value={'Activo'}>Administrador</option>
+                        <option value={'Inactivo'}>Supervisor</option>
+                        <option value={'Inactivo'}>Cobrador</option>
+                      </NativeSelect>
+                      <FormHelperText>Rol del Trabajador</FormHelperText>
                     </FormControl>
                      {/* <div className = "form-group">
                         <FormControl className={classes.formControl}>
@@ -217,8 +268,8 @@ export default function InsertWorker({ data, render, onSave }) {
                           </FormControl>
                               </div>*/}
                   </div>
-                </Grid>
-            </Grid>
+                </Grid>  
+                </Grid>            
         </DialogContent>
         <Divider/>
         <DialogActions>

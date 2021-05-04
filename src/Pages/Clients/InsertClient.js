@@ -9,23 +9,18 @@ import { add, update } from "./ClientSlice";
 import { useDispatch } from "react-redux";
 import { nextID } from "./ClientSlice";
 import { Divider, FormControl, FormHelperText, Grid, NativeSelect } from "@material-ui/core";
-import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
+import {useStyles} from "./Clients";
+
 
 export default function InsertClient({ data, render, onSave }) {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
 
-  const defaultImg = data && data.img;
-  const defaultField = data && data.field;
   // Existing ID or random ID
-  const id = data && data.id;
 
-  const [img, setImg] = React.useState(defaultImg);
-  const [setField] = React.useState(defaultField);
 
   const handleClickOpen = () => {
     setOpen(true);
-    setImg(defaultImg);
     setClient(client);
   };
 
@@ -35,7 +30,7 @@ export default function InsertClient({ data, render, onSave }) {
 
   const handleSave = () => {
     const action = data ? update : add;
-    dispatch(action({ client, id: id || nextID(), img }));
+    dispatch(action({ client: client || nextID() }));
     onSave && onSave();
     handleClose();
   };
@@ -229,6 +224,7 @@ export default function InsertClient({ data, render, onSave }) {
                               </div>*/}
                   </div>
                 </Grid>
+                
             </Grid>
         </DialogContent>
         <Divider/>

@@ -139,7 +139,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function SummaryCard({ title, value, component }) {
+function SummaryCard({ title, value, component }) {
   const classes = useStyles();
   return (
     <Paper elevation={2} className={classes.summaryCard}>
