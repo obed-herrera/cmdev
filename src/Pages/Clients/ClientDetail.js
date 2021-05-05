@@ -179,7 +179,7 @@ export default function ClientDetail({ id }) {
   const rows = useSelector(selectClient);
   let client = rows.find((row) => row.id === +id);
   if (!client) {
-    client = { name: "hello", id: 3, img: "foo" };
+    client = { name: "Cliente", id: 3, img: "foo" };
   }
   const classes = useStyles();
   const loading = false;
@@ -250,8 +250,8 @@ export default function ClientDetail({ id }) {
     <Content maxWidth = "lg" className = {classes.container}>
       <div
         style={{
-          height: "200px",
-          backgroundPosition: "center",
+          height: "20px",
+          backgroundPosition: "justify",
           backgroundSize: "cover",
           filter: "contrast(75%)",
         }}
@@ -265,7 +265,7 @@ export default function ClientDetail({ id }) {
             classes={{ root: classes.avatar, circle: classes.circle }}
           />
           <Typography variant={"h5"}>{client.name}</Typography>
-          <Chip variant={"outlined"} icon={<DriveIcon />} label="Driver" />
+          <Chip variant={"outlined"} icon={<DriveIcon />} label="Cliente" />
           {/*<Rating name="read-only" value={4.3} readOnly />*/}
           <div className={classes.spacer} />
           <div className={classes.actionGroup}>
@@ -299,10 +299,11 @@ export default function ClientDetail({ id }) {
         </div>
       </div>
       <div className={classes.summaryCards}>
-        <SummaryCard title={"Revenue"} value={"$" + fare} />
-        <SummaryCard title={"Trips"} value={trips} />
-        <SummaryCard title={"Miles"} value={distance} />
-        <SummaryCard title={"Rating"} value={4.32} />
+        <SummaryCard title={"Nombre del Cliente"} value={"Obed Herrera"} />
+        <SummaryCard title={"Cedula"} value={"201-160398-0002U"} />
+        <SummaryCard title={"Direccion"} value={"De los semaforos de la mascota 3 cuadras al lago"} />
+        <SummaryCard title={"Telefono"} value={"8975-6890"} />
+        <SummaryCard title={"Prestamos abiertos"} value={4} />
       </div>
       {/*<div className={classes.summaryCards}>
         <SummaryCard title="Last 30 Days" component={<RevenueLine />} />

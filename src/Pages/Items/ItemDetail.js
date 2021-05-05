@@ -11,7 +11,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import InsertItem from "./InsertItem";
+import InsertClient from "./InsertItem";
 import { useSelector } from "react-redux";
 import { selectItem } from "./ItemSlice";
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -27,6 +27,8 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import InsertItem from "./InsertItem";
 
 const drawerWidth = 240;
 
@@ -179,7 +181,7 @@ export default function ItemDetail({ id }) {
   const rows = useSelector(selectItem);
   let item = rows.find((row) => row.id === +id);
   if (!item) {
-    item = { name: "hello", id: 3, img: "foo" };
+    item = { name: "Producto", id: 3, img: "foo" };
   }
   const classes = useStyles();
   const loading = false;
@@ -200,9 +202,6 @@ export default function ItemDetail({ id }) {
     );
   }
 
-  const trips = 4;
-  const distance = 0;
-  const fare = 0;
   return (
     <div className = {classes.root}>
     <CssBaseline/>
@@ -220,6 +219,7 @@ export default function ItemDetail({ id }) {
                     <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
                         Productos
                     </Typography>
+                    
                     <IconButton color = "inherit">
                         <PowerSettingsNewIcon/>
                     </IconButton>
@@ -244,19 +244,19 @@ export default function ItemDetail({ id }) {
                 <Divider/>
                 <List>{secondaryListItems}</List>
             </Drawer>
-    {<main className = {classes.content}> 
+    <main className = {classes.content}> 
     <div className = {classes.appBarSpacer}/>     
     <Content maxWidth = "lg" className = {classes.container}>
       <div
         style={{
-          height: "200px",
-          backgroundPosition: "center",
+          height: "20px",
+          backgroundPosition: "justify",
           backgroundSize: "cover",
           filter: "contrast(75%)",
-          backgroundImage: "url(/img/wallpaper.jpeg)",
         }}
       />
       <div className={classes.headerContainer}>
+      
         <div className={classes.header}>
           <Avatar
             alt={item.name}
@@ -264,10 +264,11 @@ export default function ItemDetail({ id }) {
             classes={{ root: classes.avatar, circle: classes.circle }}
           />
           <Typography variant={"h5"}>{item.name}</Typography>
-          <Chip variant={"outlined"} icon={<DriveIcon />} label="Driver" />
+          <Chip variant={"outlined"} icon={<AddBoxIcon />} label="Producto" />
           {/*<Rating name="read-only" value={4.3} readOnly />*/}
           <div className={classes.spacer} />
           <div className={classes.actionGroup}>
+          <div>
           <Button
           color = "secondary"
           variant = "contained"
@@ -276,6 +277,7 @@ export default function ItemDetail({ id }) {
           >
             Regresar
           </Button>
+          </div>
             <InsertItem
               data={item}
               render={(open) => (
@@ -285,21 +287,22 @@ export default function ItemDetail({ id }) {
                   startIcon={<EditIcon />}
                   onClick={open}
                 >
-                  Editar
+                  Edit
                 </Button>
               )}
             />
             <Button variant="outlined" startIcon={<DeleteIcon />}>
-              Borrar
+              Delete
             </Button>
           </div>
         </div>
       </div>
       <div className={classes.summaryCards}>
-        <SummaryCard title={"Revenue"} value={"$" + fare} />
-        <SummaryCard title={"Trips"} value={trips} />
-        <SummaryCard title={"Miles"} value={distance} />
-        <SummaryCard title={"Rating"} value={4.32} />
+        <SummaryCard title={"Nombre del Cliente"} value={"Obed Herrera"} />
+        <SummaryCard title={"Cedula"} value={"201-160398-0002U"} />
+        <SummaryCard title={"Direccion"} value={"De los semaforos de la mascota 3 cuadras al lago"} />
+        <SummaryCard title={"Telefono"} value={"8975-6890"} />
+        <SummaryCard title={"Prestamos abiertos"} value={4} />
       </div>
       {/*<div className={classes.summaryCards}>
         <SummaryCard title="Last 30 Days" component={<RevenueLine />} />
@@ -307,7 +310,7 @@ export default function ItemDetail({ id }) {
               </div>*/}
       {/*<SummaryCard title={"Recent expenses"} component={<ExpensesTable />} />*/}
     </Content>
-    </main>}
+    </main>
 </div>
   )
           }

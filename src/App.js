@@ -22,6 +22,9 @@ import Items from "./Pages/Items/Items";
 import Workers from "./Pages/Workers/Workers";
 import workersReducer from '../src/Pages/Workers/WorkersSlice';
 import Reports from "./Pages/Reports/Reports";
+import ItemDetail from "./Pages/Items/ItemDetail";
+import LoansDetail from "./Pages/Loans/LoansDetail";
+import LinesDetail from "./Pages/Lines/LinesDetail";
 
 function App() {
 
@@ -57,8 +60,14 @@ function App() {
                     <Route path = "/loans">
                       <Loans/>
                     </Route>
+                    <Route path = "/loandetail/1">
+                      <LoansDetail/>
+                    </Route>
                     <Route path = "/lines">
                       <Lines/>
+                    </Route>
+                    <Route path = "/linesdetail/1">
+                      <LinesDetail/>
                     </Route>
                     <Route exact path = "/">
                       <SignIn/>
@@ -74,6 +83,9 @@ function App() {
                     </Route>
                     <Route exact path = "/items">
                       <Items/>
+                    </Route>
+                    <Route path = "/itemdetail/1">
+                      <ItemDetail/>
                     </Route>
                   </Switch>
                   
