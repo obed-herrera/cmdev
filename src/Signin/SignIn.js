@@ -90,7 +90,7 @@ export default function SignIn() {
             control={<Checkbox value="remember" color="secondary" />}
             label="Recuérdame"
           />
-          <Link to = '/dashboard'>
+          <Link to = '/dashboard' style = {{textDecoration: 'none'}}>
             <Button
               fullWidth
               variant = "contained"

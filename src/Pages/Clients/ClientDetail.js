@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Content from "../../Dashboard/Content";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
@@ -270,14 +270,16 @@ export default function ClientDetail({ id }) {
           <div className={classes.spacer} />
           <div className={classes.actionGroup}>
           <div>
-          <Button
-          color = "secondary"
-          variant = "contained"
-          href = "/clients"
-          startIcon = {<KeyboardReturnIcon/>}
-          >
-            Regresar
-          </Button>
+          <Link to = '/clients' style = {{textDecoration: 'none'}}>
+            <Button
+            color = "secondary"
+            variant = "contained"
+            startIcon = {<KeyboardReturnIcon/>}
+            >
+              Regresar
+            </Button>
+          </Link>
+          
           </div>
             <InsertClient
               data={client}
