@@ -19,29 +19,39 @@ function ListItemLink(props){
 export const mainListItems = (
 
     <div>
-        <Link to = '/dashboard'>
-            <ListItemIcon>
-                <DashboardIcon/>
-            </ListItemIcon>
-            <ListItemText primary = "Inicio"/>
+        <Link to = '/dashboard' style = {{textDecoration: 'none', color: '#000'}}>
+            <ListItemLink>
+                <ListItemIcon>
+                    <DashboardIcon/>
+                </ListItemIcon>
+                <ListItemText primary = "Inicio"/>
+            </ListItemLink>
         </Link>
-        <Link to = '/clients'>
+        <Link to = '/clients' style = {{textDecoration: 'none' , color: '#000'}}>
+        <ListItemLink>
                 <ListItemIcon>
                     <ContactsIcon/>
                 </ListItemIcon>
                 <ListItemText primary = "Clientes"/>
+        </ListItemLink>
         </Link>
-        <Link to = '/loans'>
+        <Link to = '/loans' style = {{textDecoration: 'none' , color: '#000'}}>
+            <ListItemLink>
             <ListItemIcon>
                 <AttachMoney/>
             </ListItemIcon>
             <ListItemText primary = "Préstamos"/>
+            </ListItemLink>
+            
         </Link>
-        <Link to = '/lines'>
+        <Link to = '/lines' style = {{textDecoration: 'none', color: '#000'}}>
+            <ListItemLink>
             <ListItemIcon>
                 <Description/>
             </ListItemIcon>
             <ListItemText primary = "Líneas"/>
+            </ListItemLink>
+            
         </Link>
     </div>
 );
@@ -59,29 +69,40 @@ export const headerSecondaryList = (
 
 export const secondaryListItems = (
     <div>
-        <Link to = '/workers'>
+        <Link to = '/workers' style = {{textDecoration: 'none', color: '#000'}}>
+            <ListItemLink>
             <ListItemIcon>
                 <EmojiPeopleIcon/>
             </ListItemIcon>
             <ListItemText primary = "Trabajadores"/>
+            </ListItemLink>
         </Link>
-        <Link to = '/reports'>
+        <Link to = '/reports' style = {{textDecoration: 'none', color: '#000'}}>
+            <ListItemLink>
             <ListItemIcon>
                 <AssignmentIcon/>
             </ListItemIcon>
             <ListItemText primary = "Reportes"/>
+            </ListItemLink>
+            
         </Link>
-        <Link to = '/items'>
+        <Link to = '/items' style = {{textDecoration: 'none', color: '#000'}}>
+            <ListItemLink>
             <ListItemIcon>
                 <StorageIcon/>
             </ListItemIcon>
             <ListItemText primary = "Inventario"/>
+            </ListItemLink>
+           
         </Link>
-        <Link to = '/configuration'>
+        <Link to = '/configuration' style = {{textDecoration: 'none', color: '#000'}}>
+            <ListItemLink>
             <ListItemIcon>
                 <BuildIcon/>
             </ListItemIcon>
             <ListItemText primary = "Configuración"/>
+            </ListItemLink>
+            
         </Link>
     </div>
 );
