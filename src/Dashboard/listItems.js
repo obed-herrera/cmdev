@@ -10,6 +10,7 @@ import StorageIcon from '@material-ui/icons/Storage';
 import BuildIcon from '@material-ui/icons/Build';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import { AttachMoney, Description } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 function ListItemLink(props){
     return <ListItem button component = "a" {...props}/>;
@@ -18,30 +19,30 @@ function ListItemLink(props){
 export const mainListItems = (
 
     <div>
-        <ListItemLink href = "/dashboard">
+        <Link to = '/dashboard'>
             <ListItemIcon>
                 <DashboardIcon/>
             </ListItemIcon>
             <ListItemText primary = "Inicio"/>
-        </ListItemLink>
-        <ListItemLink href = "/clients">
+        </Link>
+        <Link to = '/clients'>
                 <ListItemIcon>
                     <ContactsIcon/>
                 </ListItemIcon>
                 <ListItemText primary = "Clientes"/>
-        </ListItemLink>
-        <ListItemLink href = "/loans">
+        </Link>
+        <Link to = '/loans'>
             <ListItemIcon>
                 <AttachMoney/>
             </ListItemIcon>
             <ListItemText primary = "Préstamos"/>
-        </ListItemLink>
-        <ListItemLink href = "/lines">
+        </Link>
+        <Link to = '/lines'>
             <ListItemIcon>
                 <Description/>
             </ListItemIcon>
             <ListItemText primary = "Líneas"/>
-        </ListItemLink>
+        </Link>
     </div>
 );
 
@@ -58,29 +59,29 @@ export const headerSecondaryList = (
 
 export const secondaryListItems = (
     <div>
-        <ListItemLink href = "/workers">
+        <Link to = '/workers'>
             <ListItemIcon>
                 <EmojiPeopleIcon/>
             </ListItemIcon>
             <ListItemText primary = "Trabajadores"/>
-        </ListItemLink>
-        <ListItemLink href = "/reports">
+        </Link>
+        <Link to = '/reports'>
             <ListItemIcon>
                 <AssignmentIcon/>
             </ListItemIcon>
             <ListItemText primary = "Reportes"/>
-        </ListItemLink>
-        <ListItemLink href = "/items">
+        </Link>
+        <Link to = '/items'>
             <ListItemIcon>
                 <StorageIcon/>
             </ListItemIcon>
             <ListItemText primary = "Inventario"/>
-        </ListItemLink>
-        <ListItemLink href = "/configuration">
+        </Link>
+        <Link to = '/configuration'>
             <ListItemIcon>
                 <BuildIcon/>
             </ListItemIcon>
             <ListItemText primary = "Configuración"/>
-        </ListItemLink>
+        </Link>
     </div>
 );
