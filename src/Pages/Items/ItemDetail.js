@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Content from "../../Dashboard/Content";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
@@ -167,7 +167,7 @@ export function SummaryCard({ title, value, component }) {
         {title}
       </Typography>
       {component || (
-        <Typography color={"primary"} variant="h3">
+        <Typography color={"primary"} variant="h5">
           {value}
         </Typography>
       )}
@@ -269,6 +269,7 @@ export default function ItemDetail({ id }) {
           <div className={classes.spacer} />
           <div className={classes.actionGroup}>
           <div>
+          <Link to = '/items' style = {{textDecoration: 'none'}}>
           <Button
           color = "secondary"
           variant = "contained"
@@ -277,6 +278,8 @@ export default function ItemDetail({ id }) {
           >
             Regresar
           </Button>
+          </Link>
+          
           </div>
             <InsertItem
               data={item}
@@ -291,9 +294,6 @@ export default function ItemDetail({ id }) {
                 </Button>
               )}
             />
-            <Button variant="outlined" startIcon={<DeleteIcon />}>
-              Delete
-            </Button>
           </div>
         </div>
       </div>

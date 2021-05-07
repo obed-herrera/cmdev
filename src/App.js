@@ -25,6 +25,7 @@ import Reports from "./Pages/Reports/Reports";
 import ItemDetail from "./Pages/Items/ItemDetail";
 import LoansDetail from "./Pages/Loans/LoansDetail";
 import LinesDetail from "./Pages/Lines/LinesDetail";
+import WorkerDetail from "./Pages/Workers/WorkerDetail";
 
 function App() {
 
@@ -80,6 +81,9 @@ function App() {
                     </Route>
                     <Route exact path = "/workers">
                       <Workers/>
+                    </Route>
+                    <Route path = "/workersdetail/1">
+                      <WorkerDetail/>
                     </Route>
                     <Route exact path = "/items">
                       <Items/>

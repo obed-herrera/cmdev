@@ -164,7 +164,7 @@ export function SummaryCard({ title, value, component }) {
         {title}
       </Typography>
       {component || (
-        <Typography color={"primary"} variant="h3">
+        <Typography color={"primary"} variant="h5">
           {value}
         </Typography>
       )}
@@ -217,7 +217,7 @@ export default function WorkerDetail({ id }) {
                         <MenuIcon/>
                     </IconButton>
                     <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
-                        Clientes
+                        Trabajador
                     </Typography>
                     <IconButton color = "inherit">
                         <PowerSettingsNewIcon/>
@@ -280,9 +280,6 @@ export default function WorkerDetail({ id }) {
                 </Button>
               )}
             />
-            <Button variant="outlined" startIcon={<DeleteIcon />}>
-              Delete
-            </Button>
           </div>
         </div>
       </div>

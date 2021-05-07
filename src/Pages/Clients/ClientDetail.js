@@ -165,7 +165,7 @@ export function SummaryCard({ title, value, component }) {
         {title}
       </Typography>
       {component || (
-        <Typography color={"primary"} variant="h3">
+        <Typography color={"primary"} variant="h5">
           {value}
         </Typography>
       )}
@@ -278,10 +278,10 @@ export default function ClientDetail({ id }) {
             >
               Regresar
             </Button>
-          </Link>
-          
+          </Link>   
           </div>
-            <InsertClient
+          <div>
+          <InsertClient
               data={client}
               render={(open) => (
                 <Button
@@ -294,9 +294,7 @@ export default function ClientDetail({ id }) {
                 </Button>
               )}
             />
-            <Button variant="outlined" startIcon={<DeleteIcon />}>
-              Delete
-            </Button>
+          </div>
           </div>
         </div>
       </div>

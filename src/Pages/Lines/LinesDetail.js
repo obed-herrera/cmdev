@@ -165,7 +165,7 @@ export function SummaryCard({ title, value, component }) {
         {title}
       </Typography>
       {component || (
-        <Typography color={"primary"} variant="h3">
+        <Typography color={"primary"} variant="h5">
           {value}
         </Typography>
       )}
@@ -292,9 +292,6 @@ export default function LinesDetail({ id }) {
                 </Button>
               )}
             />
-            <Button variant="outlined" startIcon={<DeleteIcon />}>
-              Delete
-            </Button>
           </div>
         </div>
       </div>

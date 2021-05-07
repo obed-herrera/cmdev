@@ -27,8 +27,15 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
+import { Table } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
+import InsertPayment from "./InsertPayment";
 
 const drawerWidth = 240;
+
+function Alert(props){
+  return <MuiAlert elevation = {6} variant = "filled" {...props}/>;
+}
 
 const useStyles = makeStyles((theme) => ({
   headerContainer: {
@@ -68,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     flexGrow: 1,
     padding: theme.spacing(3),
+    fontsize: 14,
   },
   tripCard: {
     margin: theme.spacing(1),
@@ -108,6 +116,9 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: 24,
+  },
+  value:{
+    fontsize: 14,
   },
   menuButtonHidden: {
     display: 'none',
@@ -165,12 +176,41 @@ export function SummaryCard({ title, value, component }) {
         {title}
       </Typography>
       {component || (
-        <Typography color={"primary"} variant="h3">
+        <Typography color={"primary"} variant="h5">
           {value}
         </Typography>
       )}
     </Paper>
   );
+}
+
+function SummaryCardPayment({title, value, component}){
+  const classes = useStyles();
+  const [snackOpen, setSnackOpen] = React.useState(false);
+  const snackClose = (event, reason) => {
+    if(reason === "clickaway"){
+      return;
+    }
+    setSnackOpen(false);
+  };
+  return(
+    <Paper elevation = {6} className = {classes.summaryCard}>
+    <Typography color = {"textSecondary"}>
+      {title}
+    </Typography>
+    <InsertPayment
+    edge = "end"
+    onSave = {()=>{
+      setSnackOpen("Pago Realizado")
+    }}
+    render = {(open)=>(
+      <Button variant = "outlined" edge = "end" onClick = {open}>
+        Realizar pago
+      </Button>
+    )}/>
+  </Paper>
+  );
+  
 }
 
 export default function LoansDetail({ id }) {
@@ -292,13 +332,11 @@ export default function LoansDetail({ id }) {
                 </Button>
               )}
             />
-            <Button variant="outlined" startIcon={<DeleteIcon />}>
-              Delete
-            </Button>
           </div>
         </div>
       </div>
       <div className={classes.summaryCards}>
+        <SummaryCardPayment title = {"Realizar Pago"} value = {"Pago"}/>
         <SummaryCard title={"Cliente del Prestamo"} value={"Obed Herrera"} />
         <SummaryCard title={"Cedula"} value={"201-160398-0002U"} />
         <SummaryCard title={"Direccion"} value={"De los semaforos de la mascota 3 cuadras al lago"} />
