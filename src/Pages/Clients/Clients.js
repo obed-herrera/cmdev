@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,7 +17,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
+import axios from 'axios';
 import ClientsInfo from './ClientsInfo';
+import ClientTable from './ClientTable';
+import MaterialTable from 'material-table';
 
 function Copyright() {
     return (
@@ -129,6 +132,7 @@ export default function Clients(){
         setOpen(false);
     }
     //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  
 
     return(
         <div className = {classes.root}>
@@ -174,7 +178,7 @@ export default function Clients(){
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
                 <Container maxWidth = "xl" className = {classes.container}>               
-                      <ClientsInfo />
+                      <ClientTable />
                 </Container>
                   <Box pt = {4}>
                     <Copyright/>

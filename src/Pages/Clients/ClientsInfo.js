@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,6 +18,9 @@ import DeleteClient from './DeleteClient';
 import { useDispatch, useSelector } from 'react-redux';
 import { remove, selectClient, selectLoading} from './ClientSlice';
 import { useHistory } from 'react-router';
+import axios from 'axios';
+import { DataUsage } from '@material-ui/icons';
+
 
 
 function Alert(props) {
@@ -103,6 +106,8 @@ function EnhancedTableHead(props) {
     onRequestSort(event, property);
   };
 
+  
+
   return (
     <TableHead>
       <TableRow>
@@ -179,6 +184,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const baseUrl = "http://localhost:3001/clients";
+
 export default function ClientsInfo() {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
@@ -198,6 +205,20 @@ export default function ClientsInfo() {
 
     setSnackOpen(false);
   };
+
+const [data, setData] = useState([]);
+
+const peticionGet = async()=>{
+  await axios.get(baseUrl)
+  .then(response => {
+    setData(response.data);
+  })
+}
+
+useEffect(()=>{
+  peticionGet();
+},[])
+
 
   let history = useHistory();
 
@@ -334,8 +355,8 @@ export default function ClientsInfo() {
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
-                      .map((row, index) => {
-                        const isItemSelected = isSelected(row.id);
+                      .map((data, index) => {
+                        const isItemSelected = isSelected(data.id);
                         const labelId = `enhanced-table-checkbox-${index}`;
 
                         return (
@@ -353,26 +374,26 @@ export default function ClientsInfo() {
                               }
                               history.push(`/clientdetail/1`);
                             }}
-                            key={`person-${row.id}`}
+                            key={`person-${data.id}`}
                             selected={isItemSelected}
                             style={{ cursor: "pointer" }}
                           >
                             <TableCell
                               padding="checkbox"
                               onClick={(e) => {
-                                selectTableRow(row.id);
+                                selectTableRow(DataUsage.id);
                               }}
                             >
                               <Checkbox
                                 checked={isItemSelected}
                                 inputProps={{ "aria-labelledby": labelId }}
                                 onChange={(e) => {
-                                  selectTableRow(row.id);
+                                  selectTableRow(data.id);
                                 }}
                               />
                             </TableCell>
                             <TableCell>
-                              <Avatar alt={row.name} src={row.img} />
+                              <Avatar  />
                             </TableCell>
                             <TableCell
                               component="th"
@@ -380,7 +401,7 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_sys_code}
+                              {data.client_sys_code}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -388,7 +409,7 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_first_name}
+                              {data.client_first_name}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -396,7 +417,7 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_middle_name}
+                              {data.client_middle_name}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -404,7 +425,7 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_national_id}
+                              {data.client_national_id}
                             </TableCell>
                             <TableCell
                               component="th"
@@ -412,7 +433,7 @@ export default function ClientsInfo() {
                               scope="row"
                               padding="none"
                             >
-                              {row.client_phone}
+                              {data.client_phone}
                             </TableCell>
                           </TableRow>
                         );
