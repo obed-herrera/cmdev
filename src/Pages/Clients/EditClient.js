@@ -12,7 +12,7 @@ import axios from "axios";
 
 
 
-export default function InsertClient({render}) {
+export default function EditClient({render}) {
   const baseUrl = "http://localhost:3001/Client/clients";
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
@@ -27,15 +27,28 @@ export default function InsertClient({render}) {
     status_id:""
 });
 
-const peticionPost=async()=>{
-  await axios.post(baseUrl, clientSeleccionado)
-  .then(response=>{
-    setClientSeleccionado(data.concat(response.data));
-    handleClose();
-  }).catch(error=>{
-    console.log(error);
-  })
-}
+const peticionPut=async()=>{
+    await axios.put(baseUrl+"/"+clientSeleccionado.id, clientSeleccionado)
+    .then(response=>{
+      var dataNueva= data;
+      dataNueva.map(client=>{
+        if(client.id===clientSeleccionado.id){
+          client.first_name=clientSeleccionado.first_name;
+          client.second_name=clientSeleccionado.second_name;
+          client.last_name=clientSeleccionado.last_name;
+          client.secondary_last_name=clientSeleccionado.secondary_last_name;
+          client.national_id=clientSeleccionado.national_id;
+          client.sys_code=clientSeleccionado.sys_code;
+          client.phone=clientSeleccionado.phone;
+          client.status_id=clientSeleccionado.status_id;
+        }
+      });
+      setData(dataNueva);
+      handleClose();
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
 
 const [data, setData] = useState([]);
 
@@ -201,7 +214,7 @@ const [data, setData] = useState([]);
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          {<Button onClick={peticionPost} color="primary">
+          {<Button onClick={peticionPut} color="primary">
             Guardar
         </Button>}
         </DialogActions>
