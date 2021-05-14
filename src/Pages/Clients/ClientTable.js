@@ -174,8 +174,8 @@ export default function ClientTable(){
 
 
 
-    const seleccionarCliente=(credi_client, caso)=>{
-        setClientSeleccionado(credi_client);
+    const seleccionarCliente=(clientSeleccionado, caso)=>{
+        setClientSeleccionado(clientSeleccionado);
         (caso==="Editar")?abrirCerrarModalEditar()
         :
         abrirCerrarModalEliminar()
