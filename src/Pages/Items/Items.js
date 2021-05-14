@@ -18,6 +18,7 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
 import ItemsInfo from './ItemsInfo';
+import TableItem from './TableItem';
 
 function Copyright() {
     return (
@@ -33,7 +34,7 @@ function Copyright() {
   }
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
@@ -174,7 +175,7 @@ export default function Items(){
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
                 <Container maxWidth = "xl" className = {classes.container}>               
-                      <ItemsInfo />
+                      <TableItem />
                 </Container>
                   <Box pt = {4}>
                     <Copyright/>

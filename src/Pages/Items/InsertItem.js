@@ -8,43 +8,56 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { add, update } from "./ItemSlice";
 import { useDispatch } from "react-redux";
 import { nextID } from "./ItemSlice";
-import { Divider, Grid } from "@material-ui/core";
+import { Divider, FormControl, FormHelperText, Grid, NativeSelect } from "@material-ui/core";
+import axios from "axios";
+import {useStyles} from "./Items";
 //import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
 
-export default function InsertItem({ data, render, onSave }) {
+export default function InsertItem({ render}) {
+  const baseUrl = "http://localhost:3001/Item/items";
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
 
-  const defaultImg = data && data.img;
-  const defaultField = data && data.field;
-  // Existing ID or random ID
-  const id = data && data.id;
+  const peticionPost=async()=>{
+    await axios.post(baseUrl, item)
+    .then(response=>{
+      setItem(data.concat(response.data));
+      handleClose();
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
 
-  const [img, setImg] = React.useState(defaultImg);
-  const [ setField] = React.useState(defaultField);
+  const [data, setData] = useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
-    setImg(defaultImg);
+    setItem(item);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleSave = () => {
-    const action = data ? update : add;
-    dispatch(action({ item, id: id || nextID(), img }));
-    onSave && onSave();
-    handleClose();
-  };
+  const handleChange=e=>{
+    setItem((item)=>({
+      ...item,
+      [e.target.name]: e.target.value
+    }))
+    console.log(item);
+  }
+
+  const classes = useStyles();
 
   const [item, setItem]=useState({
-    id_item: '',
-    item_code:'',
-    item_name:'',
-    item_description:'',
-    item_quantity:'',
+    id_credi_item: '',
+    credi_item_code:'',
+    credi_item_name:'',
+    credi_item_description:'',
+    credi_item_cost:'',
+    credi_item_price:'',
+    credi_item_quantity:'',
+    credi_item_state:''
   });
 
  /* const handleChange=e=>{
@@ -65,71 +78,78 @@ export default function InsertItem({ data, render, onSave }) {
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
-        maxWidth = "xs"
       >
         <DialogTitle id="form-dialog-title">
           {data ? "Editar" : "Agregar"} Producto{" "}
         </DialogTitle>
         <Divider/>
         <DialogContent>
-        <Grid container spacing = {3} style = {{padding:20}}>
+        <Grid container lg = 'auto' spacing = {3} style = {{padding:20}}>
                 <Grid item xs ={9}>
                     <div className = "form-group">
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="item_code"
+                            name="credi_item_code"
                             label="Codigo del Producto"
                             fullWidth
-                            value={item.item_code}
-                            onChange={(e) => {
-                            setItem(e.target.value);
-                            }}
+                            onChange={handleChange}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="item_name"
+                            name="credi_item_name"
                             label="Nombre del Producto"
                             fullWidth
-                            value={item.item_name}
-                            onChange={(e) => {
-                            setItem(e.target.value);
-                            }}
+                            onChange={handleChange}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="item_description"
+                            name="credi_item_description"
                             label="Descripcion"
                             fullWidth
-                            value={item.item_description}
-                            onChange={(e) => {
-                            setItem(e.target.value);
-                            }}
+                            onChange={handleChange}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="item_quantity"
+                            name="credi_item_cost"
+                            label="Costo del Producto"
+                            fullWidth
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            name="credi_item_price"
+                            label="Precio del Producto"
+                            fullWidth
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            name="credi_item_quantity"
                             label="Cantidad"
                             fullWidth
-                            value={item.item_quantity}
-                            onChange={(e) => {
-                            setItem(e.target.value);
-                            }}
+                            onChange={handleChange}
                         />
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="item_price"
-                            label="Precio"
-                            fullWidth
-                            value={item.item_price}
-                            onChange={(e) => {
-                            setItem(e.target.value);
-                            }}
-                        />
+                        <FormControl className={classes.formControl}>
+                          <NativeSelect
+                            className={classes.selectEmpty}     
+                            name="credi_item_state"
+                            onChange={handleChange}
+                            inputProps={{ 'aria-label': 'credi_item_state' }}
+                          >
+                            <option value="" disabled>
+                              Estado del Producto
+                            </option>
+                            <option value={'0'}>Activo</option>
+                            <option value={'1'}>Inactivo</option>
+                          </NativeSelect>
+                          <FormHelperText>Estado del Producto</FormHelperText>
+                        </FormControl>
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
                     </div>
                 </Grid>
@@ -140,7 +160,7 @@ export default function InsertItem({ data, render, onSave }) {
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          {<Button onClick={handleSave} color="primary">
+          {<Button onClick={peticionPost} color="primary">
             Guardar
         </Button>}
         </DialogActions>
