@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import MaterialTable from "material-table";
 import axios from 'axios';
-import {Modal, TextField, Button, FormControl, NativeSelect, FormHelperText} from '@material-ui/core';
+import { Modal,TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+import "./ClientTable.css";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { forwardRef } from 'react';
@@ -21,6 +22,13 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import {  ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import InsertClient from './InsertClient';
+import EditClient from './EditClient';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const columns = [
     {
@@ -70,14 +78,17 @@ const baseUrl = "http://localhost:3001/clients";
 const useStyles = makeStyles((theme) => ({
     modal: {
       position: 'absolute',
-      width: 400,
+      width: 1000,
       backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
+      border: 'none',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
-      top: '50%',
+      top: '40%',
       left: '50%',
-      transform: 'translate(-50%, -50%)'
+      transform: 'translate(-50%, -50%)',
+      margin: 'auto',
+
+      overflowY: 'auto'
     },
     iconos:{
         cursor: 'pointer'
@@ -90,11 +101,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ClientTable(){
     const styles= useStyles();
+    const [open, setOpen] = React.useState(false);
     const [data, setData] = useState([]);
     const [modalInsertar, setModalInsertar]= useState(false);
     const [modalEditar, setModalEditar]= useState(false);
     const [modalEliminar, setModalEliminar]= useState(false);
+    const [snackOpen, setSnackOpen] = React.useState(false);
     const [clientSeleccionado, setClientSeleccionado]=useState({ 
+        id:"",  
         first_name:"",
         mid_name:"",
         last_name:"",
@@ -102,16 +116,29 @@ export default function ClientTable(){
         national_id:"",
         sys_code:"",
         phone:"",
-        status_id:""
+        status_id:"",
+        created_at:new Date(),
+        modified_at: new Date(),
+        disabled_at: new Date()
     })
 
+    const [state, setState] = useState([]);
+
     const handleChange=e=>{
-        const {name, value}=e.target;
-        setClientSeleccionado(prevState=>({
-          ...prevState,
-          [name]: value
-        }));
-      }
+      setClientSeleccionado((clientSeleccionado)=>({
+        ...clientSeleccionado,
+        [e.target.name]: e.target.value
+      }))
+      console.log(clientSeleccionado);
+    }
+
+     
+    
+      const classes = useStyles();
+
+      const handleClose = () => {
+        setState({dialogOpen: false});
+      };
 
     const peticionGet=async()=>{
         await axios.get(baseUrl)
@@ -122,24 +149,30 @@ export default function ClientTable(){
         })
       }
 
-      const peticionPost=async()=>{
-        var f = new data();
-        f.append("first_name", clientSeleccionado.first_name);
-        f.append("mid_name", clientSeleccionado.mid_name);
-        f.append("last_name", clientSeleccionado.last_name);
-        f.append("secondary_last_name", clientSeleccionado.secondary_last_name);
-        f.append("national_id", clientSeleccionado.national_id);
-        f.append("sys_code", clientSeleccionado.sys_code);
-        f.append("phone", clientSeleccionado.phone);
-        f.append("status_id", clientSeleccionado.status_id);
-        await axios.post(baseUrl, f)
+      const peticionPut=async()=>{
+        await axios.put(baseUrl+"/"+clientSeleccionado.id, clientSeleccionado)
         .then(response=>{
-          setData(data.concat(response.data));
-          abrirCerrarModalInsertar();
+          var dataNueva= data;
+          dataNueva.map(client=>{
+            if(client.id===clientSeleccionado.id){
+              client.first_name=clientSeleccionado.first_name;
+              client.second_name=clientSeleccionado.second_name;
+              client.last_name=clientSeleccionado.last_name;
+              client.secondary_last_name=clientSeleccionado.secondary_last_name;
+              client.national_id=clientSeleccionado.national_id;
+              client.sys_code=clientSeleccionado.sys_code;
+              client.phone=clientSeleccionado.phone;
+              client.status_id=clientSeleccionado.status_id;
+            }
+          });
+          setData(dataNueva);
+          handleClose();
         }).catch(error=>{
           console.log(error);
         })
-      }  
+      }
+
+
 
     const seleccionarCliente=(credi_client, caso)=>{
         setClientSeleccionado(credi_client);
@@ -151,47 +184,7 @@ export default function ClientTable(){
     const abrirCerrarModalInsertar=()=>{
         setModalInsertar(!modalInsertar);
       }
-
-      const bodyInsertar=(
-        <div className={styles.modal}>
-          <h3>Agregar Nuevo Cliente</h3>
-          <TextField className={styles.inputMaterial} label="Codigo del Cliente" name="sys_code" onChange={handleChange}/>
-          <br />
-          <TextField className={styles.inputMaterial} label="Primer Nombre" name="first_name" onChange={handleChange}/>
-          <br />
-          <TextField className={styles.inputMaterial} label="Segundo Nombre" name="mid_name" onChange={handleChange}/>
-          <br />
-          <TextField className={styles.inputMaterial} label="Primer Apellido" name="last_name" onChange={handleChange}/>
-          <br />
-          <TextField className={styles.inputMaterial} label="Segundo Apellido" name="secondary_last_name" onChange={handleChange}/>
-          <br />
-          <TextField className={styles.inputMaterial} label="Cedula" name="national_id" onChange={handleChange}/>
-          <br />
-          <TextField className={styles.inputMaterial} label="Telefono/Celular" name="phone" onChange={handleChange}/>
-          <br />
-          <FormControl>
-                <NativeSelect
-                    value={data.status_id}
-                    name="status_id"
-                    onChange={handleChange}
-                    inputProps={{ 'aria-label': 'status_id' }}
-                >
-                    <option value="" disabled>
-                        Estado del Cliente
-                    </option>
-                    <option value={'0'}>Activo</option>
-                    <option value={'1'}>Inactivo</option>
-                </NativeSelect>
-                <FormHelperText>Estado del Cliente</FormHelperText>
-            </FormControl>
-          <div align="right">
-            <Button color="primary" onClick={()=>peticionPost()}>Insertar</Button>
-            <Button onClick={()=>abrirCerrarModalInsertar()}>Cancelar</Button>
-          </div>
-        </div>
-      )
-    
-      
+         
       const abrirCerrarModalEditar=()=>{
         setModalEditar(!modalEditar);
       }
@@ -208,9 +201,17 @@ export default function ClientTable(){
     return(
         <div className = "Table">
             <br/>
-            <Button 
-            variant = "outlined" color = "primary" edge = "end"
-            onClick={()=>abrirCerrarModalInsertar()}>Insertar Cliente</Button>
+            <InsertClient
+            edge = "end"
+            onSave = {()=>{
+              setSnackOpen("Cliente Agregado")
+            }}
+            render = {(open) => (
+              <Button variant = "outlined" color = "primary" edge = "end" onClick = {open}>
+                Insertar Nuevo Cliente
+              </Button>
+            )}
+          />
             <br/><br/>
             <MaterialTable
                 icons = {tableIcons}
@@ -221,7 +222,9 @@ export default function ClientTable(){
                     {
                         icon: EditIcon,
                         tooltip: 'Editar Cliente',
-                        onClick: (event, rowData)=>seleccionarCliente(rowData, "Editar")
+                        onClick: rowData => {
+                          setState({dialogOpen:true});
+                        }
                     },
                     {
                       icon: DeleteIcon,
@@ -238,11 +241,115 @@ export default function ClientTable(){
                     }
                 }}
             />
-            <Modal
-                open={modalInsertar}
-                onClose={abrirCerrarModalInsertar}>
-                {bodyInsertar}
-            </Modal>
+           <Dialog
+              open={state.dialogOpen}
+              onClose={handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">
+                {data ? "Editar" : "Agregar"} Cliente{" "}
+              </DialogTitle>
+              <Divider/>
+              <DialogContent>
+              <Grid container lg = 'auto' spacing = {2} style = {{padding:20}}>
+                      <Grid item lg ={4}>
+                          <div className = "form-group">
+                              <TextField
+                                  autoFocus
+                                  margin="dense"
+                                  name="first_name"
+                                  label="Primer Nombre"
+                                  fullWidth
+                                  onChange={handleChange}
+                                  value = {clientSeleccionado && clientSeleccionado.first_name}
+                              />
+                              <TextField
+                                  autoFocus
+                                  margin="dense"
+                                  name="mid_name"
+                                  label="Segundo Nombre"
+                                  fullWidth
+                                  onChange={handleChange}
+                                  value = {clientSeleccionado && clientSeleccionado.first_name}
+                              />
+                              <TextField
+                                  autoFocus
+                                  margin="dense"
+                                  name="last_name"
+                                  label="Primer Apellido"
+                                  fullWidth
+                                  onChange={handleChange}
+                                  value = {clientSeleccionado && clientSeleccionado.first_name}
+                              />
+                              <TextField
+                                  autoFocus
+                                  margin="dense"
+                                  name="secondary_last_name"
+                                  label="Segundo Apellido"
+                                  fullWidth
+                                  onChange={handleChange}
+                                  value = {clientSeleccionado && clientSeleccionado.first_name}
+                              />
+                              {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
+                          </div>
+                      </Grid>
+                      <Grid item lg ={4}> 
+                      <TextField
+                                  autoFocus
+                                  margin="dense"
+                                  name="national_id"
+                                  label="Cedula del Cliente"
+                                  fullWidth
+                                  onChange={handleChange}
+                                  value = {clientSeleccionado && clientSeleccionado.first_name}
+                              />
+                              <TextField
+                                  autoFocus
+                                  margin="dense"
+                                  name="sys_code"
+                                  label="Codigo del Cliente"
+                                  fullWidth
+                                  onChange={handleChange}
+                                  value = {clientSeleccionado && clientSeleccionado.first_name}
+                              />
+                              <TextField
+                                  autoFocus
+                                  margin="dense"
+                                  name="phone"
+                                  label="Telefono del Trabajo"
+                                  fullWidth
+                                  onChange={handleChange}
+                                  value = {clientSeleccionado && clientSeleccionado.first_name}
+                              /> 
+                          <FormControl className={classes.formControl}>
+                            <NativeSelect
+                              className={classes.selectEmpty}     
+                              name="status_id"
+                              onChange={handleChange}
+                              value = {clientSeleccionado && clientSeleccionado.first_name}
+                              inputProps={{ 'aria-label': 'status_id' }}
+                            >
+                              <option value="" disabled>
+                                Estado del Cliente
+                              </option>
+                              <option value={'0'}>Activo</option>
+                              <option value={'1'}>Inactivo</option>
+                            </NativeSelect>
+                            <FormHelperText>Estado del Trabajador</FormHelperText>
+                          </FormControl>                                
+                      </Grid>
+                  </Grid>
+              </DialogContent>
+              <Divider/>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Cancelar
+                </Button>
+                {<Button onClick={peticionPut} color="primary">
+                  Guardar
+              </Button>}
+              </DialogActions>
+            </Dialog>  
         </div>
     );
 }
