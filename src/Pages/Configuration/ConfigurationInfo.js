@@ -1,8 +1,10 @@
-import { Box, Button, Container, CssBaseline, makeStyles, Paper, Snackbar, Typography } from "@material-ui/core";
+import { Box, Button, Container, CssBaseline, Grid, makeStyles, Paper, Snackbar, Typography } from "@material-ui/core";
 import React from "react";
 import Content from "../../Dashboard/Content";
 import MuiAlert from "@material-ui/lab/Alert";
 import InsertRole from "./InsertRole";
+import InsertLine from "./InsertLine";
+import InsertLoanArea from "./InsertLoanArea";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -102,9 +104,81 @@ function SummaryCardCheck({title, value, component}){
                         {value}
                     </Typography>
                 )}
-                <Button variant = "outlined" color = "primary">
-                    Gestion de usuarios
-                </Button>
+                
+            </Paper>
+        </Content> 
+    );
+}
+
+function SummaryCardLines({title, value, component}){
+    const [snackOpen, setSnackOpen] = React.useState(false);
+    const classes = useStyles();
+    const snackClose = (event, reason) => {
+        if (reason === "clickaway") {
+          return;
+        }
+    
+        setSnackOpen(false);
+      };
+    return(
+        <Content>
+            <Paper elevation = {6} className = {classes.summaryCard}>
+                <Typography color = {"textSecondary"}>
+                    {title}
+                </Typography>
+                {component || (
+                    <Typography>
+                        {value}
+                    </Typography>
+                )}
+                <InsertLine
+                    edge = "end"
+                    onSave = {()=>{
+                        setSnackOpen("Linea agregada")
+                    }}
+                    render={(open)=>(
+                        <Button variant = "outlined" edge = "end" onClick = {open}>
+                            Gestionar lineas
+                        </Button>
+                    )}
+                />
+            </Paper>
+        </Content> 
+    );
+}
+
+function SummaryCardLoans({title, value, component}){
+    const [snackOpen, setSnackOpen] = React.useState(false);
+    const classes = useStyles();
+    const snackClose = (event, reason) => {
+        if (reason === "clickaway") {
+          return;
+        }
+    
+        setSnackOpen(false);
+      };
+    return(
+        <Content>
+            <Paper elevation = {6} className = {classes.summaryCard}>
+                <Typography color = {"textSecondary"}>
+                    {title}
+                </Typography>
+                {component || (
+                    <Typography>
+                        {value}
+                    </Typography>
+                )}
+                <InsertLoanArea
+                    edge = "end"
+                    onSave = {()=>{
+                        setSnackOpen("Area agregada")
+                    }}
+                    render={(open)=>(
+                        <Button variant = "outlined" edge = "end" onClick = {open}>
+                            Agregar areas de prestamos
+                        </Button>
+                    )}
+                />
             </Paper>
         </Content> 
     );
@@ -118,13 +192,16 @@ export default function ConfigurationInfo(){
             <main className = {classes.content}>
                 <Content maxWidht = "lg" className = {classes.container}>
                     <div className = {classes.summaryCards}>
-                            {/*<Button>
-                                Hola
-                            </Button>*/}
-                        <SummaryCard title = {"Crear nuevo rol"}/>
-                        <SummaryCardCheck title = {"Gestionar roles"}/>
-                        <SummaryCard title = {"Crear nuevo usuario"}/>
-                        <SummaryCard title = {"Crear nuevo usuario"}/>
+                        <Grid container>
+                            <Grid>
+                                <SummaryCard title = {"Crear nuevo rol"}/>
+                                <SummaryCardCheck title = {"Gestionar roles"}/>
+                            </Grid>
+                            <Grid>
+                                <SummaryCardLines title = {"Gestionar Lineas"}/>
+                                <SummaryCardLoans title = {"Gestionar areas de prestamos"}/>
+                            </Grid>
+                        </Grid>     
                     </div>   
                 </Content>
             </main> 

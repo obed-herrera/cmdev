@@ -178,7 +178,6 @@ export default function Configuration({currentTheme, setCurrentTheme}){
                 <div className = {classes.appBarSpacer}/>
                 <Container maxWidth = "xl" className = {classes.container}>               
                   <ConfigurationInfo/>
-                  <Registration/>
                 </Container>
                   <Box pt = {4}>
                     <Copyright/>
