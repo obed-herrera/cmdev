@@ -49,46 +49,46 @@ function App() {
               <Router>
                 <div>
                   <Switch>
-                    <Route path = "/dashboard">
+                    <Route path = "credimarketnic.com/dashboard">
                       <Dashboard/>
                     </Route>
-                    <Route path = "/clients">
+                    <Route path = "credimarketnic.com/clients">
                       <Clients/>
                     </Route>
-                    <Route path = "/clientdetail/1">
+                    <Route path = "credimarketnic.com/clientdetail/1">
                       <ClientDetail/>
                     </Route>
-                    <Route path = "/loans">
+                    <Route path = "credimarketnic.com/loans">
                       <Loans/>
                     </Route>
-                    <Route path = "/loandetail/1">
+                    <Route path = "credimarketnic.com/loandetail/1">
                       <LoansDetail/>
                     </Route>
-                    <Route path = "/lines">
+                    <Route path = "credimarketnic.com/lines">
                       <Lines/>
                     </Route>
-                    <Route path = "/linesdetail/1">
+                    <Route path = "credimarketnic.com/linesdetail/1">
                       <LinesDetail/>
                     </Route>
                     <Route exact path = "/">
                       <SignIn/>
                     </Route>
-                    <Route exact path = "/configuration">
+                    <Route exact path = "credimarketnic.com/configuration">
                       <Configuration/>
                     </Route>
-                    <Route exact path = "/reports">
+                    <Route exact path = "credimarketnic.com/reports">
                       <Reports/>
                     </Route>
-                    <Route exact path = "/workers">
+                    <Route exact path = "credimarketnic.com/workers">
                       <Workers/>
                     </Route>
-                    <Route path = "/workersdetail/1">
+                    <Route path = "credimarketnic.com/workersdetail/1">
                       <WorkerDetail/>
                     </Route>
-                    <Route exact path = "/items">
+                    <Route exact path = "credimarketnic.com/items">
                       <Items/>
                     </Route>
-                    <Route path = "/itemdetail/1">
+                    <Route path = "credimarketnic.com/itemdetail/1">
                       <ItemDetail/>
                     </Route>
                   </Switch>
