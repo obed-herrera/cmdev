@@ -107,14 +107,16 @@ const data = useState([]);
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        minWidth = 'md'
+
       >
         <DialogTitle id="form-dialog-title">
           {data ? "Editar" : "Agregar"} Cliente{" "}
         </DialogTitle>
         <Divider/>
         <DialogContent>
-        <Grid container lg = 'auto' spacing = {2} style = {{padding:20}}>
-                <Grid item lg ={4}>
+        <Grid container sm = 'auto' spacing = {1} style = {{padding:10}} alignItems = 'center'>
+                <Grid item lg ={6}>
                     <div className = "form-group">
                         <TextField
                             autoFocus
@@ -151,7 +153,7 @@ const data = useState([]);
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
                     </div>
                 </Grid>
-                <Grid item lg ={4}> 
+                <Grid item lg ={6}> 
                 <TextField
                             autoFocus
                             margin="dense"
