@@ -1,4 +1,4 @@
-import { Box, Button, Container, CssBaseline, Grid, makeStyles, Paper, Snackbar, Typography } from "@material-ui/core";
+import {Button, CssBaseline, Grid, makeStyles, Paper, Snackbar, Typography } from "@material-ui/core";
 import React from "react";
 import Content from "../../Dashboard/Content";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -95,6 +95,11 @@ function SummaryCardCheck({title, value, component}){
       };
     return(
         <Content>
+            <Snackbar open = {snackOpen} autoHideDuration = {2000} onClose = {snackClose}>
+                <Alert onClose = {snackClose} severity = "success">
+                    {snackOpen}
+                </Alert>
+            </Snackbar>
             <Paper elevation = {6} className = {classes.summaryCard}>
                 <Typography color = {"textSecondary"}>
                     {title}

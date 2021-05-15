@@ -5,7 +5,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { useDispatch } from "react-redux";
 import { Divider, FormControl, FormHelperText, Grid, NativeSelect } from "@material-ui/core";
 import {useStyles} from "./Clients";
 import axios from "axios";
@@ -15,7 +14,6 @@ import axios from "axios";
 export default function InsertClient({render}) {
   const baseUrl = "http://localhost:3001/Client/clients";
   const [open, setOpen] = React.useState(false);
-  const dispatch = useDispatch();
   const [clientSeleccionado, setClientSeleccionado]=useState({ 
     first_name:"",
     mid_name:"",
@@ -37,7 +35,7 @@ const peticionPost=async()=>{
   })
 }
 
-const [data, setData] = useState([]);
+const data = useState([]);
 
 /*const peticionPost=async()=>{
   var f = new clientSeleccionado();

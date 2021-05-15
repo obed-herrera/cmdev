@@ -5,9 +5,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { add, update } from "./ItemSlice";
-import { useDispatch } from "react-redux";
-import { nextID } from "./ItemSlice";
 import { Divider, FormControl, FormHelperText, Grid, NativeSelect } from "@material-ui/core";
 import axios from "axios";
 import {useStyles} from "./Items";
@@ -16,7 +13,6 @@ import {useStyles} from "./Items";
 export default function InsertItem({ render}) {
   const baseUrl = "http://localhost:3001/Item/items";
   const [open, setOpen] = React.useState(false);
-  const dispatch = useDispatch();
 
   const peticionPost=async()=>{
     await axios.post(baseUrl, item)

@@ -1,15 +1,12 @@
-import { Button, Dialog, DialogActions, DialogContent, Divider, FormControl, FormHelperText, Grid, NativeSelect, TextField } from "@material-ui/core";
+import { Button, Dialog, DialogActions, DialogContent, Divider, FormControl, FormHelperText, NativeSelect, TextField } from "@material-ui/core";
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { add, nextID, update } from "./UserSlice";
 import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
 import axios from "axios";
 
 export default function InsertLine({data, render}){
     const baseUrl = "http://localhost:3001/Line/lines";
     const [open, setOpen] = React.useState(false);
-    const dispatch = useDispatch();
 
     const peticionPost=async()=>{
         await axios.post(baseUrl, line)

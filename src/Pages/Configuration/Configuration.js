@@ -18,7 +18,6 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
 import ConfigurationInfo from './ConfigurationInfo';
-import Registration from './Registration';
 
 
 

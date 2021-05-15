@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import MaterialTable from "material-table";
 import axios from 'axios';
-import { Modal,TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider} from '@material-ui/core';
+import {TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import "./ClientTable.css";
 import EditIcon from '@material-ui/icons/Edit';
@@ -22,9 +22,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import {  ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import InsertClient from './InsertClient';
-import EditClient from './EditClient';
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -100,10 +98,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function ClientTable(){
-    const styles= useStyles();
-    const [open, setOpen] = React.useState(false);
     const [data, setData] = useState([]);
-    const [modalInsertar, setModalInsertar]= useState(false);
     const [modalEditar, setModalEditar]= useState(false);
     const [modalEliminar, setModalEliminar]= useState(false);
     const [snackOpen, setSnackOpen] = React.useState(false);
@@ -181,9 +176,6 @@ export default function ClientTable(){
         abrirCerrarModalEliminar()
       }
 
-    const abrirCerrarModalInsertar=()=>{
-        setModalInsertar(!modalInsertar);
-      }
          
       const abrirCerrarModalEditar=()=>{
         setModalEditar(!modalEditar);

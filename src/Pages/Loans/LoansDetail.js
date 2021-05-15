@@ -26,14 +26,14 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
-import { Table } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import InsertPayment from "./InsertPayment";
+import { Snackbar } from "@material-ui/core";
 
 const drawerWidth = 240;
 
-function Alert(props){
-  return <MuiAlert elevation = {6} variant = "filled" {...props}/>;
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -193,21 +193,29 @@ function SummaryCardPayment({title, value, component}){
     setSnackOpen(false);
   };
   return(
-    <Paper elevation = {6} className = {classes.summaryCard}>
-    <Typography color = {"textSecondary"}>
-      {title}
-    </Typography>
-    <InsertPayment
-    edge = "end"
-    onSave = {()=>{
-      setSnackOpen("Pago Realizado")
-    }}
-    render = {(open)=>(
-      <Button variant = "outlined" edge = "end" onClick = {open}>
-        Realizar pago
-      </Button>
-    )}/>
-  </Paper>
+    <Content>
+      <Snackbar open = {snackOpen} autoHideDuration = {2000} onClose = {snackClose}>
+                <Alert onClose = {snackClose} severity = "success">
+                    {snackOpen}
+                </Alert>
+            </Snackbar>
+      <Paper elevation = {6} className = {classes.summaryCard}>
+      <Typography color = {"textSecondary"}>
+        {title}
+      </Typography>
+      <InsertPayment
+      edge = "end"
+      onSave = {()=>{
+        setSnackOpen("Pago Realizado")
+      }}
+      render = {(open)=>(
+        <Button variant = "outlined" edge = "end" onClick = {open}>
+          Realizar pago
+        </Button>
+      )}/>
+    </Paper>
+    </Content>
+    
   );
   
 }
@@ -239,9 +247,6 @@ export default function LoansDetail({ id }) {
     );
   }
 
-  const trips = 4;
-  const distance = 0;
-  const fare = 0;
   return (
     <div className = {classes.root}>
     <CssBaseline/>

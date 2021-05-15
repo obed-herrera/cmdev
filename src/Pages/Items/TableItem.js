@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import MaterialTable from "material-table";
 import axios from 'axios';
-import { Modal,TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider} from '@material-ui/core';
+import {TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import "./TableItem.css";
 import EditIcon from '@material-ui/icons/Edit';
@@ -22,7 +22,6 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import {  ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -103,10 +102,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function TableItem(){
-    const styles= useStyles();
-    const [open, setOpen] = React.useState(false);
     const [data, setData] = useState([]);
-    const [modalInsertar, setModalInsertar]= useState(false);
     const [modalEditar, setModalEditar]= useState(false);
     const [modalEliminar, setModalEliminar]= useState(false);
     const [snackOpen, setSnackOpen] = React.useState(false);
@@ -145,40 +141,11 @@ export default function TableItem(){
         })
       }
 
-      /*const peticionPut=async()=>{
-        await axios.put(baseUrl+"/"+clientSeleccionado.id, clientSeleccionado)
-        .then(response=>{
-          var dataNueva= data;
-          dataNueva.map(client=>{
-            if(client.id===clientSeleccionado.id){
-              client.first_name=clientSeleccionado.first_name;
-              client.second_name=clientSeleccionado.second_name;
-              client.last_name=clientSeleccionado.last_name;
-              client.secondary_last_name=clientSeleccionado.secondary_last_name;
-              client.national_id=clientSeleccionado.national_id;
-              client.sys_code=clientSeleccionado.sys_code;
-              client.phone=clientSeleccionado.phone;
-              client.status_id=clientSeleccionado.status_id;
-            }
-          });
-          setData(dataNueva);
-          handleClose();
-        }).catch(error=>{
-          console.log(error);
-        })
-      }*/
-
-
-
     const seleccionarItem=(itemSeleccionado, caso)=>{
         setItemSeleccionado(itemSeleccionado);
         (caso==="Editar")?abrirCerrarModalEditar()
         :
         abrirCerrarModalEliminar()
-      }
-
-    const abrirCerrarModalInsertar=()=>{
-        setModalInsertar(!modalInsertar);
       }
          
       const abrirCerrarModalEditar=()=>{

@@ -17,7 +17,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
-import ItemsInfo from './ItemsInfo';
 import TableItem from './TableItem';
 
 function Copyright() {

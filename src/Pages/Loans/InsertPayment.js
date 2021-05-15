@@ -1,9 +1,8 @@
-import { Button, Dialog, DialogActions, DialogContent, Divider, FormControl, FormHelperText, Grid, NativeSelect, TextField } from "@material-ui/core";
+import { Button, Dialog, DialogActions, DialogContent, Divider, TextField } from "@material-ui/core";
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { add, nextID, update } from "./LoansSlice";
-import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
 
 export default function InsertPayment({data, render, onSave}){
     const [open, setOpen] = React.useState(false);
@@ -30,16 +29,15 @@ export default function InsertPayment({data, render, onSave}){
         credi_payment_mount:''
     });
 
-    const handleChange = e =>{
+    /*const handleChange = e =>{
         const {name, value} = e.target;
         setUser((prevState)=>({
             ...prevState,
             [name]: value
         }))
         console.log(user);
-    }
+    }*/
 
-    const classes = useStyles();
 
     return(
         <div>
