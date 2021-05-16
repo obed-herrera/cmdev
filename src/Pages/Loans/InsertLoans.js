@@ -28,7 +28,11 @@ const useStyles = makeStyles((theme)=>({
     },
 }));
 
-export default function InsertLine({ data, render, onSave }) {
+export default function InsertLoans({ data, render, onSave }) {
+  const fetchData = () =>{
+    const loanAPI = 'http://localhost/Loan/loans';
+    const clientAPI = 'http://localhost/Client/clients';
+  }
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
 
@@ -60,6 +64,7 @@ export default function InsertLine({ data, render, onSave }) {
   const [loan, setLoan]=useState({
     id_credi_loan:'',
     credi_loan_code:'',
+    credi_loan_client:'',
     credi_loan_term:'',
     credi_loan_payment:'',
     credi_loan_mount:'',

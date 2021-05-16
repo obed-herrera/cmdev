@@ -21,6 +21,9 @@
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
+    "react-select-async-paginate": "^0.5.3",
+    "react-select-fetch": "^0.3.1",
     "reactstrap": "^8.9.0",
     "styled-components": "^5.2.3",
     "web-vitals": "^1.1.1"

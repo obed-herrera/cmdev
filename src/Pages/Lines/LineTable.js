@@ -3,7 +3,7 @@ import MaterialTable from "material-table";
 import axios from 'axios';
 import {TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import "./ClientTable.css";
+import "./LineTable.css";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { forwardRef } from 'react';
@@ -22,32 +22,32 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import InsertClient from './InsertClient';
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import InsertLine from './InsertLine';
 
 const columns = [
     {
-        title: 'Codigo del Cliente',
-        field: 'sys_code'
+        title: 'Codigo de la Linea',
+        field: 'id_credi_line_action'
     },
     {
-        title: 'Primer Nombre',
-        field: 'first_name'
+        title: 'Client',
+        field: 'id_credi_client'
     },
     {
-        title: 'Primer Apellido',
-        field: 'last_name'
+        title: 'Producto',
+        field: 'id_credi_item'
     },
     {
-        title: 'Cedula',
-        field: 'national_id'
+        title: 'Cantidad',
+        field: 'id_credi_item'
     },
     {
-        title: 'Telefono',
-        field: 'phone'
+        title: 'Total',
+        field: 'id_credi_line_action_total'
     }
 ];
 
@@ -71,7 +71,7 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
 
-const baseUrl = "http://localhost:3001/Client/clients";
+const baseUrl = "http://localhost:3001/Line/lineaction";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function ClientTable(){
+export default function LineTable(){
     const [data, setData] = useState([]);
     const [modalEditar, setModalEditar]= useState(false);
     const [modalEliminar, setModalEliminar]= useState(false);
@@ -200,7 +200,7 @@ export default function ClientTable(){
     return(
         <div className = "Table">
             <br/>
-            <InsertClient
+            <InsertLine
             edge = "end"
             onSave = {()=>{
               setSnackOpen("Cliente Agregado")

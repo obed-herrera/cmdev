@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -8,46 +8,87 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { add, update } from "./LinesSlice";
 import { useDispatch } from "react-redux";
 import { nextID } from "./LinesSlice";
-import { Grid } from "@material-ui/core";
+import { FormControl, FormHelperText, Grid, MenuItem, NativeSelect } from "@material-ui/core";
 import './InsertLine.css';
+import AsyncSelect from 'react-select';
+import axios from "axios";
+import { AirlineSeatReclineNormalTwoTone } from "@material-ui/icons";
+import { SelectFetch } from 'react-select-fetch';
+import { AsyncPaginate } from "react-select-async-paginate";
 
-export default function InsertLine({ data, render, onSave }) {
+
+/*const options = [
+  {value: 'line_credi_client', label:'Obed'},
+]*/
+
+/*async function loadOptions(search, loadedOptions){
+  const response = await fetch(`http://localhost:3001/Client/getClient/?search=${search}&offset=${loadedOptions.lenght}`);
+  const responseJSON = await response.json();
+
+  return{
+    options: responseJSON.client,
+    hasMore: responseJSON.has_more,
+  };
+}*/
+
+
+export default function InsertLine({render}) {
+  const lineAPI = "http://localhost:3001/Line/lineaction";
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
+  const [client, setClient] = useState({
+    id:'',
+    first_name:''
+  });
+  const [item, setItem] = useState([]);
 
-  const defaultImg = data && data.img;
-  const defaultName = data && data.name;
-  // Existing ID or random ID
-  const id = data && data.id;
+  /*const peticionGetClient = async()=>{
+    await axios.get(clientAPI)
+    .then(response=>{
+      setClient(response.data);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
 
-  const [img, setImg] = React.useState(defaultImg);
-  const [name, setName] = React.useState(defaultName);
+  useEffect(()=>{
+    peticionGetClient();
+  }, [])*/
+
+  const data = useState([]);
+
+  const peticionPost=async()=>{
+    await axios.post(lineAPI, line)
+    .then(response=>{
+      setLine(data.concat(response.data));
+      handleClose();
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
-    setName(defaultName);
-    setImg(defaultImg);
+    setLine(line);
   };
+
+  const handleChange=e=>{
+    setLine((line)=>({
+      ...line,
+      [e.target.name]: e.target.value
+    }))
+    console.log(line);
+  }
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleSave = () => {
-    const action = data ? update : add;
-    dispatch(action({ name, id: id || nextID(), img }));
-    onSave && onSave();
-    handleClose();
-  };
-
   const [line, setLine]=useState({
-    id_credi_line: '',
-    credi_line_code: '',
-    credi_line_client: '',
-    credi_line_item: '',
-    credi_line_item_price: '',
-    credi_line_item_quantity:'',
-    credi_line_total:'',
+    id_credi_line_action: '',
+    id_credi_client: '',
+    id_credi_item:'',
+    quantity:''
   });
 
   /*const handleChange=e=>{
@@ -79,57 +120,34 @@ export default function InsertLine({ data, render, onSave }) {
                     <TextField
                             autoFocus
                             margin="dense"
-                            id="credi_line_code"
-                            label="Codigo de la Linea"
+                            name="credi_line_action"
+                            label="Codigo de accion de linea"
                             fullWidth
-                            value={line.credi_line_code}
-                            onChange={(e) => {
-                            setLine(e.target.value);
-                            }}
+                            onChange={handleChange}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="credi_line_client"
+                            name="id_credi_client"
                             label="Cliente"
                             fullWidth
-                            value={line.credi_line_client}
-                            onChange={(e) => {
-                            setLine(e.target.value);
-                            }}
+                            onChange={handleChange}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="credi_line_item"
-                            label="Item"
-                            fullWidth
-                            value={line.credi_line_item}
-                            onChange={(e) => {
-                            setLine(e.target.value);
-                            }}
-                        />
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="credi_line_item_price"
+                            name="id_credi_item"
                             label="Producto"
                             fullWidth
-                            value={line.credi_line_item_price}
-                            onChange={(e) => {
-                            setLine(e.target.value);
-                            }}
+                            onChange={handleChange}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="credi_line_quantity"
+                            name="quantity"
                             label="Cantidad"
                             fullWidth
-                            value={line.credi_line_quantity}
-                            onChange={(e) => {
-                            setLine(e.target.value);
-                            }}
+                            onChange={handleChange}
                         />
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
                     </div>
@@ -140,7 +158,7 @@ export default function InsertLine({ data, render, onSave }) {
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          {<Button onClick={handleSave} color="primary">
+          {<Button onClick={peticionPost} color="primary">
             Guardar
         </Button>}
         </DialogActions>
