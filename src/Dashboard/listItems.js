@@ -9,6 +9,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import StorageIcon from '@material-ui/icons/Storage';
 import BuildIcon from '@material-ui/icons/Build';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import { AttachMoney, Description } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 
@@ -77,6 +78,14 @@ export const secondaryListItems = (
             <ListItemText primary = "Trabajadores"/>
             </ListItemLink>
         </Link>
+        <Link to = '/expenses' style = {{textDecoration: 'none', color: '#000'}}>
+            <ListItemLink>
+            <ListItemIcon>
+                <LocalAtmIcon/>
+            </ListItemIcon>
+            <ListItemText primary = "Gastos"/>
+            </ListItemLink>
+        </Link>
         <Link to = '/reports' style = {{textDecoration: 'none', color: '#000'}}>
             <ListItemLink>
             <ListItemIcon>
@@ -104,5 +113,6 @@ export const secondaryListItems = (
             </ListItemLink>
             
         </Link>
+        
     </div>
 );

@@ -3,7 +3,7 @@ import MaterialTable from "material-table";
 import axios from 'axios';
 import {TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import "./ClientTable.css";
+import "./ExpensesTable.css";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { forwardRef } from 'react';
@@ -22,32 +22,28 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import InsertClient from './InsertClient';
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import InsertExpenses from './InsertExpenses';
 
 const columns = [
     {
-        title: 'Codigo del Cliente',
-        field: 'sys_code'
+        title: 'Beneficiario',
+        field: 'expenses_ben'
     },
     {
-        title: 'Primer Nombre',
-        field: 'first_name'
+        title: 'Concepto',
+        field: 'expenses_concept'
     },
     {
-        title: 'Primer Apellido',
-        field: 'last_name'
+        title: 'Fecha',
+        field: 'expenses_date'
     },
     {
-        title: 'Cedula',
-        field: 'national_id'
-    },
-    {
-        title: 'Telefono',
-        field: 'phone'
+        title: 'Monto',
+        field: 'expenses_mount'
     }
 ];
 
@@ -97,35 +93,28 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function ClientTable(){
+export default function ExpensesTable(){
     const [data, setData] = useState([]);
     const [modalEditar, setModalEditar]= useState(false);
     const [modalEliminar, setModalEliminar]= useState(false);
     const [snackOpen, setSnackOpen] = React.useState(false);
-    const [clientSeleccionado, setClientSeleccionado]=useState({ 
-        id:"",  
-        first_name:"",
-        mid_name:"",
-        last_name:"",
-        secondary_last_name:"",
-        national_id:"",
-        sys_code:"",
-        phone:"",
-        address:"",
-        status_id:"",
-        created_at:new Date(),
-        modified_at: new Date(),
-        disabled_at: new Date()
+    const [expensesSeleccionado, setExpensesSeleccionado]=useState({ 
+        credi_expenses_id:"",
+        expenses_ben:"",
+        expenses_concept:"",
+        expenses_date: new Date(),
+        expenses_mount:"",
+        expenses_status:""
     })
 
     const [state, setState] = useState([]);
 
     const handleChange=e=>{
-      setClientSeleccionado((clientSeleccionado)=>({
-        ...clientSeleccionado,
+      setExpensesSeleccionado((expensesSeleccionado)=>({
+        ...expensesSeleccionado,
         [e.target.name]: e.target.value
       }))
-      console.log(clientSeleccionado);
+      console.log(expensesSeleccionado);
     }
 
      
@@ -146,19 +135,15 @@ export default function ClientTable(){
     }
 
       const peticionPut=async()=>{
-        await axios.put(baseUrl+"/"+clientSeleccionado.id, clientSeleccionado)
+        await axios.put(baseUrl+"/"+expensesSeleccionado.expenses_id, expensesSeleccionado)
         .then(response=>{
           var dataNueva= data;
-          dataNueva.map(client=>{
-            if(client.id===clientSeleccionado.id){
-              client.first_name=clientSeleccionado.first_name;
-              client.second_name=clientSeleccionado.second_name;
-              client.last_name=clientSeleccionado.last_name;
-              client.secondary_last_name=clientSeleccionado.secondary_last_name;
-              client.national_id=clientSeleccionado.national_id;
-              client.sys_code=clientSeleccionado.sys_code;
-              client.phone=clientSeleccionado.phone;
-              client.status_id=clientSeleccionado.status_id;
+          dataNueva.map(expenses=>{
+            if(expenses.id===expensesSeleccionado.expenses_id){
+              expenses.expenses_ben=expensesSeleccionado.expenses_ben;
+              expenses.expenses_concept=expensesSeleccionado.expenses_concept;
+              expenses.expenses_date=expensesSeleccionado.expenses_date;
+              expenses.expenses_mount=expensesSeleccionado.expenses_mount;
             }
           });
           setData(dataNueva);
@@ -169,16 +154,16 @@ export default function ClientTable(){
       }
 
       const peticionDelete = async()=>{
-        await axios.delete(baseUrl+"/"+clientSeleccionado.id)
+        await axios.delete(baseUrl+"/"+expensesSeleccionado.expenses_id)
         .then(response=>{
-          setClientSeleccionado(data.filter(client=>client.id!==clientSeleccionado.id));
+          setExpensesSeleccionado(data.filter(expenses=>expenses.expenses_id!==expensesSeleccionado.expenses_id));
         })
       }
 
 
 
-    const seleccionarCliente=(clientSeleccionado, caso)=>{
-        setClientSeleccionado(clientSeleccionado);
+    const seleccionarExpenses=(expensesSeleccionado, caso)=>{
+        setExpensesSeleccionado(expensesSeleccionado);
         (caso==="Editar")?abrirCerrarModalEditar()
         :
         abrirCerrarModalEliminar()
@@ -201,7 +186,7 @@ export default function ClientTable(){
     return(
         <div className = "Table">
             <br/>
-            <InsertClient
+            <InsertExpenses
             edge = "end"
             onSave = {()=>{
               setSnackOpen("Cliente Agregado")
@@ -217,19 +202,19 @@ export default function ClientTable(){
                 icons = {tableIcons}
                 columns = {columns}
                 data = {data}
-                title = "Clientes"
+                title = "Gastos"
                 actions={[
                     {
                         icon: EditIcon,
-                        tooltip: 'Editar Cliente',
+                        tooltip: 'Editar Gasto',
                         onClick: rowData => {
                           setState({dialogOpen:true});
                         }
                     },
                     {
                       icon: DeleteIcon,
-                      tooltip: 'Eliminar Cliente',
-                      onClick: (event, rowData) => seleccionarCliente(rowData, "Eliminar")
+                      tooltip: 'Eliminar Gasto',
+                      onClick: (event, rowData) => seleccionarExpenses(rowData, "Eliminar")
                     }
                 ]}
                 options={{
@@ -247,27 +232,27 @@ export default function ClientTable(){
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">
-                {data ? "Editar" : "Agregar"} Cliente{" "}
+                {data ? "Editar" : "Agregar"} Gasto{" "}
               </DialogTitle>
               <Divider/>
               <DialogContent>
               <Grid container lg = 'auto' spacing = {2} style = {{padding:20}}>
                       <Grid item lg ={4}>
-                          <div className = "form-group">
+                          {/*<div className = "form-group">
                               <TextField
                                   autoFocus
                                   margin="dense"
-                                  name="first_name"
-                                  label="Primer Nombre"
+                                  name="expenses_ben"
+                                  label="Beneficiario"
                                   fullWidth
                                   onChange={handleChange}
-                                  value = {clientSeleccionado && clientSeleccionado.first_name}
+                                  value = {expensesSeleccionado && expensesSeleccionado.expenses_ben}
                               />
                               <TextField
                                   autoFocus
                                   margin="dense"
-                                  name="mid_name"
-                                  label="Segundo Nombre"
+                                  name="expenses_concept"
+                                  label="Concepto"
                                   fullWidth
                                   onChange={handleChange}
                                   value = {clientSeleccionado && clientSeleccionado.mid_name}
@@ -290,10 +275,10 @@ export default function ClientTable(){
                                   onChange={handleChange}
                                   value = {clientSeleccionado && clientSeleccionado.secondary_last_name}
                               />
-                              {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
-                          </div>
+                              {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>}
+            </div>*/}
                       </Grid>
-                      <Grid item lg ={4}> 
+                      {/*<Grid item lg ={4}> 
                       <TextField
                                   autoFocus
                                   margin="dense"
@@ -337,7 +322,7 @@ export default function ClientTable(){
                             </NativeSelect>
                             <FormHelperText>Estado del Trabajador</FormHelperText>
                           </FormControl>                                
-                      </Grid>
+        </Grid>*/}
                   </Grid>
               </DialogContent>
               <Divider/>
@@ -350,7 +335,7 @@ export default function ClientTable(){
               </Button>}
               </DialogActions>
             </Dialog> 
-            <Dialog>
+           {/*<Dialog>
                 <div>
                   <p>Estas seguro que deseas eliminar al Cliente <b>{clientSeleccionado && clientSeleccionado.client}</b>?</p>
                   <div align = "right">
@@ -358,7 +343,7 @@ export default function ClientTable(){
                     <Button onClick = {handleClose}>NO</Button>
                   </div>
                 </div>
-            </Dialog> 
+           </Dialog>*/} 
         </div>
     );
 }

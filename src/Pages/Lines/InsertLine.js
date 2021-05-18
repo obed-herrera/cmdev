@@ -8,7 +8,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { add, update } from "./LinesSlice";
 import { useDispatch } from "react-redux";
 import { nextID } from "./LinesSlice";
-import { FormControl, FormHelperText, Grid, MenuItem, NativeSelect } from "@material-ui/core";
+import { FormControl, FormHelperText, Grid, InputLabel, makeStyles, MenuItem, NativeSelect, Select } from "@material-ui/core";
 import './InsertLine.css';
 import AsyncSelect from 'react-select';
 import axios from "axios";
@@ -16,6 +16,15 @@ import { AirlineSeatReclineNormalTwoTone } from "@material-ui/icons";
 import { SelectFetch } from 'react-select-fetch';
 import { AsyncPaginate } from "react-select-async-paginate";
 
+const useStyles = makeStyles((theme)=>({
+  formControl: {
+      margin: theme.spacing(1),
+      minWidth:120,
+  },
+  selectEmpty:{
+      marginTop: theme.spacing(2),
+  },
+}));
 
 /*const options = [
   {value: 'line_credi_client', label:'Obed'},
@@ -41,6 +50,7 @@ export default function InsertLine({render}) {
     first_name:''
   });
   const [item, setItem] = useState([]);
+  const classes = useStyles();
 
   /*const peticionGetClient = async()=>{
     await axios.get(clientAPI)
@@ -88,7 +98,8 @@ export default function InsertLine({render}) {
     id_credi_line_action: '',
     id_credi_client: '',
     id_credi_item:'',
-    quantity:''
+    quantity:'',
+    credi_line_term:''
   });
 
   /*const handleChange=e=>{
@@ -149,6 +160,34 @@ export default function InsertLine({render}) {
                             fullWidth
                             onChange={handleChange}
                         />
+                        <FormControl variant = "outlined" className = {classes.formControl}>
+                            <InputLabel id = "credi_line_term">Plazo</InputLabel>
+                            <Select
+                                labelId = "credi_line_term"
+                                id = "credi_line_term"
+                                name = "credi_line_term"
+                                value = {line.credi_line_term}
+                                onChange = {handleChange}
+                                label = "Plazo"
+                            >
+                                <MenuItem value = "">
+                                    <em>Ninguno</em>
+                                </MenuItem>
+                                <MenuItem value = {30}>1 Mes</MenuItem>
+                                <MenuItem value = {60}>2 Meses</MenuItem>
+                                <MenuItem value = {90}>3 Meses</MenuItem>
+                                <MenuItem value = {120}>4 Meses</MenuItem>
+                                <MenuItem value = {150}>5 Meses</MenuItem>
+                                <MenuItem value = {180}>6 Meses</MenuItem>
+                                <MenuItem value = {210}>7 Meses</MenuItem>
+                                <MenuItem value = {240}>8 Meses</MenuItem>
+                                <MenuItem value = {270}>9 Meses</MenuItem>
+                                <MenuItem value = {300}>10 Meses</MenuItem>
+                                <MenuItem value = {330}>11 Meses</MenuItem>
+                                <MenuItem value = {360}>12 Meses</MenuItem>
+
+                            </Select>
+                        </FormControl>
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
                     </div>
                 </Grid>

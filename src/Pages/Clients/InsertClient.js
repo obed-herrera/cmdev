@@ -8,7 +8,13 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Divider, FormControl, FormHelperText, Grid, NativeSelect } from "@material-ui/core";
 import {useStyles} from "./Clients";
 import axios from "axios";
+import {withStyles} from "@material-ui/core/styles";
 
+const styles = theme =>({
+  dialogCustomizeWidth:{
+    'max-width':'80%'
+  }
+});
 
 
 export default function InsertClient({render}) {
@@ -22,6 +28,7 @@ export default function InsertClient({render}) {
     national_id:"",
     sys_code:"",
     phone:"",
+    address:"",
     status_id:""
 });
 
@@ -108,14 +115,24 @@ const data = useState([]);
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
         minWidth = 'md'
-
+        maxWidth = 'xs'
       >
         <DialogTitle id="form-dialog-title">
           {data ? "Editar" : "Agregar"} Cliente{" "}
         </DialogTitle>
         <Divider/>
-        <DialogContent>
-        <Grid container sm = 'auto' spacing = {1} style = {{padding:10}} alignItems = 'center'>
+        <DialogContent alignItems = 'center'>
+        <Grid container md = 'auto'  position = 'center' style = {{padding:20}} item lg = {6}>
+                <TextField
+                            autoFocus
+                            margin="dense"
+                            name="sys_code"
+                            label="Codigo del Cliente"
+                            fullWidth
+                            onChange={handleChange}
+                        />
+                </Grid>
+        <Grid container lg = 'md' direction = 'columns' spacing = {2} style = {{padding:20}} alignItems = 'center'>   
                 <Grid item lg ={6}>
                     <div className = "form-group">
                         <TextField
@@ -162,14 +179,7 @@ const data = useState([]);
                             fullWidth
                             onChange={handleChange}
                         />
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            name="sys_code"
-                            label="Codigo del Cliente"
-                            fullWidth
-                            onChange={handleChange}
-                        />
+                        
                         <TextField
                             autoFocus
                             margin="dense"

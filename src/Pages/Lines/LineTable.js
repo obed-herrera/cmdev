@@ -34,7 +34,7 @@ const columns = [
         field: 'id_credi_line_action'
     },
     {
-        title: 'Client',
+        title: 'Cliente',
         field: 'id_credi_client'
     },
     {
@@ -198,7 +198,7 @@ export default function LineTable(){
       }, [])
 
     return(
-        <div className = "Table">
+        <div className = "Table-line">
             <br/>
             <InsertLine
             edge = "end"
@@ -207,7 +207,7 @@ export default function LineTable(){
             }}
             render = {(open) => (
               <Button variant = "outlined" color = "primary" edge = "end" onClick = {open}>
-                Insertar Nuevo Cliente
+                Insertar nueva actividad de linea
               </Button>
             )}
           />
@@ -216,18 +216,18 @@ export default function LineTable(){
                 icons = {tableIcons}
                 columns = {columns}
                 data = {data}
-                title = "Clientes"
+                title = "Lineas"
                 actions={[
                     {
                         icon: EditIcon,
-                        tooltip: 'Editar Cliente',
+                        tooltip: 'Editar Linea',
                         onClick: rowData => {
                           setState({dialogOpen:true});
                         }
                     },
                     {
                       icon: DeleteIcon,
-                      tooltip: 'Eliminar Cliente',
+                      tooltip: 'Eliminar Linea',
                       onClick: (event, rowData) => seleccionarCliente(rowData, "Eliminar")
                     }
                 ]}
