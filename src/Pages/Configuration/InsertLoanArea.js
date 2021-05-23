@@ -53,7 +53,7 @@ export default function InsertLine({data, render}){
                 aria-labelledby = "form-dialog-title"
             >
                 <DialogTitle id = "form-dialog-title">
-                    {data = "Agregar"} Rol {" "}
+                    {data = "Agregar"} Area de Prestamo {" "}
                 </DialogTitle>
                 <Divider/>
                 <DialogContent>

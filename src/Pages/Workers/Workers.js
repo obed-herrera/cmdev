@@ -18,6 +18,7 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
 import WorkersInfo from './WorkersInfo';
+import WorkersTable from './WorkersTable';
 
 function Copyright() {
     return (
@@ -174,7 +175,7 @@ export default function Workers(){
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
                 <Container maxWidth = "xl" className = {classes.container}>               
-                      <WorkersInfo />
+                      <WorkersTable />
                 </Container>
                   <Box pt = {4}>
                     <Copyright/>

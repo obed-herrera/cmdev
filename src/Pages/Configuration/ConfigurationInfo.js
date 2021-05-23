@@ -5,6 +5,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import InsertRole from "./InsertRole";
 import InsertLine from "./InsertLine";
 import InsertLoanArea from "./InsertLoanArea";
+import ViewRole from "./ViewRole";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme)=>({
       },
       content: {
         flexGrow: 1,
-        height: '100vh',
+        height: '200vh',
         overflow: 'auto',
       },
 }));
@@ -74,11 +75,95 @@ function SummaryCard({title, value, component}){
                     }}
                     render={(open)=>(
                         <Button variant = "outlined" edge = "end" onClick = {open}>
-                            Crear Rol
+                        Crear Rol
                         </Button>
                     )}
-                />     
-            </Paper>
+                />   
+            </Paper> 
+        </Content>     
+    );
+}
+
+function SummaryCardViewRole({title, value, component}){
+    const [snackOpen, setSnackOpen] = React.useState(false);
+    const classes = useStyles();
+    const snackClose = (event, reason) => {
+        if (reason === "clickaway") {
+          return;
+        }
+    
+        setSnackOpen(false);
+      };
+    return(
+        <Content>
+            <Snackbar open = {snackOpen} autoHideDuration = {2000} onClose = {snackClose}>
+                <Alert onClose = {snackClose} severity = "success">
+                    {snackOpen}
+                </Alert>
+            </Snackbar>
+            <Paper elevation = {6} className = {classes.summaryCard}>
+                <Typography color = {"textSecondary"}>
+                    {title}
+                </Typography>
+                {component || (
+                    <Typography>
+                        {value}
+                    </Typography>
+                )}
+                <ViewRole
+                    edge = "end"
+                    onSave = {()=>{
+                        setSnackOpen("Rol Agregado")
+                    }}
+                    render={(open)=>(
+                        <Button variant = "outlined" edge = "end" onClick = {open}>
+                        Ver Roles
+                        </Button>
+                    )}
+                />   
+            </Paper> 
+        </Content>     
+    );
+}
+
+function SummaryCardViewLine({title, value, component}){
+    const [snackOpen, setSnackOpen] = React.useState(false);
+    const classes = useStyles();
+    const snackClose = (event, reason) => {
+        if (reason === "clickaway") {
+          return;
+        }
+    
+        setSnackOpen(false);
+      };
+    return(
+        <Content>
+            <Snackbar open = {snackOpen} autoHideDuration = {2000} onClose = {snackClose}>
+                <Alert onClose = {snackClose} severity = "success">
+                    {snackOpen}
+                </Alert>
+            </Snackbar>
+            <Paper elevation = {6} className = {classes.summaryCard}>
+                <Typography color = {"textSecondary"}>
+                    {title}
+                </Typography>
+                {component || (
+                    <Typography>
+                        {value}
+                    </Typography>
+                )}
+                <ViewRole
+                    edge = "end"
+                    onSave = {()=>{
+                        setSnackOpen("Lineas")
+                    }}
+                    render={(open)=>(
+                        <Button variant = "outlined" edge = "end" onClick = {open}>
+                        Ver Lineas
+                        </Button>
+                    )}
+                />   
+            </Paper> 
         </Content>     
     );
 }
@@ -195,18 +280,14 @@ export default function ConfigurationInfo(){
         <div className = {classes.root}>
             <CssBaseline/>
             <main className = {classes.content}>
-                <Content maxWidht = "lg" className = {classes.container}>
+                <Content maxWidht = "md" className = {classes.container}>
                     <div className = {classes.summaryCards}>
-                        <Grid container>
-                            <Grid>
-                                <SummaryCard title = {"Crear nuevo rol"}/>
-                                <SummaryCardCheck title = {"Gestionar roles"}/>
-                            </Grid>
-                            <Grid>
-                                <SummaryCardLines title = {"Gestionar Lineas"}/>
-                                <SummaryCardLoans title = {"Gestionar areas de prestamos"}/>
-                            </Grid>
-                        </Grid>     
+                        <SummaryCard title = {"Crear nuevo rol"} value = {"Este botón le permite añadir un nuevo rol a la empresa"}/>
+                        <SummaryCardViewRole title = {"Ver roles agregados"} value = {"Este boton le permite ver los roles que han sido agregados"}/>
+                        <SummaryCardLines title = {"Gestionar Lineas"} value = {"Este boton le permite añadir una nueva linea para su uso"}/>
+                        <SummaryCardViewLine title = {"Ver lineas agregadas"} value = {"Este boton le permite ver las lineas que han sido agregadas"}/>
+                        <SummaryCardLoans title = {"Gestionar areas de prestamos"} value = {"Este boton le permite añadir una nueva area de prestamos"}/>
+                        <SummaryCardCheck title = {"Gestionar roles"} value = {""}/>    
                     </div>   
                 </Content>
             </main> 

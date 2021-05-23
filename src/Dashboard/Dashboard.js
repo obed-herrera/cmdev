@@ -17,6 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from './listItems';
+import Content from './Content';
 
 function Copyright() {
     return (
@@ -171,7 +172,8 @@ export default function Dashboard(){
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
                 <Container maxWidth="lg" className={classes.container}>   
-                        
+                   <Content>
+                   </Content>     
                 </Container>
                 <Box pt = {4}>
                     <Copyright/>

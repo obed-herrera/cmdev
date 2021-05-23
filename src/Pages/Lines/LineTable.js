@@ -198,7 +198,7 @@ export default function LineTable(){
       }, [])
 
     return(
-        <div className = "Table-line">
+        <div className = "Table">
             <br/>
             <InsertLine
             edge = "end"
@@ -232,13 +232,19 @@ export default function LineTable(){
                     }
                 ]}
                 options={{
-                    actionsColumnIndex: -1,
-                }}
-                localization={{
-                    header:{
-                        actions: "Acciones"
-                    }
-                }}
+                  actionsColumnIndex: -1,
+                  selection: true
+              }}
+              localization={{
+                  header:{
+                      actions: "Acciones"
+                  },
+                  toolbar:{
+                      nRowsSelected: "{0} fila(s) seleccionada",
+                      searchTooltip: "Buscar",
+                      searchPlaceholder: "Buscar"
+                  }
+              }}
             />
            <Dialog
               open= {state.openDialog}

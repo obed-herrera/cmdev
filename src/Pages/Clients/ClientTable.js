@@ -46,6 +46,10 @@ const columns = [
         field: 'national_id'
     },
     {
+        title: 'Direccion',
+        field: 'address'
+    },
+    {
         title: 'Telefono',
         field: 'phone'
     }
@@ -234,10 +238,16 @@ export default function ClientTable(){
                 ]}
                 options={{
                     actionsColumnIndex: -1,
+                    selection: true
                 }}
                 localization={{
                     header:{
                         actions: "Acciones"
+                    },
+                    toolbar:{
+                        nRowsSelected: "{0} fila(s) seleccionada",
+                        searchTooltip: "Buscar",
+                        searchPlaceholder: "Buscar"
                     }
                 }}
             />

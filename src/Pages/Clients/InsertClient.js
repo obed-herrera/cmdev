@@ -21,15 +21,14 @@ export default function InsertClient({render}) {
   const baseUrl = "http://localhost:3001/Client/clients";
   const [open, setOpen] = React.useState(false);
   const [clientSeleccionado, setClientSeleccionado]=useState({ 
-    first_name:"",
-    mid_name:"",
-    last_name:"",
-    secondary_last_name:"",
-    national_id:"",
-    sys_code:"",
-    phone:"",
-    address:"",
-    status_id:""
+    first_name:'',
+    mid_name:'',
+    last_name:'',
+    secondary_last_name:'',
+    national_id:'',
+    sys_code:'',
+    phone:'',
+    status_id:''
 });
 
 const peticionPost=async()=>{
@@ -118,21 +117,21 @@ const data = useState([]);
         maxWidth = 'xs'
       >
         <DialogTitle id="form-dialog-title">
-          {data ? "Editar" : "Agregar"} Cliente{" "}
+          {"Agregar"} Cliente{" "}
         </DialogTitle>
         <Divider/>
         <DialogContent alignItems = 'center'>
         <Grid container md = 'auto'  position = 'center' style = {{padding:20}} item lg = {6}>
                 <TextField
-                            autoFocus
-                            margin="dense"
-                            name="sys_code"
-                            label="Codigo del Cliente"
-                            fullWidth
-                            onChange={handleChange}
-                        />
+                  autoFocus
+                  margin="dense"
+                  name="sys_code"
+                  label="Codigo del Cliente"
+                  fullWidth
+                  onChange={handleChange}
+                />
                 </Grid>
-        <Grid container lg = 'md' direction = 'columns' spacing = {2} style = {{padding:20}} alignItems = 'center'>   
+        <Grid container lg = 'md' direction = 'columns' spacing = {2} style = {{padding:20}} alignItems = 'stretch'>   
                 <Grid item lg ={6}>
                     <div className = "form-group">
                         <TextField
@@ -172,37 +171,29 @@ const data = useState([]);
                 </Grid>
                 <Grid item lg ={6}> 
                 <TextField
-                            autoFocus
-                            margin="dense"
-                            name="national_id"
-                            label="Cedula del Cliente"
-                            fullWidth
-                            onChange={handleChange}
-                        />
-                        
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            name="phone"
-                            label="Telefono del Trabajo"
-                            fullWidth
-                            onChange={handleChange}
-                        /> 
-                    <FormControl className={classes.formControl}>
-                      <NativeSelect
-                        className={classes.selectEmpty}     
-                        name="status_id"
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'status_id' }}
-                      >
-                        <option value="" disabled>
-                          Estado del Cliente
-                        </option>
-                        <option value={'0'}>Activo</option>
-                        <option value={'1'}>Inactivo</option>
-                      </NativeSelect>
-                      <FormHelperText>Estado del Trabajador</FormHelperText>
-                    </FormControl>                                
+                  autoFocus
+                  margin="dense"
+                  name="national_id"
+                  label="Cedula del Cliente"
+                  fullWidth
+                  onChange={handleChange}
+                />  
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  name="address"
+                  label="Dirección del Cliente"
+                  fullWidth
+                  onChange={handleChange}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  name="phone"
+                  label="Telefono del Cliente"
+                  fullWidth
+                  onChange={handleChange}
+                />                                
                 </Grid>
             </Grid>
         </DialogContent>

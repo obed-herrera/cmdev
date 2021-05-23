@@ -67,7 +67,7 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
 
-const baseUrl = "http://localhost:3001/Client/clients";
+const baseUrl = "http://localhost:3001/Expenses/expenses";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -189,11 +189,11 @@ export default function ExpensesTable(){
             <InsertExpenses
             edge = "end"
             onSave = {()=>{
-              setSnackOpen("Cliente Agregado")
+              setSnackOpen("Gasto Agregado")
             }}
             render = {(open) => (
               <Button variant = "outlined" color = "primary" edge = "end" onClick = {open}>
-                Insertar Nuevo Cliente
+                Insertar gasto
               </Button>
             )}
           />
@@ -218,13 +218,19 @@ export default function ExpensesTable(){
                     }
                 ]}
                 options={{
-                    actionsColumnIndex: -1,
-                }}
-                localization={{
-                    header:{
-                        actions: "Acciones"
-                    }
-                }}
+                  actionsColumnIndex: -1,
+                  selection: true
+              }}
+              localization={{
+                  header:{
+                      actions: "Acciones"
+                  },
+                  toolbar:{
+                      nRowsSelected: "{0} fila(s) seleccionada",
+                      searchTooltip: "Buscar",
+                      searchPlaceholder: "Buscar"
+                  }
+              }}
             />
            <Dialog
               open= {state.openDialog}

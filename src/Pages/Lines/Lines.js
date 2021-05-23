@@ -16,6 +16,7 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
 import LineTable from './LineTable';
+import { Container } from '@material-ui/core';
 
 function Copyright() {
     return (
@@ -171,7 +172,9 @@ export default function Lines(){
             </Drawer>
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
+                <Container maxWidth = "xl" className = {classes.container}>
                   <LineTable />
+                </Container>
                 <Box pt = {4}>
                     <Copyright/>
                 </Box>

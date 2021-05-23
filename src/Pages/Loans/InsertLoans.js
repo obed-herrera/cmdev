@@ -21,8 +21,14 @@ import 'date-fns';
 const useStyles = makeStyles((theme)=>({
     formControl: {
         margin: theme.spacing(1),
-        minWidth:120,
+        alignItems: 'right',
+        minWidth:150,
     },
+    formControl2: {
+      margin: theme.spacing(1),
+      alignItems: 'right',
+      minWidth:150,
+  },
     selectEmpty:{
         marginTop: theme.spacing(2),
     },
@@ -113,209 +119,164 @@ const classes = useStyles();
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          {data ? "Editar" : "Agragar"} Prestamo{" "}
+          {"Agregar"} Prestamo{" "}
         </DialogTitle>
-        <DialogContent>
-        <Grid container lg = 'auto' spacing = {3} style = {{padding:10}}>
-                <Grid item lg ={4}>
-                    <div className = "form-group">
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="credi_loan_code"
-                            label="Codigo del Prestamo"
-                            fullWidth
-                            value={loan.credi_loan_code}
-                            onChange={(e) => {
-                            setName(e.target.value);
-                            }}
-                        />
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="credi_loan_mount"
-                            label="Monto del Prestamo"
-                            fullWidth
-                            value={loan.credi_loan_mount}
-                            onChange={(e) => {
-                            setName(e.target.value);
-                            }}
-                        />
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="credi_loan_interest"
-                            label="Interes"
-                            fullWidth
-                            value={loan.credi_loan_interest}
-                            onChange={(e) => {
-                            setName(e.target.value);
-                            }}
-                        />
-                        <Grid container 
-                        spacing = {2}
-                        direction = "row">
-                          <Grid item lg = {3}>
-                        <FormControl variant = "outlined" className = {classes.formControl}>
-                            <InputLabel id = "credi_loan_term">Plazo</InputLabel>
-                            <Select
-                                labelId = "credi_loan_term"
-                                id = "credi_loan_term"
-                                value = {credi_loan_term}
-                                onChange = {handleChangeTerm}
-                                label = "Plazo"
-                            >
-                                <MenuItem value = "">
-                                    <em>Ninguno</em>
-                                </MenuItem>
-                                <MenuItem value = {30}>1 Mes</MenuItem>
-                                <MenuItem value = {60}>2 Meses</MenuItem>
-                                <MenuItem value = {90}>3 Meses</MenuItem>
-                                <MenuItem value = {120}>4 Meses</MenuItem>
-                                <MenuItem value = {150}>5 Meses</MenuItem>
-                                <MenuItem value = {180}>6 Meses</MenuItem>
-                                <MenuItem value = {210}>7 Meses</MenuItem>
-                                <MenuItem value = {240}>8 Meses</MenuItem>
-
-                            </Select>
-                        </FormControl>
-                        <FormControl variant = "outlined" className = {classes.formControl}>
-                            <InputLabel id = "credi_loan_term">Forma de Pago</InputLabel>
-                            <Select
-                                labelId = "credi_loan_paym_freq"
-                                id = "credi_loan_paym_freq"
-                                value = {credi_loan_term}
-                                onChange = {handleChangeTerm}
-                                label = "Forma de Pago"
-                            >
-                                <MenuItem value = "">
-                                    <em>Ninguno</em>
-                                </MenuItem>
-                                <MenuItem value = {30}>Diario</MenuItem>
-                                <MenuItem value = {60}>Dia de por medio</MenuItem>
-                                <MenuItem value = {90}>Semanal</MenuItem>
-                                <MenuItem value = {120}>Quincenal</MenuItem>
-                                <MenuItem value = {150}>Mensual</MenuItem>
-                            </Select>
-                        </FormControl>
-                        </Grid>
-                        </Grid>
-                        {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
-                    </div>
-                </Grid>
-                <Grid item lg ={4}> 
-                    <div className = "form-group">
-                      <MuiPickersUtilsProvider utils = {DateFnsUtils}>
-                        <Grid container justify = "space-around">
-                          <KeyboardDatePicker
-                            margin="normal"
-                            id="date-picker-dialog"
-                            label="Date picker dialog"
-                            format="MM/dd/yyyy"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                              'aria-label': 'change date',
-                            }}
-                          />
-                        </Grid>
-                        <Grid container justify = "space-around">
-                          <KeyboardDatePicker
-                            margin="normal"
-                            id="date-picker-dialog"
-                            label="Date picker dialog"
-                            format="MM/dd/yyyy"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                              'aria-label': 'change date',
-                            }}
-                          />
-                        </Grid>
-                        <Grid container justify = "space-around">
-                          <KeyboardDatePicker
-                            margin="normal"
-                            id="date-picker-dialog"
-                            label="Date picker dialog"
-                            format="MM/dd/yyyy"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                              'aria-label': 'change date',
-                            }}
-                          />
-                        </Grid>
-                        
-                        </MuiPickersUtilsProvider>
-                  </div> 
-            </Grid>
+        <DialogContent alignItems = 'center'>
+          <Grid container md = 'auto' position = 'center' style = {{padding:20}} item lg = {4} alignItems = 'stretch'>
+                <TextField
+                  autoFocus
+                  name = "loan_code"
+                  margin = "dense"
+                  label = "Codigo del Prestamo"
+                  fullWidth
+                />
+          </Grid>
+            <Grid container md = 'auto' direction = 'columns' spacing = {2} style = {{padding:10}} alignItems = 'stretch'>
+              <Grid item lg = {4}>
+                <div className = "form-group">
+                  <TextField
+                    autoFocus
+                    name = "loan_code"
+                    margin = "dense"
+                    label = "Cliente"
+                    fullWidth
+                  />
+                  <TextField
+                    autoFocus
+                    name = "loan_code"
+                    margin = "dense"
+                    label = "Monto a Prestar"
+                    fullWidth
+                  /> 
+                  <FormControl variant = "outlined" className = {classes.formControl}>
+                    <InputLabel id = "money_type">Tipo de Moneda</InputLabel>
+                    <Select
+                      labelId = "money_type"
+                      id = "money_type"
+                      name = "money_type"
+                      label = "Tipo de Moneda"
+                      margin = "dense"
+                    >
+                      <MenuItem value = {"0"}>Cordoba</MenuItem>
+                      <MenuItem value = {"35.50"}>Dolar</MenuItem>
+                    </Select>
+                  </FormControl>
+                  
+                  <FormControl variant = "outlined" className = {classes.formControl}>
+                    <InputLabel id = "loan_term">Plazo</InputLabel>
+                    <Select
+                      labelId = "loan_term"
+                      id = "loan_term"
+                      name = "loan_term"
+                      label = "Plazo"
+                      margin = "dense"
+                      value = {loan.loan_payment_term}
+                      onChange = {handleChange}
+                    >
+                      <MenuItem value = "">
+                          <em>Ninguno</em>
+                      </MenuItem>
+                      <MenuItem value = {30}>1 Mes</MenuItem>
+                      <MenuItem value = {60}>2 Meses</MenuItem>
+                      <MenuItem value = {90}>3 Meses</MenuItem>
+                      <MenuItem value = {120}>4 Meses</MenuItem>
+                      <MenuItem value = {150}>5 Meses</MenuItem>
+                      <MenuItem value = {180}>6 Meses</MenuItem>
+                      <MenuItem value = {210}>7 Meses</MenuItem>
+                      <MenuItem value = {240}>8 Meses</MenuItem>
+                      <MenuItem value = {270}>9 Meses</MenuItem>
+                      <MenuItem value = {300}>10 Meses</MenuItem>
+                      <MenuItem value = {330}>11 Meses</MenuItem>
+                      <MenuItem value = {360}>12 Meses</MenuItem>
+                    </Select>
+                  </FormControl> 
+                  
+                </div>
+                </Grid> 
                 <Grid item lg = {4}>
-                  <FormControl className={classes.formControl}>
-                      <NativeSelect
-                        className={classes.selectEmpty}
-                        value={state.client_state}
-                        name="client_state"
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'client_state' }}
-                      >
-                        <option value="" disabled>
-                          Tipo de moneda
-                        </option>
-                        <option value={'Activo'}>Cordoba</option>
-                        <option value={'Inactivo'}>Dolar</option>
-                      </NativeSelect>
-                      <FormHelperText>Tipo de Moneda</FormHelperText>
+                <TextField
+                      autoFocus
+                      name = "interest"
+                      margin = "dense"
+                      label = "Interes"
+                      fullWidth
+                    /> 
+                  <FormControl variant = "outlined" className = {classes.formControl2}>
+                    <InputLabel id = "loan_payment_freq">Frequencia</InputLabel>
+                    <Select
+                      labelId = "loan_payment_freq"
+                      id = "loan_payment_freq"
+                      name = "loan_payment_freq"
+                      value = {loan.loan_payment_freq}
+                      onChange = {handleChange}
+                      label = "Frequencia"
+                    >
+                      <MenuItem value = "">
+                          <em>Ninguno</em>
+                      </MenuItem>
+                      <MenuItem value = {30}>Diario</MenuItem>
+                      <MenuItem value = {60}>Dia de por medio</MenuItem>
+                      <MenuItem value = {90}>Semanal</MenuItem>
+                      <MenuItem value = {120}>Quincenal</MenuItem>
+                      <MenuItem value = {150}>Mensual</MenuItem>
+                    </Select>
                     </FormControl>
-                    <FormControl variant = "outlined" className = {classes.formControl}>
-                            <InputLabel id = "credi_loan_term">Linea del Cliente</InputLabel>
-                            <Select
-                                labelId = "credi_loan_paym_freq"
-                                id = "credi_loan_paym_freq"
-                                value = {credi_loan_term}
-                                onChange = {handleChangeTerm}
-                                label = "Linea del Cliente"
-                            >
-                                <MenuItem value = "">
-                                    <em>Ninguno</em>
-                                </MenuItem>
-                                <MenuItem value = {30}>Montetabor</MenuItem>
-                                <MenuItem value = {60}>TICOMO</MenuItem>
-                                <MenuItem value = {60}>San Jose O.</MenuItem>
-                                <MenuItem value = {60}>Cuajachillo</MenuItem>
-                                <MenuItem value = {60}>Ciudad Sandino</MenuItem>
-                                <MenuItem value = {60}>Villa Reconciliacion</MenuItem>
-                                <MenuItem value = {60}>Bello Amanecer 1</MenuItem>
-                                <MenuItem value = {60}>Bello Amanecer 2</MenuItem>
-                                <MenuItem value = {60}>Bello Amanecer 3</MenuItem>
-                                <MenuItem value = {60}>Bello Amanecer 4</MenuItem>
-                                <MenuItem value = {60}>Giorgino Andrae</MenuItem>
-                                <MenuItem value = {60}>Los Brasiles</MenuItem>
-
-                            </Select>
-                        </FormControl>
-                        <div className = "form-group">
-                        <FormControl className={classes.formControl}>
-                      <NativeSelect
-                        className={classes.selectEmpty}
-                        value={state.client_state}
-                        name="client_state"
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'client_state' }}
+                    
+                    <FormControl variant = "outlined" className = {classes.formControl2}>
+                      <InputLabel id = "area">Area</InputLabel>
+                      <Select
+                        labelId = "area"
+                        id = "area"
+                        name = "area"
+                        label = "Area"
+                        margin = "dense"
                       >
-                        <option value="" disabled>
-                          Estado del Cliente
-                        </option>
-                        <option value={'Activo'}>Activo</option>
-                        <option value={'Inactivo'}>Inactivo</option>
-                      </NativeSelect>
-                      <FormHelperText>Estado del Trabajador</FormHelperText>
-                    </FormControl>
-                  </div>
-                        
-                                         
+                        <MenuItem value = {"Huembes"}>Huembes</MenuItem>
+                        <MenuItem value = {"Oriental"}>Oriental</MenuItem>
+                        <MenuItem value = {"Pulperias"}>Pulperias</MenuItem>
+                        <MenuItem value = {"Empresas"}>Empresas</MenuItem>
+                      </Select>
+                    </FormControl>  
                 </Grid>
+                <Grid item lg = {4}>
+                  <MuiPickersUtilsProvider utils = {DateFnsUtils}>
+                    <KeyboardDatePicker
+                      disableToolbar
+                      variant = "inline"
+                      format = "MM/dd/yyyy"
+                      margin = "dense"
+                      id = "fecha_entrega"
+                      label = "Fecha de Entrega"
+                      KeyboardButtonProps = {{'aria-label':'change date',}}
+                    />
+                    <KeyboardDatePicker
+                      disableToolbar
+                      variant = "inline"
+                      format = "MM/dd/yyyy"
+                      margin = "dense"
+                      id = "fecha_inicio"
+                      label = "Fecha de Inicio"
+                      KeyboardButtonProps = {{'aria-label':'change date',}}
+                    />
+                    <KeyboardDatePicker
+                      disableToolbar
+                      variant = "inline"
+                      format = "MM/dd/yyyy"
+                      margin = "dense"
+                      id = "fecha_final"
+                      label = "Fecha de Finalizacion"
+                      KeyboardButtonProps = {{'aria-label':'change date',}}
+                    />
+                  </MuiPickersUtilsProvider>
                 </Grid>
-                
+            </Grid>
+            <Grid item lg ={4}>
+              <TextField
+                label = "Cuota"
+                fullWidth
+                autoFocus
+              />
+            </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

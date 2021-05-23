@@ -175,8 +175,8 @@ export default function Configuration({currentTheme, setCurrentTheme}){
             </Drawer>
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
-                <Container maxWidth = "xl" className = {classes.container}>               
-                  <ConfigurationInfo/>
+                <Container maxWidth = "xl" className = {classes.container}>
+                  <ConfigurationInfo />
                 </Container>
                   <Box pt = {4}>
                     <Copyright/>

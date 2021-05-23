@@ -18,6 +18,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
 import LoansInfo from './LoansInfo';
 import { Container } from '@material-ui/core';
+import LoanTable from './LoanTable';
 
 function Copyright() {
     return (
@@ -173,7 +174,7 @@ export default function Loans(){
             <main className = {classes.content}>
                 <div className = {classes.appBarSpacer}/>
                 <Container maxWidth = "xl" className = {classes.container}>
-                  <LoansInfo />
+                  <LoanTable />
                 </Container>
                 <Box pt = {4}>
                     <Copyright/>

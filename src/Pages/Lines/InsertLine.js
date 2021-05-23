@@ -5,69 +5,97 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { add, update } from "./LinesSlice";
 import { useDispatch } from "react-redux";
-import { nextID } from "./LinesSlice";
-import { FormControl, FormHelperText, Grid, InputLabel, makeStyles, MenuItem, NativeSelect, Select } from "@material-ui/core";
+import { FormControl, FormHelperText, Grid, InputLabel, makeStyles, MenuItem, NativeSelect, Select} from "@material-ui/core";
 import './InsertLine.css';
-import AsyncSelect from 'react-select';
+//import  Select from 'react-select';
 import axios from "axios";
-import { AirlineSeatReclineNormalTwoTone } from "@material-ui/icons";
-import { SelectFetch } from 'react-select-fetch';
-import { AsyncPaginate } from "react-select-async-paginate";
+import AsyncSelect from 'react-select/async';
+import FinderSelect from 'react-finderselect';
+import 'react-finderselect/dist/index.css'
 
 const useStyles = makeStyles((theme)=>({
   formControl: {
       margin: theme.spacing(1),
       minWidth:120,
   },
+  formControl2:{
+    margin: theme.spacing(1),
+    minWidth: 160,
+  },
   selectEmpty:{
       marginTop: theme.spacing(2),
   },
 }));
 
-/*const options = [
-  {value: 'line_credi_client', label:'Obed'},
-]*/
-
-/*async function loadOptions(search, loadedOptions){
-  const response = await fetch(`http://localhost:3001/Client/getClient/?search=${search}&offset=${loadedOptions.lenght}`);
-  const responseJSON = await response.json();
-
-  return{
-    options: responseJSON.client,
-    hasMore: responseJSON.has_more,
-  };
-}*/
-
-
 export default function InsertLine({render}) {
-  const lineAPI = "http://localhost:3001/Line/lineaction";
+  const lineAPI = "http://localhost:3001/Client/getClient";
+  const itemAPI = "http://localhost:3001/Item/items";
+  const clientAPI = "http://localhost:3001/Line/lines";
+
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
-  const [client, setClient] = useState({
-    id:'',
-    first_name:''
-  });
-  const [item, setItem] = useState([]);
   const classes = useStyles();
+  const [data, setData] = useState([]);
+  const [item, setItem] = useState([]);
+  const [dataLine, setDataLine] = useState([]);
 
-  /*const peticionGetClient = async()=>{
-    await axios.get(clientAPI)
-    .then(response=>{
-      setClient(response.data);
+  const peticionGetClient = async()=>{
+    await axios.get(lineAPI)
+    .then((response)=>{
+      console.log(response)
+      setData(response.data);
     }).catch(error=>{
       console.log(error);
     })
   }
 
+  const peticionGetLine = async()=>{
+    await axios.get(clientAPI)
+    .then((response)=>{
+      console.log(response)
+      setDataLine(response.data);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
+
+  const loadOptions = (data) =>{
+    setData(data);
+  };
+
+  /*const peticionGetItem = async()=>{
+    await axios.get(itemAPI)
+    .then((response)=>{
+      console.log(response)
+      setData(response.data);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }*/
+
+  useEffect(()=>{
+    peticionGetLine();
+  }, [])
+
   useEffect(()=>{
     peticionGetClient();
+  }, [])
+
+  /*useEffect(()=>{
+    peticionGetItem();
+    return()=>{
+      setData({});
+    };
   }, [])*/
 
-  const data = useState([]);
+  //const data = useState([]);
 
-  const peticionPost=async()=>{
+  /*const handleInputChange = value => {
+    setValue(value);
+  };*/
+
+  /*const peticionPost=async()=>{
     await axios.post(lineAPI, line)
     .then(response=>{
       setLine(data.concat(response.data));
@@ -75,7 +103,7 @@ export default function InsertLine({render}) {
     }).catch(error=>{
       console.log(error);
     })
-  }
+  }*/
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -98,8 +126,10 @@ export default function InsertLine({render}) {
     id_credi_line_action: '',
     id_credi_client: '',
     id_credi_item:'',
+    id_credi_line:'',
     quantity:'',
-    credi_line_term:''
+    credi_line_term:'',
+    credi_line_payment_freq:''
   });
 
   /*const handleChange=e=>{
@@ -122,7 +152,7 @@ export default function InsertLine({render}) {
         maxWidth = "xs"
       >
         <DialogTitle id="form-dialog-title">
-          {data ? "Editar" : "Agregar"} Linea{" "}
+          {"Agregar"} Linea{" "}
         </DialogTitle>
         <DialogContent>
         <Grid style = {{padding:20}}>
@@ -136,22 +166,57 @@ export default function InsertLine({render}) {
                             fullWidth
                             onChange={handleChange}
                         />
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            name="id_credi_client"
-                            label="Cliente"
-                            fullWidth
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            name="id_credi_item"
-                            label="Producto"
-                            fullWidth
-                            onChange={handleChange}
-                        />
+                        <div>
+                        <FormControl variant = "outlined" className = {classes.formControl}>
+                            <InputLabel id = "id_credi_client">Clientes</InputLabel>
+                        <Select
+                                labelId = "id_credi_client"
+                                id = "id_credi_client"
+                                name = "id_credi_client"
+                                value = {line.id_credi_client}
+                                onChange = {handleChange}
+                                label = "Cliente"
+                            >
+                               {data.map((client)=>{
+                                 return(
+                                   <MenuItem key = {client.id} value = {client.id}>
+                                     {client.first_name}{' '}{client.last_name}
+                                   </MenuItem>
+                                 );
+                               })}
+                              </Select>
+                              </FormControl>
+                              <FormControl variant = "outlined" className = {classes.formControl}>
+                            <InputLabel id = "id_credi_line">Linea</InputLabel>
+                        <Select
+                                labelId = "id_credi_line"
+                                id = "id_credi_line"
+                                name = "id_credi_line"
+                                value = {line.id_credi_line}
+                                onChange = {handleChange}
+                                label = "Cliente"
+                            >
+                               {dataLine.map((line)=>{
+                                 return(
+                                   <MenuItem key = {line.id_credi_line} value = {line.id_credi_line}>
+                                     {line.credi_line_name}
+                                   </MenuItem>
+                                 );
+                               })}
+                              </Select>
+                              </FormControl>
+                            </div>
+                            <div>
+                            
+                            <TextField
+                              autoFocus
+                              margin = "dense"
+                              name = "quantity"
+                              label = "Cantidad"
+                              fullWidth
+                              onChange = {handleChange}
+                            />
+                            </div>
                         <TextField
                             autoFocus
                             margin="dense"
@@ -169,6 +234,7 @@ export default function InsertLine({render}) {
                                 value = {line.credi_line_term}
                                 onChange = {handleChange}
                                 label = "Plazo"
+                                margin = "dense"
                             >
                                 <MenuItem value = "">
                                     <em>Ninguno</em>
@@ -188,6 +254,26 @@ export default function InsertLine({render}) {
 
                             </Select>
                         </FormControl>
+                        <FormControl variant = "outlined" className = {classes.formControl2}>
+                            <InputLabel id = "credi_line_payment_freq">Frequencia de Pago</InputLabel>
+                            <Select
+                                labelId = "credi_line_payment_freq"
+                                id = "credi_line_payment_freq"
+                                name = "credi_line_payment_freq"
+                                value = {line.credi_line_payment_freq}
+                                onChange = {handleChange}
+                                label = "Frequencia de Pago"
+                            >
+                                <MenuItem value = "">
+                                    <em>Ninguno</em>
+                                </MenuItem>
+                                <MenuItem value = {30}>Diario</MenuItem>
+                                <MenuItem value = {60}>Dia de por medio</MenuItem>
+                                <MenuItem value = {90}>Semanal</MenuItem>
+                                <MenuItem value = {120}>Quincenal</MenuItem>
+                                <MenuItem value = {150}>Mensual</MenuItem>
+                            </Select>
+                        </FormControl>
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
                     </div>
                 </Grid>
@@ -197,7 +283,7 @@ export default function InsertLine({render}) {
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          {<Button onClick={peticionPost} color="primary">
+          {<Button onClick={handleClose} color="primary">
             Guardar
         </Button>}
         </DialogActions>
