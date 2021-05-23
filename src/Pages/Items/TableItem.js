@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import MaterialTable from "material-table";
 import axios from 'axios';
-import {TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider} from '@material-ui/core';
+import {TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider, DialogContentText} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import "./TableItem.css";
 import EditIcon from '@material-ui/icons/Edit';
@@ -130,6 +130,7 @@ export default function TableItem(){
 
     const handleClose = () => {
       setState({dialogOpen: false});
+      setState({dialogOpenDelete: false});
     };
 
     const peticionGet=async()=>{
@@ -192,11 +193,14 @@ export default function TableItem(){
                     {
                       icon: DeleteIcon,
                       tooltip: 'Eliminar Producto',
-                      onClick: (event, rowData) => seleccionarItem(rowData, "Eliminar")
+                      onClick: rowData => {
+                        setState({dialogOpenDelete: true});
+                      }
                     }
                 ]}
                 options={{
                     actionsColumnIndex: -1,
+                    selection: true
                 }}
                 localization={{
                     header:{
@@ -293,7 +297,25 @@ export default function TableItem(){
                   Guardar
               </Button>}
               </DialogActions>
-            </Dialog> } 
+            </Dialog> }
+            <Dialog
+            open = {state.dialogOpenDelete}
+            onClose = {handleClose}>
+              <DialogTitle id = "alert-dialog-title">{"¿Desea eliminar este producto?"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  La accion que esta a punto de realizar es irreversible, en realidad desea eliminar el registro?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Aceptar
+                </Button>
+                {<Button onClick={handleClose} color="primary">
+                  Cancelar
+              </Button>}
+              </DialogActions>
+            </Dialog>
         </div>
     );
 }

@@ -131,7 +131,7 @@ const classes = useStyles();
                   fullWidth
                 />
           </Grid>
-            <Grid container md = 'auto' direction = 'columns' spacing = {2} style = {{padding:10}} alignItems = 'stretch'>
+            <Grid container lg = 'auto' direction = 'columns' spacing = {2} style = {{padding:10}} alignItems = 'stretch'>
               <Grid item lg = {4}>
                 <div className = "form-group">
                   <TextField

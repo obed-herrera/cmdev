@@ -1,6 +1,13 @@
 .Table {
     text-align: center;
   }
+
+  .custom-modal-style-line {
+    width: 1500px;
+    height: 500px;
+    left: -50%;
+    top: 50%;
+}
   
   .Table-logo {
     height: 40vmin;

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import MaterialTable from "material-table";
 import axios from 'axios';
-import {TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider} from '@material-ui/core';
+import {TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider, MenuItem, Select, InputLabel} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import "./LineTable.css";
 import EditIcon from '@material-ui/icons/Edit';
@@ -27,6 +27,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InsertLine from './InsertLine';
+import DoubleArrow from '@material-ui/icons/DoubleArrow';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 const columns = [
     {
@@ -93,7 +96,18 @@ const useStyles = makeStyles((theme) => ({
     }, 
     inputMaterial:{
       width: '100%'
-    }
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth:120,
+    },
+    formControl2:{
+      margin: theme.spacing(1),
+      minWidth: 160,
+    },
+    selectEmpty:{
+        marginTop: theme.spacing(2),
+    },
   }));
 
 
@@ -101,7 +115,10 @@ export default function LineTable(){
     const [data, setData] = useState([]);
     const [modalEditar, setModalEditar]= useState(false);
     const [modalEliminar, setModalEliminar]= useState(false);
+    const [dialogOpenAdd, setDialogOpenAdd] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
     const [snackOpen, setSnackOpen] = React.useState(false);
+    const [dataLine, setDataLine] = useState([]);
     const [clientSeleccionado, setClientSeleccionado]=useState({ 
         id:"",  
         first_name:"",
@@ -115,7 +132,17 @@ export default function LineTable(){
         created_at:new Date(),
         modified_at: new Date(),
         disabled_at: new Date()
-    })
+    });
+
+    const [line, setLine]=useState({
+      id_credi_line_action: '',
+      id_credi_client: '',
+      id_credi_item:'',
+      id_credi_line:'',
+      quantity:'',
+      credi_line_term:'',
+      credi_line_payment_freq:''
+    });
 
     const [state, setState] = useState([]);
 
@@ -127,12 +154,20 @@ export default function LineTable(){
       console.log(clientSeleccionado);
     }
 
+    const handleChangeLine=e=>{
+      setLine((line)=>({
+        ...line,
+        [e.target.name]: e.target.value
+      }))
+      console.log(line);
+    }
      
     
       const classes = useStyles();
 
       const handleClose = () => {
-        setState({dialogOpen: false});
+        setDialogOpen(false);
+        setDialogOpenAdd(false);
       };
 
     const peticionGet=async()=>{
@@ -221,15 +256,22 @@ export default function LineTable(){
                     {
                         icon: EditIcon,
                         tooltip: 'Editar Linea',
-                        onClick: rowData => {
-                          setState({dialogOpen:true});
+                        onClick: (event, rowData)=>{
+                          setDialogOpen(true)
                         }
                     },
                     {
                       icon: DeleteIcon,
                       tooltip: 'Eliminar Linea',
                       onClick: (event, rowData) => seleccionarCliente(rowData, "Eliminar")
-                    }
+                    },
+                    {
+                      icon: DoubleArrow,
+                      tooltip: 'Agregar pago',
+                      onClick: (event, rowData) => {
+                          setDialogOpenAdd(true)
+                      },
+                  }
                 ]}
                 options={{
                   actionsColumnIndex: -1,
@@ -246,124 +288,149 @@ export default function LineTable(){
                   }
               }}
             />
-           <Dialog
-              open= {state.openDialog}
+            <Dialog contentClassName = "custom-modal-style-line"
+              open={dialogOpen}
               onClose={handleClose}
               aria-labelledby="form-dialog-title"
+              maxWidth = "xl"
             >
               <DialogTitle id="form-dialog-title">
-                {data ? "Editar" : "Agregar"} Cliente{" "}
+                {"Agregar"} Linea{" "}
               </DialogTitle>
-              <Divider/>
               <DialogContent>
-              <Grid container lg = 'auto' spacing = {2} style = {{padding:20}}>
-                      <Grid item lg ={4}>
+              <Grid style = {{padding:20}}>
+                      <Grid item xs ={9}>
                           <div className = "form-group">
+                          <TextField
+                                  autoFocus
+                                  margin="dense"
+                                  name="credi_line_action"
+                                  label="Codigo de accion de linea"
+                                  fullWidth
+                                  onChange={handleChangeLine}
+                              />
+                              <div>
+                              <FormControl variant = "outlined" className = {classes.formControl}>
+                                  <InputLabel id = "id_credi_client">Clientes</InputLabel>
+                              <Select
+                                      labelId = "id_credi_client"
+                                      id = "id_credi_client"
+                                      name = "id_credi_client"
+                                      value = {line.id_credi_client}
+                                      onChange = {handleChangeLine}
+                                      label = "Cliente"
+                                  >
+                                    {data.map((client)=>{
+                                      return(
+                                        <MenuItem key = {client.id} value = {client.id}>
+                                          {client.first_name}{' '}{client.last_name}
+                                        </MenuItem>
+                                      );
+                                    })}
+                                    </Select>
+                                    </FormControl>
+                                    <FormControl variant = "outlined" className = {classes.formControl}>
+                                  <InputLabel id = "id_credi_line">Linea</InputLabel>
+                              <Select
+                                      labelId = "id_credi_line"
+                                      id = "id_credi_line"
+                                      name = "id_credi_line"
+                                      value = {line.id_credi_line}
+                                      onChange = {handleChangeLine}
+                                      label = "Cliente"
+                                  >
+                                    {dataLine.map((line)=>{
+                                      return(
+                                        <MenuItem key = {line.id_credi_line} value = {line.id_credi_line}>
+                                          {line.credi_line_name}
+                                        </MenuItem>
+                                      );
+                                    })}
+                                    </Select>
+                                    </FormControl>
+                                  </div>
+                                  <div>
+                                  
+                                  <TextField
+                                    autoFocus
+                                    margin = "dense"
+                                    name = "quantity"
+                                    label = "Cantidad"
+                                    fullWidth
+                                    onChange = {handleChangeLine}
+                                  />
+                                  </div>
                               <TextField
                                   autoFocus
                                   margin="dense"
-                                  name="first_name"
-                                  label="Primer Nombre"
+                                  name="quantity"
+                                  label="Cantidad"
                                   fullWidth
-                                  onChange={handleChange}
-                                  value = {clientSeleccionado && clientSeleccionado.first_name}
+                                  onChange={handleChangeLine}
                               />
-                              <TextField
-                                  autoFocus
-                                  margin="dense"
-                                  name="mid_name"
-                                  label="Segundo Nombre"
-                                  fullWidth
-                                  onChange={handleChange}
-                                  value = {clientSeleccionado && clientSeleccionado.mid_name}
-                              />
-                              <TextField
-                                  autoFocus
-                                  margin="dense"
-                                  name="last_name"
-                                  label="Primer Apellido"
-                                  fullWidth
-                                  onChange={handleChange}
-                                  value = {clientSeleccionado && clientSeleccionado.last_name}
-                              />
-                              <TextField
-                                  autoFocus
-                                  margin="dense"
-                                  name="secondary_last_name"
-                                  label="Segundo Apellido"
-                                  fullWidth
-                                  onChange={handleChange}
-                                  value = {clientSeleccionado && clientSeleccionado.secondary_last_name}
-                              />
+                              <FormControl variant = "outlined" className = {classes.formControl}>
+                                  <InputLabel id = "credi_line_term">Plazo</InputLabel>
+                                  <Select
+                                      labelId = "credi_line_term"
+                                      id = "credi_line_term"
+                                      name = "credi_line_term"
+                                      value = {line.credi_line_term}
+                                      onChange = {handleChangeLine}
+                                      label = "Plazo"
+                                      margin = "dense"
+                                  >
+                                      <MenuItem value = "">
+                                          <em>Ninguno</em>
+                                      </MenuItem>
+                                      <MenuItem value = {30}>1 Mes</MenuItem>
+                                      <MenuItem value = {60}>2 Meses</MenuItem>
+                                      <MenuItem value = {90}>3 Meses</MenuItem>
+                                      <MenuItem value = {120}>4 Meses</MenuItem>
+                                      <MenuItem value = {150}>5 Meses</MenuItem>
+                                      <MenuItem value = {180}>6 Meses</MenuItem>
+                                      <MenuItem value = {210}>7 Meses</MenuItem>
+                                      <MenuItem value = {240}>8 Meses</MenuItem>
+                                      <MenuItem value = {270}>9 Meses</MenuItem>
+                                      <MenuItem value = {300}>10 Meses</MenuItem>
+                                      <MenuItem value = {330}>11 Meses</MenuItem>
+                                      <MenuItem value = {360}>12 Meses</MenuItem>
+
+                                  </Select>
+                              </FormControl>
+                              <FormControl variant = "outlined" className = {classes.formControl2}>
+                                  <InputLabel id = "credi_line_payment_freq">Frequencia de Pago</InputLabel>
+                                  <Select
+                                      labelId = "credi_line_payment_freq"
+                                      id = "credi_line_payment_freq"
+                                      name = "credi_line_payment_freq"
+                                      value = {line.credi_line_payment_freq}
+                                      onChange = {handleChangeLine}
+                                      label = "Frequencia de Pago"
+                                  >
+                                      <MenuItem value = "">
+                                          <em>Ninguno</em>
+                                      </MenuItem>
+                                      <MenuItem value = {30}>Diario</MenuItem>
+                                      <MenuItem value = {60}>Dia de por medio</MenuItem>
+                                      <MenuItem value = {90}>Semanal</MenuItem>
+                                      <MenuItem value = {120}>Quincenal</MenuItem>
+                                      <MenuItem value = {150}>Mensual</MenuItem>
+                                  </Select>
+                              </FormControl>
                               {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
                           </div>
                       </Grid>
-                      <Grid item lg ={4}> 
-                      <TextField
-                                  autoFocus
-                                  margin="dense"
-                                  name="national_id"
-                                  label="Cedula del Cliente"
-                                  fullWidth
-                                  onChange={handleChange}
-                                  value = {clientSeleccionado && clientSeleccionado.national_id}
-                              />
-                              <TextField
-                                  autoFocus
-                                  margin="dense"
-                                  name="sys_code"
-                                  label="Codigo del Cliente"
-                                  fullWidth
-                                  onChange={handleChange}
-                                  value = {clientSeleccionado && clientSeleccionado.sys_code}
-                              />
-                              <TextField
-                                  autoFocus
-                                  margin="dense"
-                                  name="phone"
-                                  label="Telefono del Trabajo"
-                                  fullWidth
-                                  onChange={handleChange}
-                                  value = {clientSeleccionado && clientSeleccionado.phone}
-                              /> 
-                          <FormControl className={classes.formControl}>
-                            <NativeSelect
-                              className={classes.selectEmpty}     
-                              name="status_id"
-                              onChange={handleChange}
-                              value = {clientSeleccionado && clientSeleccionado.status_id}
-                              inputProps={{ 'aria-label': 'status_id' }}
-                            >
-                              <option value="" disabled>
-                                Estado del Cliente
-                              </option>
-                              <option value={'0'}>Activo</option>
-                              <option value={'1'}>Inactivo</option>
-                            </NativeSelect>
-                            <FormHelperText>Estado del Trabajador</FormHelperText>
-                          </FormControl>                                
-                      </Grid>
-                  </Grid>
+                    </Grid>
               </DialogContent>
-              <Divider/>
               <DialogActions>
                 <Button onClick={handleClose} color="primary">
                   Cancelar
                 </Button>
-                {<Button onClick={peticionPut} color="primary">
+                {<Button onClick={handleClose} color="primary">
                   Guardar
               </Button>}
               </DialogActions>
-            </Dialog> 
-            <Dialog>
-                <div>
-                  <p>Estas seguro que deseas eliminar al Cliente <b>{clientSeleccionado && clientSeleccionado.client}</b>?</p>
-                  <div align = "right">
-                    <Button color = "secondary" onClick = {()=>peticionDelete()}>SI</Button>
-                    <Button onClick = {handleClose}>NO</Button>
-                  </div>
-                </div>
-            </Dialog> 
+            </Dialog>
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import MaterialTable from "material-table";
 import axios from 'axios';
-import {TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider} from '@material-ui/core';
+import {TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider, DialogContentText} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import "./ClientTable.css";
 import EditIcon from '@material-ui/icons/Edit';
@@ -27,6 +27,9 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import DoubleArrow from '@material-ui/icons/DoubleArrow';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 const columns = [
     {
@@ -105,6 +108,8 @@ export default function ClientTable(){
     const [data, setData] = useState([]);
     const [modalEditar, setModalEditar]= useState(false);
     const [modalEliminar, setModalEliminar]= useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [dialogOpenDelete, setDialogOpenDelete] = useState(false);
     const [snackOpen, setSnackOpen] = React.useState(false);
     const [clientSeleccionado, setClientSeleccionado]=useState({ 
         id:"",  
@@ -137,7 +142,8 @@ export default function ClientTable(){
       const classes = useStyles();
 
       const handleClose = () => {
-        setState({dialogOpen: false});
+        setDialogOpen(false);
+        setDialogOpenDelete(false);
       };
 
     const peticionGet=async()=>{
@@ -226,14 +232,16 @@ export default function ClientTable(){
                     {
                         icon: EditIcon,
                         tooltip: 'Editar Cliente',
-                        onClick: rowData => {
-                          setState({dialogOpen:true});
+                        onClick: (event, rowData)=>{
+                          setDialogOpen(true)
                         }
                     },
                     {
                       icon: DeleteIcon,
                       tooltip: 'Eliminar Cliente',
-                      onClick: (event, rowData) => seleccionarCliente(rowData, "Eliminar")
+                      onClick: (event, rowData)=>{
+                        setDialogOpenDelete(true)
+                      }
                     }
                 ]}
                 options={{
@@ -251,8 +259,8 @@ export default function ClientTable(){
                     }
                 }}
             />
-           <Dialog
-              open= {state.openDialog}
+            <Dialog
+              open= {dialogOpen}
               onClose={handleClose}
               aria-labelledby="form-dialog-title"
             >
@@ -360,15 +368,24 @@ export default function ClientTable(){
               </Button>}
               </DialogActions>
             </Dialog> 
-            <Dialog>
-                <div>
-                  <p>Estas seguro que deseas eliminar al Cliente <b>{clientSeleccionado && clientSeleccionado.client}</b>?</p>
-                  <div align = "right">
-                    <Button color = "secondary" onClick = {()=>peticionDelete()}>SI</Button>
-                    <Button onClick = {handleClose}>NO</Button>
-                  </div>
-                </div>
-            </Dialog> 
+            <Dialog
+            open = {dialogOpenDelete}
+            onClose = {handleClose}>
+              <DialogTitle id = "alert-dialog-title">{"¿Desea eliminar este producto?"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  La accion que esta a punto de realizar es irreversible, en realidad desea eliminar el registro?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Aceptar
+                </Button>
+                {<Button onClick={handleClose} color="primary">
+                  Cancelar
+              </Button>}
+              </DialogActions>
+            </Dialog>
         </div>
     );
 }

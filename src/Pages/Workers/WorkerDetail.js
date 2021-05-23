@@ -207,7 +207,7 @@ export default function WorkerDetail({ id }) {
             <AppBar palette = "primary" position = "absolute" className = {clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className = {classes.toolbar}>
                     <IconButton 
-                        edge = "state"
+                        edge = "end"
                         color = "inherit"
                         aria-label = "open drawer"
                         onClick = {handleDrawerOpen}

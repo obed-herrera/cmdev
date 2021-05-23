@@ -49,7 +49,7 @@ export default function InsertExpenses({render}){
                 maxWidth = "xs"
             >
                 <DialogTitle id = "form-dialog-title">
-                    {data ? "Editar" : "Agregar"} Gasto {""}
+                    {"Agregar"} Gasto {""}
                 </DialogTitle>
                 <DialogContent>
                     <Grid style = {{padding:20}}>

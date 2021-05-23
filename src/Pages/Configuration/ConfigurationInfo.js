@@ -237,6 +237,48 @@ function SummaryCardLines({title, value, component}){
     );
 }
 
+function SummaryCardViewArea({title, value, component}){
+    const [snackOpen, setSnackOpen] = React.useState(false);
+    const classes = useStyles();
+    const snackClose = (event, reason) => {
+        if (reason === "clickaway") {
+          return;
+        }
+    
+        setSnackOpen(false);
+      };
+    return(
+        <Content>
+            <Snackbar open = {snackOpen} autoHideDuration = {2000} onClose = {snackClose}>
+                <Alert onClose = {snackClose} severity = "success">
+                    {snackOpen}
+                </Alert>
+            </Snackbar>
+            <Paper elevation = {6} className = {classes.summaryCard}>
+                <Typography color = {"textSecondary"}>
+                    {title}
+                </Typography>
+                {component || (
+                    <Typography>
+                        {value}
+                    </Typography>
+                )}
+                <ViewRole
+                    edge = "end"
+                    onSave = {()=>{
+                        setSnackOpen("Areas")
+                    }}
+                    render={(open)=>(
+                        <Button variant = "outlined" edge = "end" onClick = {open}>
+                        Ver Areas
+                        </Button>
+                    )}
+                />   
+            </Paper> 
+        </Content>     
+    );
+}
+
 function SummaryCardLoans({title, value, component}){
     const [snackOpen, setSnackOpen] = React.useState(false);
     const classes = useStyles();
@@ -284,9 +326,10 @@ export default function ConfigurationInfo(){
                     <div className = {classes.summaryCards}>
                         <SummaryCard title = {"Crear nuevo rol"} value = {"Este botón le permite añadir un nuevo rol a la empresa"}/>
                         <SummaryCardViewRole title = {"Ver roles agregados"} value = {"Este boton le permite ver los roles que han sido agregados"}/>
-                        <SummaryCardLines title = {"Gestionar Lineas"} value = {"Este boton le permite añadir una nueva linea para su uso"}/>
+                        <SummaryCardLines title = {"Gestionar Lineas"} value = {"Este boton le permite añadir una nueva linea        "}/>
                         <SummaryCardViewLine title = {"Ver lineas agregadas"} value = {"Este boton le permite ver las lineas que han sido agregadas"}/>
                         <SummaryCardLoans title = {"Gestionar areas de prestamos"} value = {"Este boton le permite añadir una nueva area de prestamos"}/>
+                        <SummaryCardViewArea title = {"Ver areas agregadas"} value = {"Este boton le permite ver las areas que han sido agregadas"}/>
                         <SummaryCardCheck title = {"Gestionar roles"} value = {""}/>    
                     </div>   
                 </Content>

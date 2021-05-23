@@ -19,41 +19,37 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControl, FormHelperText, Grid, makeStyles, NativeSelect, TextField } from '@material-ui/core';
 import InsertWorker from './InsertWorker';
 
 const columns = [
     {
-        title: 'Codigo del Prestamo',
-        field: 'loan_code'
+        title: 'Codigo del Trabajador',
+        field: 'worker_code'
     },
     {
-        title: 'Cliente',
+        title: 'Primer Nombre',
         field: 'client'
     },
     {
-        title: 'Monto Prestado',
+        title: 'Segundo Nombre',
         field: 'mount'
     },
     {
-        title: 'Interes',
+        title: 'Cedula',
         field: 'interest'
     },
     {
-        title: 'Deuda Total',
+        title: 'Direccion',
         field: 'total'
     },
     {
-        title: 'Plazo',
+        title: 'Telefono',
         field: 'term'
     },
     {
-        title: 'Frecuencia',
+        title: 'Rol',
         field: 'freq'
-    },
-    {
-        title: 'Area del Prestamo',
-        field: 'area'
     }
 ];
 
@@ -116,6 +112,30 @@ const useStyles = makeStyles((theme)=>({
 export default function WorkersTable(){
     const [snackOpen, setSnackOpen] = React.useState(false);
     const [state, setState] = useState([]);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [worker, setWorker]=useState({
+        credi_worker_code: '',
+        worker_username:'',
+        worker_password:'',
+        worker_first_name:'',
+        worker_second_name:'',
+        worker_middle_name:'',
+        worker_last_name:'',
+      });
+    const handleChange=e=>{
+        const {name, value}=e.target;
+        setWorker((prevState)=>({
+          ...prevState,
+          [name]: value
+        }))
+        console.log(worker);
+    };
+
+    const handleClose = () => {
+        setDialogOpen(false);
+    };
+
+    const classes = useStyles();
     return(
         <div className = "Table">
             <br/>
@@ -139,10 +159,14 @@ export default function WorkersTable(){
                 actions = {[
                     {
                         icon: EditIcon,
-                        tooltip: 'Editar trabajador',
-                        onClick: rowData =>{
-                            setState({dialogOpen:true});
+                        tooltip: 'Editar Empleado',
+                        onClick: (event, rowData)=>{
+                          setDialogOpen(true)
                         }
+                    },
+                    {
+                      icon: DeleteIcon,
+                      tooltip: 'Eliminar Linea'
                     }
                 ]}
                 options={{
@@ -163,6 +187,226 @@ export default function WorkersTable(){
 
                 }}
             />
+            <Dialog
+                open={dialogOpen}
+                onClose={handleClose}
+                aria-labelledby="form-dialog-title"
+                fullWidth
+                maxWidth = "md"
+            >
+                <DialogTitle id="form-dialog-title">
+                {data ? "Editar" : "Agregar"} Trabajador{" "}
+                </DialogTitle>
+                <Divider/>
+                <DialogContent>
+                <Grid container width = '100%' spacing = {4} zeroMinWidth>
+                        <Grid item lg ={3} spacing = {2}>
+                            <div className = "form-group">
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="worker_username"
+                                    label="Usuario"
+                                    fullWidth
+                                    value={worker.worker_username}
+                                    onChange={(e) => {
+                                    setWorker(e.target.value);
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="worker_password"
+                                    label="Contraseña"
+                                    fullWidth
+                                    value={worker.password}
+                                    onChange={(e) => {
+                                    setWorker(e.target.value);
+                                    }}
+                                />
+                                {/*<input placeholder= " " type = "text" className = "form-control" name = "worker_first_name" onChange = {handleChange}/>*/}
+                            </div>
+                        
+                        </Grid>
+                        <Grid item lg ={3}>
+                            <div className = "form-group">
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="worker_first_name"
+                                    label="Primer Nombre"
+                                    fullWidth
+                                    value={worker.worker_first_name}
+                                    onChange={(e) => {
+                                    setWorker(e.target.value);
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="worker_second_name"
+                                    label="Segundo Nombre"
+                                    fullWidth
+                                    value={worker.worker_second_name}
+                                    onChange={(e) => {
+                                    setWorker(e.target.value);
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="worker_middle_name"
+                                    label="Primer Apellido"
+                                    fullWidth
+                                    value={worker.worker_middle_name}
+                                    onChange={(e) => {
+                                    setWorker(e.target.value);
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="worker_last_name"
+                                    label="Segundo Apellido"
+                                    fullWidth
+                                    value={worker.worker_last_name}
+                                    onChange={(e) => {
+                                    setWorker(e.target.value);
+                                    }}
+                                />
+                                {/*<input placeholder= " " type = "text" className = "form-control" name = "worker_first_name" onChange = {handleChange}/>*/}
+                            </div>
+                        </Grid>
+                        
+                        <Grid item lg ={3}> 
+                        <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="client_national_id"
+                                    label="Cedula del trabajador"
+                                    fullWidth
+                                    value={worker.worker_national_id}
+                                    onChange={(e) => {
+                                    setWorker(e.target.value);
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="worker_sys_code"
+                                    label="Codigo del trabajdor"
+                                    fullWidth
+                                    value={worker.worker_sys_code}
+                                    onChange={(e) => {
+                                    setWorker(e.target.value);
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="worker_home_address"
+                                    label="Direccion de Casa"
+                                    fullWidth
+                                    value={worker.worker_home_address}
+                                    onChange={(e) => {
+                                    setWorker(e.target.value);
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="worker_business_address"
+                                    label="Direccion del Trabajo"
+                                    fullWidth
+                                    value={worker.worker_business_address}
+                                    onChange={(e) => {
+                                    setWorker(e.target.value);
+                                    }}
+                                /> 
+                                                            
+                        </Grid>
+                        <Grid item lg = {3}>
+                        <div className = "form-group">
+                        <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="worker_phone"
+                                    label="Telefono del Trabajo"
+                                    fullWidth
+                                    value={worker.worker_phone}
+                                    onChange={(e) => {
+                                    setWorker(e.target.value);
+                                    }}
+                                /> 
+                            <FormControl className={classes.formControl}>
+                            <NativeSelect
+                                className={classes.selectEmpty}
+                                value={worker.worker_state}
+                                name="worker_state"
+                                onChange={handleChange}
+                                inputProps={{ 'aria-label': 'worker_state' }}
+                            >
+                                <option value="" disabled>
+                                Estado del trabajador
+                                </option>
+                                <option value={'Activo'}>Activo</option>
+                                <option value={'Inactivo'}>Inactivo</option>
+                            </NativeSelect>
+                            <FormHelperText>Estado del Trabajador</FormHelperText>
+                            </FormControl>
+                            <FormControl className={classes.formControl}>
+                            <NativeSelect
+                                className={classes.selectEmpty}
+                                value={worker.worker_role}
+                                name="worker_role"
+                                onChange={handleChange}
+                                inputProps={{ 'aria-label': 'worker_role' }}
+                            >
+                                <option value="" disabled>
+                                Rol del trabajador
+                                </option>
+                                <option value={'Activo'}>Administrador</option>
+                                <option value={'Inactivo'}>Supervisor</option>
+                                <option value={'Inactivo'}>Cobrador</option>
+                            </NativeSelect>
+                            <FormHelperText>Rol del Trabajador</FormHelperText>
+                            </FormControl>
+                            {/* <div className = "form-group">
+                                <FormControl className={classes.formControl}>
+                                    <NativeSelect
+                                    className={classes.selectEmpty}
+                                    value={state.worker_Line}
+                                    name="worker_line"
+                                    onChange={handleChange}
+                                    inputProps={{ 'aria-label': 'worker_line' }}
+                                    >
+                                    <option value="" disabled>
+                                        Linea del workere
+                                    </option>
+                                    {lines.map((value)=>(
+                                        <option value = {value.worker_line} key = {value.id_credi_worker_line}>
+                                        {value.worker_line}
+                                        </option>
+                                    ))}
+                                    
+                                    </NativeSelect>
+                                    <FormHelperText>Linea del workere</FormHelperText>
+                                </FormControl>
+                                    </div>*/}
+                        </div>
+                        </Grid>  
+                        </Grid>            
+                </DialogContent>
+                <Divider/>
+                <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                    Cancelar
+                </Button>
+                {<Button onClick={handleClose} color="primary">
+                    Guardar
+                </Button>}
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }
