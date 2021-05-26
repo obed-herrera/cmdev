@@ -9,7 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { add, update } from "./LoansSlice";
 import { useDispatch } from "react-redux";
 import { nextID } from "./LoansSlice";
-import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, NativeSelect, Select } from "@material-ui/core";
+import { Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, NativeSelect, Select } from "@material-ui/core";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -275,9 +275,14 @@ const classes = useStyles();
                 label = "Cuota"
                 fullWidth
                 autoFocus
-              />
+              /> 
             </Grid>
         </DialogContent>
+        <Divider/>
+              <input  align = "center" type = "file" name = "client_file" class = "client_file" multiple onChange = {()=>handleChange}/>
+              <br/><br/>
+              <Button color = "secondary">Insertar Archivos</Button>
+              <Divider/>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancelar

@@ -6,7 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useDispatch } from "react-redux";
-import { FormControl, FormHelperText, Grid, InputLabel, makeStyles, MenuItem, NativeSelect, Select} from "@material-ui/core";
+import { Divider, FormControl, FormHelperText, Grid, InputLabel, makeStyles, MenuItem, NativeSelect, Select} from "@material-ui/core";
 import './InsertLine.css';
 //import  Select from 'react-select';
 import axios from "axios";
@@ -152,10 +152,10 @@ export default function InsertLine({render}) {
         maxWidth = "xs"
       >
         <DialogTitle id="form-dialog-title">
-          {"Agregar"} Linea{" "}
+          {"Agregar"} Accion de Linea{" "}
         </DialogTitle>
         <DialogContent>
-        <Grid style = {{padding:20}}>
+        <Grid style = {{padding:20}} spacing = {2}>
                 <Grid item xs ={9}>
                     <div className = "form-group">
                     <TextField
@@ -279,6 +279,11 @@ export default function InsertLine({render}) {
                 </Grid>
               </Grid>
         </DialogContent>
+        <Divider/>
+        <input  align = "center" type = "file" name = "client_file" class = "client_file" multiple onChange = {()=>handleChange}/>
+        <br/><br/>
+        <Button color = "secondary">Insertar Archivos</Button>
+        <Divider/>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancelar

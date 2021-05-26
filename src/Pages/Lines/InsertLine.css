@@ -4,3 +4,23 @@
     left: -50%;
     top: 50%;
 }
+
+.client_file{
+    font-size: 12px;
+    background:white;
+    border-radius: 30px;
+    box-shadow: 2px 2px 4px black;
+    width: 290px;
+    outline: none;
+    margin-left: 70px;
+  }
+
+  ::-webkit-file-upload-button{
+    color: white;
+    background: #3ba657;
+    padding: 10px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 1px 0 1px 1px #6b4559;
+    outline: none;
+  }

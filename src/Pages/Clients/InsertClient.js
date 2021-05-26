@@ -9,6 +9,8 @@ import { Divider, FormControl, FormHelperText, Grid, NativeSelect } from "@mater
 import {useStyles} from "./Clients";
 import axios from "axios";
 import {withStyles} from "@material-ui/core/styles";
+import BackupIcon from '@material-ui/icons/Backup';
+import "./ClientTable.css";
 
 const styles = theme =>({
   dialogCustomizeWidth:{
@@ -197,6 +199,10 @@ const data = useState([]);
                 </Grid>
             </Grid>
         </DialogContent>
+        <Divider/>
+        <input  align = "center" type = "file" name = "client_file" class = "client_file" multiple onChange = {()=>handleChange}/>
+        <br/><br/>
+        <Button color = "secondary">Insertar Archivos</Button>
         <Divider/>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
