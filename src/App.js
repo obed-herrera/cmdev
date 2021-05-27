@@ -50,7 +50,7 @@ function App() {
               <Router>
                 <div>
                   <Switch>
-                    <Route path = "https://credimarketnic.com/dashboard">
+                    <Route path = "/dashboard">
                       <Dashboard/>
                     </Route>
                     <Route path = "/clients">
