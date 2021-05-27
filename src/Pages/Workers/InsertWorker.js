@@ -215,22 +215,6 @@ export default function InsertWorker({ data, render, onSave }) {
                     <FormControl className={classes.formControl}>
                       <NativeSelect
                         className={classes.selectEmpty}
-                        value={worker.worker_state}
-                        name="worker_state"
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'worker_state' }}
-                      >
-                        <option value="" disabled>
-                          Estado del trabajador
-                        </option>
-                        <option value={'Activo'}>Activo</option>
-                        <option value={'Inactivo'}>Inactivo</option>
-                      </NativeSelect>
-                      <FormHelperText>Estado del Trabajador</FormHelperText>
-                    </FormControl>
-                    <FormControl className={classes.formControl}>
-                      <NativeSelect
-                        className={classes.selectEmpty}
                         value={worker.worker_role}
                         name="worker_role"
                         onChange={handleChange}

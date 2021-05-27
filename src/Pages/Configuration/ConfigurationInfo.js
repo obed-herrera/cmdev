@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme)=>({
         flexWrap: "wrap",
       },
     summaryCard: {
-        margin: theme.spacing(3),
+        margin: theme.spacing(4),
         flexGrow: 1,
-        padding: theme.spacing(6),
+        padding: theme.spacing(4),
       },
       container: {
         paddingTop: theme.spacing(1),
@@ -291,7 +291,7 @@ function SummaryCardLoans({title, value, component}){
       };
     return(
         <Content>
-            <Paper elevation = {6} className = {classes.summaryCard}>
+            <Paper elevation = {2} className = {classes.summaryCard}>
                 <Typography color = {"textSecondary"}>
                     {title}
                 </Typography>
@@ -326,7 +326,7 @@ export default function ConfigurationInfo(){
                     <div className = {classes.summaryCards}>
                         <SummaryCard title = {"Crear nuevo rol"} value = {"Este botón le permite añadir un nuevo rol a la empresa"}/>
                         <SummaryCardViewRole title = {"Ver roles agregados"} value = {"Este boton le permite ver los roles que han sido agregados"}/>
-                        <SummaryCardLines title = {"Gestionar Lineas"} value = {"Este boton le permite añadir una nueva linea        "}/>
+                        <SummaryCardLines title = {"Gestionar Lineas"} value = {"Este boton le permite añadir una nueva linea a la empresa        "}/>
                         <SummaryCardViewLine title = {"Ver lineas agregadas"} value = {"Este boton le permite ver las lineas que han sido agregadas"}/>
                         <SummaryCardLoans title = {"Gestionar areas de prestamos"} value = {"Este boton le permite añadir una nueva area de prestamos"}/>
                         <SummaryCardViewArea title = {"Ver areas agregadas"} value = {"Este boton le permite ver las areas que han sido agregadas"}/>
