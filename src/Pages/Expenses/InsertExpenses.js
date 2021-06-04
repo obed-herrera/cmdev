@@ -9,12 +9,14 @@ export default function InsertExpenses({render}){
     const [open, setOpen] = useState(false);
     //const [expenses_date, setExpensesDate] = React.useState(new Date());
     const [expenses, setExpenses] = useState({
-        credi_expenses_id:'',
-        expenses_ben:'',
-        expenses_concept:'',
-        expenses_date: new Date().toISOString,
-        expenses_mount:'',
-        expenses_status:''
+        id:'',
+        beneficiary:'',
+        concept:'',
+        amount:'',
+        expensed_at: new Date(),
+        created_at: new Date(),
+        modified_at: new Date(),
+        disabled_at: new Date()
     });
     
     const data = useState([]);
@@ -57,39 +59,39 @@ export default function InsertExpenses({render}){
                             <TextField
                             autoFocus
                             margin = "dense"
-                            name = "expenses_ben"
+                            name = "beneficiary"
                             label = "Beneficiario"
-                            value = {expenses.expenses_ben}
+                            value = {expenses.beneficiary}
                             fullWidth
                             onChange = {handleChange}
                             />
                             <TextField
                             autoFocus
                             margin = "dense"
-                            name = "expenses_concept"
+                            name = "concept"
                             label = "Concepto"
-                            value = {expenses.expenses_concept}
+                            value = {expenses.concept}
                             fullWidth
                             onChange = {handleChange}
                             />
                             <KeyboardDatePicker
                             margin="normal"
-                            name="expenses_date"
-                            id = "expenses_date"
+                            name="expensed_at"
+                            id = "expensed_at"
                             label="Fecha del gasto"
                             format="MM/dd/yyyy"
-                            value = {expenses.expenses_date}
+                            value = {expenses.expensed_at}
                             onChange = {handleChange}
                             KeyboardButtonProps={{
-                              'aria-label': 'expenses_date',
+                              'aria-label': 'expensed_at',
                             }}
                             />
                             <TextField
                             autoFocus
                             margin = "dense"
-                            name = "expenses_mount"
+                            name = "amount"
                             label = "Monto"
-                            value = {expenses.expenses_mount}
+                            value = {expenses.amount}
                             fullWidth
                             onChange = {handleChange}
                             />

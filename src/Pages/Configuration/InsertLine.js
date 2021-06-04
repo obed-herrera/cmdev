@@ -28,10 +28,13 @@ export default function InsertLine({data, render}){
     };
 
     const [line, setLine] = useState({
-        id_credi_line:'',
-        credi_line_name:'',
-        credi_line_state:'',
-        credi_line_code:''
+        id:'',
+        name:'',
+        status_id:'',
+        code_line:'',
+        created_at:'',
+        modified_at:'',
+        disabled_at:''
     });
 
     const handleChange = e =>{
@@ -62,7 +65,7 @@ export default function InsertLine({data, render}){
                         <TextField
                                 autoFocus
                                 margin = "dense"
-                                name = "credi_line_code"
+                                name = "code_line"
                                 label = "Codigo de la linea"
                                 fullWidth
                                 onChange = {handleChange}
@@ -70,12 +73,12 @@ export default function InsertLine({data, render}){
                             <TextField
                                 autoFocus
                                 margin = "dense"
-                                name = "credi_line_name"
+                                name = "name"
                                 label = "Nombre de la linea"
                                 fullWidth
                                 onChange = {handleChange}
                             />
-                            <FormControl className={classes.formControl}>
+                            {/*<FormControl className={classes.formControl}>
                                 <NativeSelect
                                     className={classes.selectEmpty}
                                     name="credi_line_state"
@@ -89,7 +92,7 @@ export default function InsertLine({data, render}){
                                     <option value={'1'}>Inactivo</option>
                                 </NativeSelect>
                                 <FormHelperText>Estado de la linea</FormHelperText>
-                            </FormControl>
+                            </FormControl>*/}
                         </div>
                 </DialogContent>
                 <Divider/>

@@ -193,6 +193,7 @@ export default function ItemDetail({ id }) {
         <SummaryCard title={"Reporte por prestamos"}  />
         <SummaryCard title={"Reporte por lineas"}  />
         <SummaryCard title={"Reporte por clientes"}  />
+        <SummaryCard title={"Reporte de gastos"}  />
       </div>
       {/*<div className={classes.summaryCards}>
         <SummaryCard title="Last 30 Days" component={<RevenueLine />} />

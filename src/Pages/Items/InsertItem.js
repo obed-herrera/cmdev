@@ -46,14 +46,17 @@ export default function InsertItem({ render}) {
   const classes = useStyles();
 
   const [item, setItem]=useState({
-    id_credi_item: '',
-    credi_item_code:'',
-    credi_item_name:'',
-    credi_item_description:'',
-    credi_item_cost:'',
-    credi_item_price:'',
-    credi_item_quantity:'',
-    credi_item_state:''
+    id: '',
+    product_code:'',
+    name:'',
+    description:'',
+    product_cost:'',
+    price:'',
+    in_stock:'',
+    status_id:'',
+    created_at: new Date(),
+    modified_at: new Date(),
+    disabled_at: new Date()
   });
 
  /* const handleChange=e=>{
@@ -86,7 +89,7 @@ export default function InsertItem({ render}) {
                         <TextField
                             autoFocus
                             margin="dense"
-                            name="credi_item_code"
+                            name="product_code"
                             label="Codigo del Producto"
                             fullWidth
                             onChange={handleChange}
@@ -94,7 +97,7 @@ export default function InsertItem({ render}) {
                         <TextField
                             autoFocus
                             margin="dense"
-                            name="credi_item_name"
+                            name="name"
                             label="Nombre del Producto"
                             fullWidth
                             onChange={handleChange}
@@ -102,7 +105,7 @@ export default function InsertItem({ render}) {
                         <TextField
                             autoFocus
                             margin="dense"
-                            name="credi_item_description"
+                            name="description"
                             label="Descripcion"
                             fullWidth
                             onChange={handleChange}
@@ -110,7 +113,7 @@ export default function InsertItem({ render}) {
                         <TextField
                             autoFocus
                             margin="dense"
-                            name="credi_item_cost"
+                            name="product_cost"
                             label="Costo del Producto"
                             fullWidth
                             onChange={handleChange}
@@ -118,7 +121,7 @@ export default function InsertItem({ render}) {
                         <TextField
                             autoFocus
                             margin="dense"
-                            name="credi_item_price"
+                            name="price"
                             label="Precio del Producto"
                             fullWidth
                             onChange={handleChange}
@@ -126,12 +129,12 @@ export default function InsertItem({ render}) {
                         <TextField
                             autoFocus
                             margin="dense"
-                            name="credi_item_quantity"
+                            name="in_stock"
                             label="Cantidad"
                             fullWidth
                             onChange={handleChange}
                         />
-                        <FormControl className={classes.formControl}>
+                        {/*<FormControl className={classes.formControl}>
                           <NativeSelect
                             className={classes.selectEmpty}     
                             name="credi_item_state"
@@ -145,7 +148,7 @@ export default function InsertItem({ render}) {
                             <option value={'1'}>Inactivo</option>
                           </NativeSelect>
                           <FormHelperText>Estado del Producto</FormHelperText>
-                        </FormControl>
+                        </FormControl>*/}
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "client_first_name" onChange = {handleChange}/>*/}
                     </div>
                 </Grid>
