@@ -14,22 +14,22 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
+import { headerSecondaryList, mainListItems, secondaryListItems } from '../../components/Dashboard/listItems';
 import LineTable from './LineTable';
 import { Container } from '@material-ui/core';
 
 function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          CrediMarket
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        CrediMarket
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   palette: {
     primary: {
-        main: '#4caf50',
+      main: '#4caf50',
     },
   },
   toolbarIcon: {
@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-    position:'sticky',
+    position: 'sticky',
   },
   paper: {
     padding: theme.spacing(2),
@@ -118,67 +118,67 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Lines(){
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-    const handleDrawerClose = () => {
-        setOpen(false);
-    }
-    //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+export default function Lines() {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  }
+  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-    return(
-        <div className = {classes.root}>
-            <CssBaseline/>
-            <AppBar palette = "primary" position = "absolute" className = {clsx(classes.appBar, open && classes.appBarShift)}>
-                <Toolbar className = {classes.toolbar}>
-                    <IconButton 
-                        edge = "end"
-                        color = "inherit"
-                        aria-label = "open drawer"
-                        onClick = {handleDrawerOpen}
-                        className = {clsx(classes.menuButton, open && classes.menuButtonHidden)}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
-                        Lineas
-                    </Typography>
-                    <IconButton color = "inherit"  href = "/">
-                        <PowerSettingsNewIcon/>
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                variant = "permanent"
-                classes = {{
-                    paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-                }}
-                open = {open}
-            >
-                <div className = {classes.toolbarIcon}>
-                    <IconButton onClick = {handleDrawerClose}>
-                        <ChevronLeftIcon/>
-                    </IconButton>
-                </div>
-                <Divider/>
-                <List>{mainListItems}</List>
-                <Divider/>
-                <List>{headerSecondaryList}</List>
-                <Divider/>
-                <List>{secondaryListItems}</List>
-            </Drawer>
-            <main className = {classes.content}>
-                <div className = {classes.appBarSpacer}/>
-                <Container maxWidth = "xl" className = {classes.container}>
-                  <LineTable />
-                </Container>
-                <Box pt = {4}>
-                    <Copyright/>
-                </Box>
-            </main>
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar palette="primary" position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            edge="end"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+            Lineas
+          </Typography>
+          <IconButton color="inherit" href="/">
+            <PowerSettingsNewIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+        }}
+        open={open}
+      >
+        <div className={classes.toolbarIcon}>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
         </div>
-    )
+        <Divider />
+        <List>{mainListItems}</List>
+        <Divider />
+        <List>{headerSecondaryList}</List>
+        <Divider />
+        <List>{secondaryListItems}</List>
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="xl" className={classes.container}>
+          <LineTable />
+        </Container>
+        <Box pt={4}>
+          <Copyright />
+        </Box>
+      </main>
+    </div>
+  )
 }

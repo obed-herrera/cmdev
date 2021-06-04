@@ -25,45 +25,65 @@ import InsertWorker from './InsertWorker';
 const columns = [
     {
         title: 'Codigo del Trabajador',
-        field: 'worker_code'
+        field: 'user_id'
     },
     {
         title: 'Primer Nombre',
-        field: 'client'
+        field: 'first_name'
     },
     {
         title: 'Segundo Nombre',
-        field: 'mount'
+        field: 'mid_name'
+    },
+    {
+        title: 'Primer Apellido',
+        field: 'last_name'
+    },
+    {
+        title: 'Segundo Apellido',
+        field: 'secondary_last_name'
     },
     {
         title: 'Cedula',
-        field: 'interest'
+        field: 'national_id'
     },
     {
         title: 'Direccion',
-        field: 'total'
+        field: 'personal_reference'
     },
     {
         title: 'Telefono',
-        field: 'term'
+        field: 'phone'
     },
     {
         title: 'Rol',
-        field: 'freq'
+        field: 'rol'
     }
 ];
 
 const data = [
     {
-        "loan_code": "2545-265",
-        "client": "Obed Herrera",
-        "mount": "C$ 2500",
-        "interest": "6%",
-        "total": "C$ 2650",
-        "term": "2 Meses",
-        "freq": "Semanal",
-        "area":"Empresas"
-    }
+       "user_id":"Obed-2021",
+       "first_name": "Obed",
+       "mid_name": "Isaias",
+       "last_name":"Herrera",
+       "secondary_last_name":"Toruno",
+       "national_id":"201-160398-0002U",
+       "personal_reference":"Uno Guapinol 1 1/2 cuadra al norte",
+       "phone": "89756890",
+       "rol":"Administrador" 
+    },
+    {
+        "user_id":"Luisangel-2021",
+        "first_name": "Luisangel",
+        "mid_name": "Martin",
+        "last_name":"Marcia",
+        "secondary_last_name":"Palma",
+        "national_id":"001-160399-0002Y",
+        "personal_reference":"Carretera Norte",
+        "phone": "88559845",
+        "rol":"Cobrador" 
+     }
 ];
 
 const tableIcons = {

@@ -5,18 +5,18 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Content from "../../Dashboard/Content";
+import Content from "../../components/Dashboard/Content";
 import DeleteIcon from '@material-ui/icons/Delete';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Snackbar from "@material-ui/core/Snackbar";
-import {Button, Checkbox, TableContainer, TablePagination, TableSortLabel, Toolbar, Tooltip } from '@material-ui/core';
+import { Button, Checkbox, TableContainer, TablePagination, TableSortLabel, Toolbar, Tooltip } from '@material-ui/core';
 import InsertLine from './InsertLoans';
 import PropTypes from "prop-types";
 import { SummaryCard } from "./LoansDetail";
 import MuiAlert from "@material-ui/lab/Alert";
 import DeleteLines from './DeleteLoans';
 import { useDispatch, useSelector } from 'react-redux';
-import { remove, selectLoans, selectLoading} from './LoansSlice';
+import { remove, selectLoans, selectLoading } from './LoansSlice';
 import { useHistory } from 'react-router';
 
 
@@ -263,26 +263,26 @@ export default function LoansInfo() {
   };
 
   return (
-      <Content>
-      <Snackbar open = {snackOpen} autoHideDuration = {2000} onClose = {snackClose}>
-        <Alert onClose = {snackClose} severity = "success">
+    <Content>
+      <Snackbar open={snackOpen} autoHideDuration={2000} onClose={snackClose}>
+        <Alert onClose={snackClose} severity="success">
           {snackOpen}
         </Alert>
       </Snackbar>
-      <div className = {classes.root}>
+      <div className={classes.root}>
         <Toolbar>
-          <div edge = "start" className = {classes.grow}/>
+          <div edge="start" className={classes.grow} />
           <InsertLine
-            edge = "end"
-            onSave = {()=>{
+            edge="end"
+            onSave={() => {
               setSnackOpen("Prestamo Agregado")
             }}
-            render = {(open) => (
-              <Button variant = "outlined" color = "primary" edge = "end" onClick = {open}>
+            render={(open) => (
+              <Button variant="outlined" color="primary" edge="end" onClick={open}>
                 Insertar Nuevo prestamo
               </Button>
             )}
-          /> 
+          />
           {selected.length > 0 && (
             <Tooltip title={"Borrar"}>
               <DeleteLines
@@ -291,8 +291,7 @@ export default function LoansInfo() {
                   dispatch(remove(selected));
 
                   setSnackOpen(
-                    `${selected.length} Driver${
-                      selected.length > 1 ? "s" : ""
+                    `${selected.length} Driver${selected.length > 1 ? "s" : ""
                     } Deleted`
                   );
                   setSelected([]);
@@ -443,6 +442,6 @@ export default function LoansInfo() {
           }
         />
       </div>
-      </Content> 
+    </Content>
   );
 }

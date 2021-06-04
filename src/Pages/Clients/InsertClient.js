@@ -23,15 +23,28 @@ export default function InsertClient({render}) {
   const baseUrl = "http://localhost:3001/Client/clients";
   const [open, setOpen] = React.useState(false);
   const [clientSeleccionado, setClientSeleccionado]=useState({ 
+    id:'',
+    sys_code:'',
     first_name:'',
     mid_name:'',
     last_name:'',
     secondary_last_name:'',
     national_id:'',
-    sys_code:'',
     phone:'',
-    status_id:''
+    status_id:'',
+    created_at:'',
+    modified_at:'',
+    disabled_at:''
 });
+const [client_address, setClient_Address] = useState({
+  id: '',
+  client_id:'',
+  status_id:'',
+  personal_reference:'',
+  created_at:'',
+  modified_at:'',
+  disabled_at:''
+})
 
 const peticionPost=async()=>{
   await axios.post(baseUrl, clientSeleccionado)
@@ -183,26 +196,26 @@ const data = useState([]);
                 <TextField
                   autoFocus
                   margin="dense"
-                  name="address"
-                  label="Dirección del Cliente"
+                  name="phone"
+                  label="Telefono del Cliente"
                   fullWidth
                   onChange={handleChange}
                 />
                 <TextField
                   autoFocus
                   margin="dense"
-                  name="phone"
-                  label="Telefono del Cliente"
+                  name="personal_reference"
+                  label="Dirección del Cliente"
                   fullWidth
                   onChange={handleChange}
-                />                                
+                />                               
                 </Grid>
             </Grid>
         </DialogContent>
-        <Divider/>
+        {/*<Divider/>
         <input  align = "center" type = "file" name = "client_file" class = "client_file" multiple onChange = {()=>handleChange}/>
         <br/><br/>
-        <Button color = "secondary">Insertar Archivos</Button>
+        <Button color = "secondary">Insertar Archivos</Button>*/}
         <Divider/>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

@@ -1,14 +1,14 @@
-import React from "react";
+import React, { Component, Suspense, lazy } from "react";
 import './App.css';
-import SignIn from '../src/Signin/SignIn';
+import SignIn from './components/Signin/SignIn';
 import DateFnsUtils from '@date-io/date-fns';
-import Dashboard from './Dashboard/Dashboard';
+import Dashboard from './components/Dashboard/Dashboard';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { ThemeProvider } from '@material-ui/styles';
 import Clients from './Pages/Clients/Clients';
 import Loans from './Pages/Loans/Loans';
-import {useTheme} from './theme';
+import { useTheme } from './theme';
 import { configureStore } from "@reduxjs/toolkit";
 import Lines from './Pages/Lines/Lines';
 import { Provider } from 'react-redux';
@@ -27,83 +27,105 @@ import LoansDetail from "./Pages/Loans/LoansDetail";
 import LinesDetail from "./Pages/Lines/LinesDetail";
 import WorkerDetail from "./Pages/Workers/WorkerDetail";
 import Expenses from "./Pages/Expenses/Expenses";
+import generateStore from "./redux"
+
+// function App() {
+
+//   const store = configureStore({
+//     reducer: {
+//       clients: clientsReducer,
+//       loan: loanReducer,
+//       lines: linesReducer,
+//       items: itemsReducer,
+//       workers: workersReducer,
+//     },
+//   });
+
+//   const [currentTheme] = useTheme();
+
+//   return (
+//     <>
+//       <MuiPickersUtilsProvider utils = {DateFnsUtils}>
+//         <ThemeProvider theme = {currentTheme}>
+//         <Provider store = {store}>
+//               <Router>
+//                 <div>
+//                   <Switch>
+//                     <Route path = "/dashboard">
+//                       <Dashboard/>
+//                     </Route>
+//                     <Route path = "/clients">
+//                       <Clients/>
+//                     </Route>
+//                     <Route path = "/clientdetail/1">
+//                       <ClientDetail/>
+//                     </Route>
+//                     <Route path = "/loans">
+//                       <Loans/>
+//                     </Route>
+//                     <Route path = "/loandetail/1">
+//                       <LoansDetail/>
+//                     </Route>
+//                     <Route path = "/lines">
+//                       <Lines/>
+//                     </Route>
+//                     <Route path = "/linesdetail/1">
+//                       <LinesDetail/>
+//                     </Route>
+//                     <Route exact path = "/">
+//                       <SignIn/>
+//                     </Route>
+//                     <Route exact path = "/configuration">
+//                       <Configuration/>
+//                     </Route>
+//                     <Route exact path = "/reports">
+//                       <Reports/>
+//                     </Route>
+//                     <Route exact path = "/workers">
+//                       <Workers/>
+//                     </Route>
+//                     <Route path = "/workersdetail/1">
+//                       <WorkerDetail/>
+//                     </Route>
+//                     <Route exact path = "/items">
+//                       <Items/>
+//                     </Route>
+//                     <Route exact path = "/expenses">
+//                       <Expenses/>
+//                     </Route>
+//                     <Route path = "/itemdetail/1">
+//                       <ItemDetail/>
+//                     </Route>
+//                   </Switch>
+
+//                 </div>
+//               </Router>
+//           </Provider>
+//           </ThemeProvider>
+//       </MuiPickersUtilsProvider>
+//     </>
+//   );
+// }
+
+const Layout = lazy(() => import("./components/Layout"))
 
 function App() {
 
-  const store = configureStore({
-    reducer: {
-      clients: clientsReducer,
-      loan: loanReducer,
-      lines: linesReducer,
-      items: itemsReducer,
-      workers: workersReducer,
-    },
-  });
+    const store = generateStore();
 
-  const [currentTheme] = useTheme();
+    const [currentTheme] = useTheme();
 
-  return (
-    <>
-      <MuiPickersUtilsProvider utils = {DateFnsUtils}>
-        <ThemeProvider theme = {currentTheme}>
-        <Provider store = {store}>
-              <Router>
-                <div>
-                  <Switch>
-                    <Route path = "/dashboard">
-                      <Dashboard/>
-                    </Route>
-                    <Route path = "/clients">
-                      <Clients/>
-                    </Route>
-                    <Route path = "/clientdetail/1">
-                      <ClientDetail/>
-                    </Route>
-                    <Route path = "/loans">
-                      <Loans/>
-                    </Route>
-                    <Route path = "/loandetail/1">
-                      <LoansDetail/>
-                    </Route>
-                    <Route path = "/lines">
-                      <Lines/>
-                    </Route>
-                    <Route path = "/linesdetail/1">
-                      <LinesDetail/>
-                    </Route>
-                    <Route exact path = "/">
-                      <SignIn/>
-                    </Route>
-                    <Route exact path = "/configuration">
-                      <Configuration/>
-                    </Route>
-                    <Route exact path = "/reports">
-                      <Reports/>
-                    </Route>
-                    <Route exact path = "/workers">
-                      <Workers/>
-                    </Route>
-                    <Route path = "/workersdetail/1">
-                      <WorkerDetail/>
-                    </Route>
-                    <Route exact path = "/items">
-                      <Items/>
-                    </Route>
-                    <Route exact path = "/expenses">
-                      <Expenses/>
-                    </Route>
-                    <Route path = "/itemdetail/1">
-                      <ItemDetail/>
-                    </Route>
-                  </Switch>
-                  
-                </div>
-              </Router>
-          </Provider>
-          </ThemeProvider>
-      </MuiPickersUtilsProvider>
-    </>
-  );
+    return (
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <ThemeProvider theme={currentTheme}>
+                <Provider store={store}>
+                    <Suspense fallback={<h2>Loading...</h2>}>
+                        <Route path="/" name="Home" component={Layout} />
+                    </Suspense>
+                </Provider>
+            </ThemeProvider>
+        </MuiPickersUtilsProvider>
+    )
 }
 
 export default App;

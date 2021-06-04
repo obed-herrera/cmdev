@@ -279,10 +279,10 @@ export default function InsertLine({render}) {
                 </Grid>
               </Grid>
         </DialogContent>
-        <Divider/>
+        {/*<Divider/>
         <input  align = "center" type = "file" name = "client_file" class = "client_file" multiple onChange = {()=>handleChange}/>
         <br/><br/>
-        <Button color = "secondary">Insertar Archivos</Button>
+        <Button color = "secondary">Insertar Archivos</Button>*/}
         <Divider/>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

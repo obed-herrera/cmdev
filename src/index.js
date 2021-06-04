@@ -6,12 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ScopedCssBaseline>
-      <App />
-    </ScopedCssBaseline>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <ScopedCssBaseline>
+            <App />
+        </ScopedCssBaseline>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

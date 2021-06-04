@@ -55,6 +55,17 @@ const columns = [
     }
 ];
 
+const dataTable = [
+  {
+    "sys_code":"MONT_CL_01",
+    "first_name":"Maria",
+    "last_name":"Polo",
+    "national_id":"001-250298-0003Y",
+    "address":"Managua",
+    "phone":"59895698"
+  }
+]
+
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -221,7 +232,7 @@ export default function ClientTable(){
             <MaterialTable
                 icons = {tableIcons}
                 columns = {columns}
-                data = {data}
+                data = {dataTable}
                 title = "Clientes"
                 actions={[
                     {

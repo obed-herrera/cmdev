@@ -22,7 +22,6 @@ import axios from 'axios';
 import { DataUsage } from '@material-ui/icons';
 
 
-
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -202,7 +201,6 @@ export default function ClientsInfo() {
     if (reason === "clickaway") {
       return;
     }
-
     setSnackOpen(false);
   };
 

@@ -37,23 +37,65 @@ export default function InsertWorker({ data, render, onSave }) {
     handleClose();
   };
 
-  const [worker, setWorker]=useState({
-    credi_worker_code: '',
-    worker_username:'',
-    worker_password:'',
-    worker_first_name:'',
-    worker_second_name:'',
-    worker_middle_name:'',
-    worker_last_name:'',
+  const [user, setUser]=useState({
+    id: '',
+    username:'',
+    password:''
+  });
+
+  const [worker, setWorker] = useState({
+    id:'',
+    user_id:'',
+    first_name:'',
+    mid_name:'',
+    last_name:'',
+    secondary_last_name:'',
+    national_id:'',
+    email:'',
+    phone:'',
+    created_at: new Date(),
+    modified_at: new Date(),
+    disabled_at: new Date()
+  })
+
+  const [user_address, setUserAddress] = useState({
+    id:'',
+    user_id:'',
+    status_id:'',
+    personal_reference:'',
+    created_at: new Date(),
+    modified_at: new Date(),
+    disabled_at: new Date()
+  });
+
+  const [user_permissions, setUserPermissions] = useState({
+    id:'',
+    name:'',
+    description:''
   });
 
   const handleChange=e=>{
-    const {name, value}=e.target;
-    setWorker((prevState)=>({
-      ...prevState,
-      [name]: value
+    setUser((user)=>({
+      ...user,
+      [e.target.name]: e.target.value
+    }))
+    console.log(user);
+  }
+
+  const handleChangeWorker = e => {
+    setWorker((worker) => ({
+      ...worker,
+      [e.target.name]: e.target.value
     }))
     console.log(worker);
+  }
+
+  const handleChangeAddress = e => {
+    setUserAddress((user_address) => ({
+      ...user_address,
+      [e.target.name]: e.target.value
+    }))
+    console.log(user_address);
   }
 
   const classes = useStyles();
@@ -79,24 +121,18 @@ export default function InsertWorker({ data, render, onSave }) {
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="worker_username"
+                            name="username"
                             label="Usuario"
                             fullWidth
-                            value={worker.worker_username}
-                            onChange={(e) => {
-                            setWorker(e.target.value);
-                            }}
+                            onChange={handleChange}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="worker_password"
+                            name="password"
                             label="Contraseña"
                             fullWidth
-                            value={worker.password}
-                            onChange={(e) => {
-                            setWorker(e.target.value);
-                            }}
+                            onChange={handleChange}
                         />
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "worker_first_name" onChange = {handleChange}/>*/}
                     </div>
@@ -107,110 +143,74 @@ export default function InsertWorker({ data, render, onSave }) {
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="worker_first_name"
+                            name="first_name"
                             label="Primer Nombre"
                             fullWidth
-                            value={worker.worker_first_name}
-                            onChange={(e) => {
-                            setWorker(e.target.value);
-                            }}
+                            onChange={handleChangeWorker}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="worker_second_name"
+                            name="mid_name"
                             label="Segundo Nombre"
                             fullWidth
-                            value={worker.worker_second_name}
-                            onChange={(e) => {
-                            setWorker(e.target.value);
-                            }}
+                            onChange={handleChangeWorker}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="worker_middle_name"
+                            name="last_name"
                             label="Primer Apellido"
                             fullWidth
-                            value={worker.worker_middle_name}
-                            onChange={(e) => {
-                            setWorker(e.target.value);
-                            }}
+                            onChange={handleChangeWorker}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="worker_last_name"
+                            name="secondary_last_name"
                             label="Segundo Apellido"
                             fullWidth
-                            value={worker.worker_last_name}
-                            onChange={(e) => {
-                            setWorker(e.target.value);
-                            }}
+                            onChange={handleChangeWorker}
                         />
                         {/*<input placeholder= " " type = "text" className = "form-control" name = "worker_first_name" onChange = {handleChange}/>*/}
                     </div>
                 </Grid>
                 
                 <Grid item lg ={3}> 
-                <TextField
+                        <TextField
                             autoFocus
                             margin="dense"
-                            id="client_national_id"
+                            name="national_id"
                             label="Cedula del trabajador"
                             fullWidth
-                            value={worker.worker_national_id}
-                            onChange={(e) => {
-                            setWorker(e.target.value);
-                            }}
+                            onChange={handleChangeWorker}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="worker_sys_code"
-                            label="Codigo del trabajdor"
+                            name="user_id"
+                            label="Codigo del trabajador"
                             fullWidth
-                            value={worker.worker_sys_code}
-                            onChange={(e) => {
-                            setWorker(e.target.value);
-                            }}
+                            onChange={handleChangeWorker}
                         />
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="worker_home_address"
+                            name="personal_reference"
                             label="Direccion de Casa"
                             fullWidth
-                            value={worker.worker_home_address}
-                            onChange={(e) => {
-                            setWorker(e.target.value);
-                            }}
-                        />
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="worker_business_address"
-                            label="Direccion del Trabajo"
-                            fullWidth
-                            value={worker.worker_business_address}
-                            onChange={(e) => {
-                            setWorker(e.target.value);
-                            }}
-                        /> 
-                                                      
+                            onChange={handleChangeAddress}
+                        />                                                      
                 </Grid>
                 <Grid item lg = {3}>
                   <div className = "form-group">
                   <TextField
                             autoFocus
                             margin="dense"
-                            id="worker_phone"
-                            label="Telefono del Trabajo"
+                            name="phone"
+                            label="Telefono"
                             fullWidth
-                            value={worker.worker_phone}
-                            onChange={(e) => {
-                            setWorker(e.target.value);
-                            }}
+                            onChange={handleChangeWorker}
                         /> 
                     <FormControl className={classes.formControl}>
                       <NativeSelect
