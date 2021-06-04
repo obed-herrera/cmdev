@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Content from "../../Dashboard/Content";
+import Content from "../../components/Dashboard/Content";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -24,7 +24,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
+import { headerSecondaryList, mainListItems, secondaryListItems } from '../../components/Dashboard/listItems';
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 
 const drawerWidth = 240;
@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
   palette: {
     primary: {
-        main: '#4caf50',
+      main: '#4caf50',
     },
   },
   toolbarIcon: {
@@ -184,12 +184,12 @@ export default function LinesDetail({ id }) {
   const loading = false;
 
   const [open, setOpen] = React.useState(true);
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   if (loading) {
     return (
@@ -200,111 +200,111 @@ export default function LinesDetail({ id }) {
   }
 
   return (
-    <div className = {classes.root}>
-    <CssBaseline/>
-            <AppBar palette = "primary" position = "absolute" className = {clsx(classes.appBar, open && classes.appBarShift)}>
-                <Toolbar className = {classes.toolbar}>
-                    <IconButton 
-                        edge = "end"
-                        color = "inherit"
-                        aria-label = "open drawer"
-                        onClick = {handleDrawerOpen}
-                        className = {clsx(classes.menuButton, open && classes.menuButtonHidden)}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    <Typography component = "h1" variant = "h6" color = "inherit" noWrap className = {classes.title}>
-                        Linea
-                    </Typography>
-                    
-                    <IconButton color = "inherit">
-                        <PowerSettingsNewIcon/>
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                variant = "permanent"
-                classes = {{
-                    paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-                }}
-                open = {open}
-            >
-                <div className = {classes.toolbarIcon}>
-                    <IconButton onClick = {handleDrawerClose}>
-                        <ChevronLeftIcon/>
-                    </IconButton>
-                </div>
-                <Divider/>
-                <List>{mainListItems}</List>
-                <Divider/>
-                <List>{headerSecondaryList}</List>
-                <Divider/>
-                <List>{secondaryListItems}</List>
-            </Drawer>
-    <main className = {classes.content}> 
-    <div className = {classes.appBarSpacer}/>     
-    <Content maxWidth = "lg" className = {classes.container}>
-      <div
-        style={{
-          height: "20px",
-          backgroundPosition: "justify",
-          backgroundSize: "cover",
-          filter: "contrast(75%)",
-        }}
-      />
-      <div className={classes.headerContainer}>
-      
-        <div className={classes.header}>
-          <Avatar
-            alt={line.name}
-            src={line.img}
-            classes={{ root: classes.avatar, circle: classes.circle }}
-          />
-          <Typography variant={"h5"}>{line.name}</Typography>
-          <Chip variant={"outlined"} icon={<DriveIcon />} label="Linea" />
-          {/*<Rating name="read-only" value={4.3} readOnly />*/}
-          <div className={classes.spacer} />
-          <div className={classes.actionGroup}>
-          <div>
-          <Button
-          color = "secondary"
-          variant = "contained"
-          href = "/lines"
-          startIcon = {<KeyboardReturnIcon/>}
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar palette="primary" position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            edge="end"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
           >
-            Regresar
-          </Button>
-          </div>
-            <InsertLine
-              data={line}
-              render={(open) => (
-                <Button
-                  color="primary"
-                  variant="contained"
-                  startIcon={<EditIcon />}
-                  onClick={open}
-                >
-                  Edit
-                </Button>
-              )}
-            />
-          </div>
+            <MenuIcon />
+          </IconButton>
+          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+            Linea
+          </Typography>
+
+          <IconButton color="inherit">
+            <PowerSettingsNewIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+        }}
+        open={open}
+      >
+        <div className={classes.toolbarIcon}>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
         </div>
-      </div>
-      <div className={classes.summaryCards}>
-        <SummaryCard title={"Cliente del Prestamo"} value={"Obed Herrera"} />
-        <SummaryCard title={"Cedula"} value={"201-160398-0002U"} />
-        <SummaryCard title={"Direccion"} value={"De los semaforos de la mascota 3 cuadras al lago"} />
-        <SummaryCard title={"Telefono"} value={"8975-6890"} />
-        <SummaryCard title={"Prestamos abiertos"} value={4} />
-      </div>
-      {/*<div className={classes.summaryCards}>
+        <Divider />
+        <List>{mainListItems}</List>
+        <Divider />
+        <List>{headerSecondaryList}</List>
+        <Divider />
+        <List>{secondaryListItems}</List>
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+        <Content maxWidth="lg" className={classes.container}>
+          <div
+            style={{
+              height: "20px",
+              backgroundPosition: "justify",
+              backgroundSize: "cover",
+              filter: "contrast(75%)",
+            }}
+          />
+          <div className={classes.headerContainer}>
+
+            <div className={classes.header}>
+              <Avatar
+                alt={line.name}
+                src={line.img}
+                classes={{ root: classes.avatar, circle: classes.circle }}
+              />
+              <Typography variant={"h5"}>{line.name}</Typography>
+              <Chip variant={"outlined"} icon={<DriveIcon />} label="Linea" />
+              {/*<Rating name="read-only" value={4.3} readOnly />*/}
+              <div className={classes.spacer} />
+              <div className={classes.actionGroup}>
+                <div>
+                  <Button
+                    color="secondary"
+                    variant="contained"
+                    href="/lines"
+                    startIcon={<KeyboardReturnIcon />}
+                  >
+                    Regresar
+                  </Button>
+                </div>
+                <InsertLine
+                  data={line}
+                  render={(open) => (
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      startIcon={<EditIcon />}
+                      onClick={open}
+                    >
+                      Edit
+                    </Button>
+                  )}
+                />
+              </div>
+            </div>
+          </div>
+          <div className={classes.summaryCards}>
+            <SummaryCard title={"Cliente del Prestamo"} value={"Obed Herrera"} />
+            <SummaryCard title={"Cedula"} value={"201-160398-0002U"} />
+            <SummaryCard title={"Direccion"} value={"De los semaforos de la mascota 3 cuadras al lago"} />
+            <SummaryCard title={"Telefono"} value={"8975-6890"} />
+            <SummaryCard title={"Prestamos abiertos"} value={4} />
+          </div>
+          {/*<div className={classes.summaryCards}>
         <SummaryCard title="Last 30 Days" component={<RevenueLine />} />
         <SummaryCard title="By Vehicle" component={<VehiclePie />} />
               </div>*/}
-      {/*<SummaryCard title={"Recent expenses"} component={<ExpensesTable />} />*/}
-    </Content>
-    </main>
-</div>
+          {/*<SummaryCard title={"Recent expenses"} component={<ExpensesTable />} />*/}
+        </Content>
+      </main>
+    </div>
   )
-          }
+}

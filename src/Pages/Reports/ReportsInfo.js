@@ -1,5 +1,5 @@
 import React from "react";
-import Content from "../../Dashboard/Content";
+import Content from "../../components/Dashboard/Content";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
   palette: {
     primary: {
-        main: '#4caf50',
+      main: '#4caf50',
     },
   },
   toolbarIcon: {
@@ -151,9 +151,9 @@ function SummaryCard({ title, value, component }) {
           {value}
         </Typography>
       )}
-            <Button variant = "outlined" color = "primary" edge="end">
-                Generar
-            </Button>
+      <Button variant="outlined" color="primary" edge="end">
+        Generar
+      </Button>
     </Paper>
   );
 }
@@ -170,38 +170,38 @@ export default function ItemDetail({ id }) {
     );
   }
   return (
-    <div className = {classes.root}>
-    <CssBaseline/>
-    {<main className = {classes.content}> 
-    <div className = {classes.appBarSpacer}/>     
-    <Content maxWidth = "lg" className = {classes.container}>
-      <div className={classes.headerContainer}>
-        <div className={classes.header}>
-          <Avatar
-            classes={{ root: classes.avatar, circle: classes.circle }}
-          />
-          <Typography variant={"h5"}></Typography>
-          <Chip variant={"outlined"} icon={<AssessmentIcon />} label="Seleccione su reporte" />
-          {/*<Rating name="read-only" value={4.3} readOnly />*/}
-        </div>
-      </div>
-      <div className={classes.summaryCards}>
-        <SummaryCard title={"Reporte al dia de hoy"}>
-        </SummaryCard>
-        <SummaryCard title={"Reporte de la semana"} />
-        <SummaryCard title={"Reporte del mes"}  />
-        <SummaryCard title={"Reporte por prestamos"}  />
-        <SummaryCard title={"Reporte por lineas"}  />
-        <SummaryCard title={"Reporte por clientes"}  />
-        <SummaryCard title={"Reporte de gastos"}  />
-      </div>
-      {/*<div className={classes.summaryCards}>
+    <div className={classes.root}>
+      <CssBaseline />
+      {<main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+        <Content maxWidth="lg" className={classes.container}>
+          <div className={classes.headerContainer}>
+            <div className={classes.header}>
+              <Avatar
+                classes={{ root: classes.avatar, circle: classes.circle }}
+              />
+              <Typography variant={"h5"}></Typography>
+              <Chip variant={"outlined"} icon={<AssessmentIcon />} label="Seleccione su reporte" />
+              {/*<Rating name="read-only" value={4.3} readOnly />*/}
+            </div>
+          </div>
+          <div className={classes.summaryCards}>
+            <SummaryCard title={"Reporte al dia de hoy"}>
+            </SummaryCard>
+            <SummaryCard title={"Reporte de la semana"} />
+            <SummaryCard title={"Reporte del mes"} />
+            <SummaryCard title={"Reporte por prestamos"} />
+            <SummaryCard title={"Reporte por lineas"} />
+            <SummaryCard title={"Reporte por clientes"} />
+            <SummaryCard title={"Reporte de gastos"} />
+          </div>
+          {/*<div className={classes.summaryCards}>
         <SummaryCard title="Last 30 Days" component={<RevenueLine />} />
         <SummaryCard title="By Vehicle" component={<VehiclePie />} />
               </div>*/}
-      {/*<SummaryCard title={"Recent expenses"} component={<ExpensesTable />} />*/}
-    </Content>
-    </main>}
-</div>
+          {/*<SummaryCard title={"Recent expenses"} component={<ExpensesTable />} />*/}
+        </Content>
+      </main>}
+    </div>
   )
-          }
+}

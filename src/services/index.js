@@ -4,7 +4,7 @@ import {
     getAuthToken,
     isAuth,
     removeAuth
-} from "services/auth.services";
+} from "./auth.services";
 
 export {
     setAuth,
