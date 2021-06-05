@@ -8,7 +8,6 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Divider, FormControl, FormHelperText, Grid, NativeSelect } from "@material-ui/core";
 import axios from "axios";
 import {useStyles} from "./Items";
-//import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
 
 export default function InsertItem({ render}) {
   const baseUrl = "http://localhost:3001/Item/items";

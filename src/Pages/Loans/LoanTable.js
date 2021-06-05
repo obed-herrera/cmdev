@@ -23,7 +23,7 @@ import DoubleArrow from '@material-ui/icons/DoubleArrow';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControl, Grid, InputLabel, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
 import InsertLoans from './InsertLoans';
 import { TimelineOppositeContent } from '@material-ui/lab';
-import InsertClient from '../Clients/InsertClient';
+import InsertClient from '../../components/Clients/Clients';
 import InsertPayment from '../Loans/InsertPayment';
 import { useDispatch } from 'react-redux';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import Content from "../../Dashboard/Content";
+import Content from "../../components/Dashboard/Content";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -22,7 +22,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
+import { headerSecondaryList, mainListItems, secondaryListItems } from '../../components/Dashboard/listItems';
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import InsertItem from "./InsertItem";

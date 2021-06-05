@@ -1,7 +1,11 @@
-import {BASE_URL_PATH} from "../utils/constants.utils";
-import http from "../utils/http.utils";
+import { BASE_URL_PATH, TOKEN } from "./constants.utils";
+import http from "./http.utils";
+import { encodeToken, decodeToken } from "./token-cypher.utils"
 
 export {
     BASE_URL_PATH,
-    http
+    TOKEN,
+    http,
+    encodeToken,
+    decodeToken
 }

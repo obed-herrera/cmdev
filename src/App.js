@@ -1,34 +1,14 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import './App.css';
-import SignIn from '../src/Signin/SignIn';
 import DateFnsUtils from '@date-io/date-fns';
-import Dashboard from './Dashboard/Dashboard';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { ThemeProvider } from '@material-ui/styles';
-import Clients from './Pages/Clients/Clients';
-import Loans from './Pages/Loans/Loans';
 import {useTheme} from './theme';
-import { configureStore } from "@reduxjs/toolkit";
-import Lines from './Pages/Lines/Lines';
 import { Provider } from 'react-redux';
-import loanReducer from '../src/Pages/Loans/LoansSlice';
-import clientsReducer from '../src/Pages/Clients/ClientSlice';
-import ClientDetail from './Pages/Clients/ClientDetail';
-import Configuration from './Pages/Configuration/Configuration';
-import linesReducer from '../src/Pages/Lines/LinesSlice';
-import itemsReducer from '../src/Pages/Items/ItemSlice';
-import Items from "./Pages/Items/Items";
-import Workers from "./Pages/Workers/Workers";
-import workersReducer from '../src/Pages/Workers/WorkersSlice';
-import Reports from "./Pages/Reports/Reports";
-import ItemDetail from "./Pages/Items/ItemDetail";
-import LoansDetail from "./Pages/Loans/LoansDetail";
-import LinesDetail from "./Pages/Lines/LinesDetail";
-import WorkerDetail from "./Pages/Workers/WorkerDetail";
-import Expenses from "./Pages/Expenses/Expenses";
+import generateStore from "./redux";
 
-function App() {
+/*function App() {
 
   const store = configureStore({
     reducer: {
@@ -104,6 +84,48 @@ function App() {
       </MuiPickersUtilsProvider>
     </>
   );
+}*/
+
+const Layout = lazy(() => import("./components/Layout"))
+const Client = lazy(()=> import("./components/Clients/Clients"))
+const Home = lazy(()=> import("./components/Dashboard/Dashboard"))
+const Loan = lazy(()=> import("./Pages/Loans/Loans"))
+const Line = lazy(()=>import("./Pages/Lines/Lines"))
+const Worker = lazy(() => import("./Pages/Workers/Workers"))
+const Expense = lazy(()=> import("./Pages/Expenses/Expenses"))
+const Report = lazy(()=> import("./Pages/Reports/Reports"))
+const Item = lazy(()=>import("./Pages/Items/Items"))
+const Configuration = lazy(()=> import("./Pages/Configuration/Configuration"))
+
+
+
+function App() {
+
+    const store = generateStore();
+
+    const [currentTheme] = useTheme();
+
+    return (
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <ThemeProvider theme={currentTheme}>
+                <Provider store={store}>
+                    <Suspense fallback={<h2>Loading...</h2>}>
+                      <Router>
+                          <Route exact path="/" index = {1} name="Home" component={Home}/>
+                          <Route exact path="/clients" index = {2} name = "Client" component = {Client}/>
+                          <Route exact path="/loans" index = {3} name = "Loan" component = {Loan}/>
+                          <Route exact path="/lines" index = {4} name = "Line" component = {Line}/>
+                          <Route exact path="/workers" index = {5} name = "Worker" component = {Worker}/>
+                          <Route exact path="/expenses" index = {6} name = "Expense" component = {Client}/>  
+                          <Route exact path="/reports" index = {7} name = "Report" component = {Client}/>
+                          <Route exact path="/items" index = {8} name = "Item" component = {Client}/>
+                          <Route exact path="/configuration" index = {9} name = "Configuration" component = {Client}/>
+                      </Router>
+                    </Suspense>
+                </Provider>
+            </ThemeProvider>
+        </MuiPickersUtilsProvider>
+    )
 }
 
 export default App;

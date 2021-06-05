@@ -14,7 +14,7 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { headerSecondaryList, mainListItems, secondaryListItems } from '../../Dashboard/listItems';
+import { headerSecondaryList, mainListItems, secondaryListItems } from '../../components/Dashboard/listItems';
 import LineTable from './LineTable';
 import { Container } from '@material-ui/core';
 

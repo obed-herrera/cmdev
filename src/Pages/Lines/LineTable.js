@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import MaterialTable from "material-table";
 import axios from 'axios';
-import {TextField, Button, FormControl, NativeSelect, FormHelperText, Grid, Divider, MenuItem, Select, InputLabel} from '@material-ui/core';
+import {TextField, Button, FormControl, Grid,  MenuItem, Select, InputLabel, DialogContentText} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import "./LineTable.css";
 import EditIcon from '@material-ui/icons/Edit';
@@ -28,8 +28,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InsertLine from './InsertLine';
 import DoubleArrow from '@material-ui/icons/DoubleArrow';
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
 
 const columns = [
     {
@@ -117,6 +115,7 @@ export default function LineTable(){
     const [modalEliminar, setModalEliminar]= useState(false);
     const [dialogOpenAdd, setDialogOpenAdd] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [dialogOpenDelete, setDialogOpenDelete] = useState(false);
     const [snackOpen, setSnackOpen] = React.useState(false);
     const [dataLine, setDataLine] = useState([]);
     const [clientSeleccionado, setClientSeleccionado]=useState({ 
@@ -428,6 +427,24 @@ export default function LineTable(){
                 </Button>
                 {<Button onClick={handleClose} color="primary">
                   Guardar
+              </Button>}
+              </DialogActions>
+            </Dialog>
+            <Dialog
+            open = {dialogOpenDelete}
+            onClose = {handleClose}>
+              <DialogTitle id = "alert-dialog-title">{"¿Desea eliminar este producto?"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  La accion que esta a punto de realizar es irreversible, en realidad desea eliminar el registro?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Aceptar
+                </Button>
+                {<Button onClick={handleClose} color="primary">
+                  Cancelar
               </Button>}
               </DialogActions>
             </Dialog>

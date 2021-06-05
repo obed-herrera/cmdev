@@ -1,6 +1,6 @@
 import {Button, CssBaseline, Grid, makeStyles, Paper, Snackbar, Typography } from "@material-ui/core";
 import React from "react";
-import Content from "../../Dashboard/Content";
+import Content from "../../components/Dashboard/Content";
 import MuiAlert from "@material-ui/lab/Alert";
 import InsertRole from "./InsertRole";
 import InsertLine from "./InsertLine";

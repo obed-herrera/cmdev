@@ -1,5 +1,5 @@
 import React from "react";
-import Content from "../../Dashboard/Content";
+import Content from "../../components/Dashboard/Content";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";

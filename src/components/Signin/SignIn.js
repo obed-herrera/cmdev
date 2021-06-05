@@ -1,18 +1,18 @@
 import React from 'react';
-import http from '../utils/http.utils';
+import http from '../../utils/http.utils';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { selectLoading } from '../Pages/Configuration/UserSlice';
+import { selectLoading } from '../../Pages/Configuration/UserSlice';
 
 function Copyright() {
   return (
@@ -50,8 +50,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const submitUser = username =>(dispatch, getState) => {
-  
+export const submitUser = username => (dispatch, getState) => {
+
 }
 
 export default function SignIn() {
@@ -97,18 +97,18 @@ export default function SignIn() {
             control={<Checkbox value="remember" color="secondary" />}
             label="Recuérdame"
           />
-          <Link to = '/dashboard' style = {{textDecoration: 'none'}}>
+          <Link to='/dashboard' style={{ textDecoration: 'none' }}>
             <Button
               fullWidth
-              variant = "contained"
-              color = "primary"
+              variant="contained"
+              color="primary"
             >
               ACCEDER
             </Button>
-            </Link>
+          </Link>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2" color = "secondary">
+              <Link href="#" variant="body2" color="secondary">
                 ¿Olvidó su contraseña?
               </Link>
             </Grid>

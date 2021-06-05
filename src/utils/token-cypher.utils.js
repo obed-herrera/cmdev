@@ -1,9 +1,16 @@
-import JWTDecode from "jwt-decode";
+import CryptoJS from "crypto-js";
 
-export function decodeToken(toDecode){
-    return JWTDecode(token);
-} 
+const ENCRYPTION_KEY = 'of09jflsdkcmeijfdkslaksjfdsa'
 
-export function encodeToken(toEncode){
-    return JWTEncode(token);
+function decodeToken(toDecode) {
+    return CryptoJS.AES.decrypt(toDecode, ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8)
+}
+
+function encodeToken(toEncode) {
+    return CryptoJS.AES.encrypt(toEncode, ENCRYPTION_KEY).toString()
+}
+
+export {
+    encodeToken,
+    decodeToken
 }

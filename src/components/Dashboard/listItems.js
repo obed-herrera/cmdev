@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -11,18 +11,17 @@ import BuildIcon from '@material-ui/icons/Build';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import { AttachMoney, Description} from '@material-ui/icons';
-import { Link } from 'react-router-dom';
-
+import { Link} from 'react-router-dom';
 
 function ListItemLink(props){
     return <ListItem button component = "a" {...props}/>;
 }
 
+const Layout = lazy(()=>import("../Layout"))
 
-
-export const mainListItems = (
+export const mainListItems =  (
     <div>
-        <Link to = '/dashboard' style = {{textDecoration: 'none', color: '#000'}}>
+        <Link to = "/"  style = {{textDecoration: 'none' , color: '#000'}}>
             <ListItemLink>
                 <ListItemIcon>
                     <DashboardIcon/>
@@ -30,7 +29,7 @@ export const mainListItems = (
                 <ListItemText primary = "Inicio"/>
             </ListItemLink>
         </Link>
-        <Link to = '/clients' style = {{textDecoration: 'none' , color: '#000'}}>
+        <Link to = "/clients"  style = {{textDecoration: 'none' , color: '#000'}}>
         <ListItemLink>
                 <ListItemIcon>
                     <ContactsIcon/>
